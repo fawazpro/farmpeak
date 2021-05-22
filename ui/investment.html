@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <link rel="title icon" href="/assets/images/p.svg" type="image/svg" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/StyleSheet/main.css" />
+    <link rel="stylesheet" href="assets/StyleSheet/main.css" />
+    <title>Wallet - Farmpeak</title>
+  </head>
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="bgSide border-right" id="sidebar-wrapper">
+        <div
+          class="sidebar-heading pt-5 d-flex justify-content-center align-items-center"
+        >
+          <a href="index.html" style="text-decoration: none" class="d-block">
+            <div>
+              <img
+                src="assets/images/p.svg"
+                style="width: 100px; height: auto"
+                class="mx-auto"
+                alt="p"
+              />
+            </div>
+            <div>
+              <p class="ml-2 text-white">Farmpeak</p>
+            </div>
+          </a>
+        </div>
+        <div class="list-group list-group-flush mt-5">
+          <a
+            href="farm.html"
+            class="list-group-item list-group-item-action bgItem"
+            ><i style="font-size: 19px" class="fa fa-building mr-3"></i>Farm</a
+          >
+          <a
+            href="investment.html"
+            class="list-group-item list-group-item-action bgItem active"
+            ><i style="font-size: 19px" class="fa fa-list mr-3"></i>My
+            Investment</a
+          >
+          <a
+            href="wallet.html"
+            class="list-group-item list-group-item-action bgItem"
+            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Wallet</a
+          >
+          <a
+            href="profile.html"
+            class="list-group-item list-group-item-action bgItem"
+            ><i style="font-size: 19px" class="fa fa-user mr-3"></i>My
+            Profile</a
+          >
+          <a
+            href="help.html"
+            class="list-group-item list-group-item-action bgItem"
+            ><i style="font-size: 19px" class="fa fa-question-circle mr-3"></i
+            >Help Center</a
+          >
+          <a href="#" class="list-group-item list-group-item-action bgItem"
+            ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
+            >Logout</a
+          >
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <button
+            class="btn"
+            style="background-color: #039730 !important"
+            id="menu-toggle"
+          >
+            <span class="fas fa-bars" style="color: #ffffff"></span>
+          </button>
+          <!-- Full name and email display -->
+          <div class="ml-auto mt-2">
+            <p class="mb-0" style="font-weight: bold; font-size: 17px">
+              Abdullah Ryan
+            </p>
+            <p class="mb-0" style="font-size: 14px">abdullah@gmail.com</p>
+          </div>
+          <!-- Full name and email display -->
+        </nav>
+
+        <div class="container-fluid">
+          <div class="mt-3">
+            <h4>My Investment</h4>
+            <p>List of your Farmpeak investment</p>
+          </div>
+          <!-- myInvestment table -->
+          <div class="m-2 m-sm-0 card">
+            <div class="card-body px-2 px-lg-2 py-2">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Farm Id</th>
+                      <th>Farm Name</th>
+                      <th>Amount</th>
+                      <th>Plot</th>
+                      <th>ROI</th>
+                      <th>Total Amount</th>
+                      <th>Total Payout</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>10D35</td>
+                      <td>Fish Farm</td>
+                      <td><span>&#x20a6;</span>35,000</td>
+                      <td>3</td>
+                      <td>12%</td>
+                      <td><span>&#x20a6;</span>105,000</td>
+                      <td><span>&#x20a6;</span>117,000</td>
+                      <td>
+                        <span class="badge badge-success">Completed</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>10D35</td>
+                      <td>Tomato Farm</td>
+                      <td><span>&#x20a6;</span>50,000</td>
+                      <td>3</td>
+                      <td>25%</td>
+                      <td><span>&#x20a6;</span>150,000</td>
+                      <td><span>&#x20a6;</span>187,000</td>
+                      <td>
+                        <span class="badge badge-secondary">Preparing</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>10D35</td>
+                      <td>Cassava Farm</td>
+                      <td><span>&#x20a6;</span>70,000</td>
+                      <td>4</td>
+                      <td>56%</td>
+                      <td><span>&#x20a6;</span>280,000</td>
+                      <td><span>&#x20a6;</span>436,800</td>
+                      <td><span class="badge badge-primary">Farming</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--end of account overview -->
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+
+    <!-- script -->
+
+    <script src="assets/fontawesome-free-5.9.0-web/js/all.min.js"></script>
+    <script src="assets/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="assets/Scripts/popper.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/Scripts/wow.min.js"></script>
+
+    <!-- end of script -->
+
+    <script>
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+  </body>
+</html>

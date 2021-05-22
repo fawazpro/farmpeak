@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="title icon" href="assets/images/p.svg" type="image/svg" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/StyleSheet/main.css" />
+    <title>Login - Farmpeak</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="col-lg-5 col-md-4 d-flex justify-content-center aligns-items-center pBack"
+        >
+          <img
+            src="assets/images/p.svg"
+            alt="logo"
+            style="width: 200px; height: auto"
+          />
+        </div>
+        <div class="col-lg-7 col-md-8 py-5 px-md-5 pBack2">
+          <div>
+            <span class="d-block text-right">
+              No Account? <b><a href="signup.html">Sign-Up</a></b></span
+            >
+            <form action="post" class="card p-4">
+              <div class="form-group">
+                <label for="username">Email</label>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-user text-farm"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Email"
+                    id="uname"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fa fa-key text-farm"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    id="pwd"
+                  />
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-block btn-farm">
+                Login
+              </button>
+            </form>
+            <div class="text-right mt-1" style="font-weight: 500">
+              <a href="forgotP.html">forgot password?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- script -->
+    <script src="assets/fontawesome-free-5.9.0-web/js/all.min.js"></script>
+    <script src="assets/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="assets/Scripts/popper.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/Scripts/wow.min.js"></script>
+    <!-- end of script -->
+  </body>
+</html>

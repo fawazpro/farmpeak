@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  scroll-behavior: smooth;
+}
+
+.pBack {
+  background-color: #039730;
+  height: 100vh;
+}
+
+.pBack2 {
+  display: block;
+  margin: auto;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.text-farm {
+  color: #039730 !important;
+}
+
+.btn-farm {
+  background-color: #039730;
+  color: #ffffff;
+}
+
+/* dash */
+#wrapper {
+  overflow-x: hidden;
+}
+.bgSide {
+  background-color: #039730;
+}
+.bgItem {
+  background-color: #04c93f;
+  color: #ffffff;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.bgItem:hover {
+  background-color: #ffffff;
+  color: #04c93f;
+  border-left: 5px solid #04c93f;
+}
+.list-group .active {
+  background-color: #ffffff;
+  color: #04c93f;
+  border-left: 5px solid #04c93f;
+}
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  position: sticky;
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  position: sticky;
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
+/* end of dash */
+
+/* farm */
+.col > div > .subTitle {
+  color: #3f3f3f;
+  font-size: 10px;
+}
+.col > div > .subInfo {
+  color: #000000;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.col-auto > div > .subInfo1 {
+  color: #039730;
+  margin-top: -17px;
+  font-size: 50px;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+/* end of farm */
+
+/* account */
+.acctCard {
+  font-size: 20px;
+  color: #000000;
+  word-wrap: nowrap;
+}
+
+.acctCard > td:first-child {
+  width: 200px;
+}
+.acctCard > td:nth-child(2) {
+  font-size: 17px;
+  padding-top: 15px;
+}
+
+/* end of account */
+
+@media screen and (max-width: 500px) and (min-width: 200px) {
+  .pBack {
+    height: 40vh;
+  }
+}
+/* @media screen and (max-width: 800px) and (min-width: 541px){} */
