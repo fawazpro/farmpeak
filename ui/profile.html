@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/StyleSheet/main.css" />
     <link rel="stylesheet" href="assets/StyleSheet/main.css" />
-    <title>Wallet - Farmpeak</title>
+    <title>My Profile - Farmpeak</title>
   </head>
   <body>
     <div class="d-flex" id="wrapper">
@@ -136,7 +136,7 @@
                     </div>
                   </div>
                   <div class="form-row">
-                    <div class="col-12 mb-3">
+                    <div class="col-md-8 mb-3">
                       <label for="email">Email</label>
                       <input
                         type="email"
@@ -144,22 +144,42 @@
                         class="form-control"
                         placeholder="Email"
                         value="abdullah@gmail.com"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="telNo">Tel No</label>
+                      <input
+                        type="tel"
+                        id="telNo"
+                        class="form-control"
+                        placeholder="0800 000 0000"
+                        value="08123441902"
                         required
                       />
                     </div>
                   </div>
                   <div class="form-row">
-                    <div class="col-12 mb-3">
-                      <label for="phoneNo">Phone No</label>
+                    <div class="col-md-6 mb-3">
+                      <label for="acctNo">Account No</label>
                       <input
                         type="tel"
                         id="phoneNo"
                         class="form-control"
-                        placeholder="0800 000 0000"
-                        value="08123441902"
-                        maxlength="11"
+                        placeholder="0000011111"
+                        value="1023456789"
+                        maxlength="10"
                         required
                       />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="bankName">Bank</label>
+                      <select id="bankName" class="form-control">
+                        <option value="gtb">GTB</option>
+                        <option value="zenith">Zenith</option>
+                        <option value="access">Access</option>
+                        <option value="fcmb">FCMB</option>
+                      </select>
                     </div>
                   </div>
                   <!-- submit -->

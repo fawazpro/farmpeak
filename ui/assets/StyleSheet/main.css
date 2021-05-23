@@ -40,8 +40,19 @@ body {
 .bgSide {
   background-color: #039730;
 }
+.bgSideAdmin {
+  background-color: #0356a3;
+}
 .bgItem {
   background-color: #04c93f;
+  color: #ffffff;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.bgItemAdmin {
+  background-color: #023c74;
   color: #ffffff;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
@@ -53,10 +64,20 @@ body {
   color: #04c93f;
   border-left: 5px solid #04c93f;
 }
+.bgItemAdmin:hover {
+  background-color: #ffffff;
+  color: #023c74;
+  border-left: 5px solid #023c74;
+}
 .list-group .active {
   background-color: #ffffff;
   color: #04c93f;
   border-left: 5px solid #04c93f;
+}
+.list-group .activeAdmin {
+  background-color: #ffffff;
+  color: #023c74;
+  border-left: 5px solid #023c74;
 }
 #sidebar-wrapper {
   min-height: 100vh;
@@ -105,7 +126,7 @@ body {
 
 /* farm */
 .col > div > .subTitle {
-  color: #3f3f3f;
+  color: #3f3f3f !important;
   font-size: 10px;
 }
 .col > div > .subInfo {
@@ -116,6 +137,13 @@ body {
 }
 .col-auto > div > .subInfo1 {
   color: #039730;
+  margin-top: -17px;
+  font-size: 50px;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.col-auto > div > .subInfo1Admin {
+  color: #023c74;
   margin-top: -17px;
   font-size: 50px;
   font-weight: 500;
@@ -139,6 +167,25 @@ body {
 }
 
 /* end of account */
+
+/* modal */
+.zoom-in {
+  transform: scale(0.7) !important;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  /* display: block !important; */
+}
+
+.zoom-in.show {
+  opacity: 1;
+  transform: scale(1) !important;
+  transform: none;
+}
+/* end of modal */
 
 @media screen and (max-width: 500px) and (min-width: 200px) {
   .pBack {
