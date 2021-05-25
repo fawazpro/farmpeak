@@ -59,7 +59,11 @@ class Pages extends BaseController
                 'b_acc' => empty($u_db['bank']),
             ];
 
-            echo view('user/header');
+            $head_data = [
+                'title' => 'Farms',
+            ];
+
+            echo view('user/header', $head_data);
             echo view('user/home', $data);
             echo view('user/footer');
         } else {
@@ -468,7 +472,7 @@ class Pages extends BaseController
 
     public function login()
     {
-        echo view('user/authheader');
+        echo view('user/authheader',['title' => 'Login']);
         echo view('user/login');
         echo view('footer');
     }
@@ -532,7 +536,7 @@ class Pages extends BaseController
 
     public function register()
     {
-        echo view('user/authheader');
+        echo view('user/authheader',['title' => 'Sign Up']);
         echo view('user/register');
         echo view('footer');
     }
@@ -803,7 +807,7 @@ class Pages extends BaseController
     public function mailer(array $data)
     {
         $email = \Config\Services::email();
-        $email->setFrom('account@skilltaps.com', 'Skilltaps Account Manager');
+        $email->setFrom(getenv('smtpuser'), getenv('smtptitle').' Account Manager');
         $email->setTo($data['to']);
         // $email->setCC('another@another-example.com');
         // $email->setBCC('them@their-example.com');
@@ -821,12 +825,12 @@ class Pages extends BaseController
         $config = new \Config\Encryption();
         $config->key = $this->key;
         $encryter = \Config\Services::encrypter($config);
-        $users = new \App\Models\Customers();
+        $users = new \App\Models\Users();
         $email = $this->request->getPost()['email'];
         if (!empty($u_db = $users->where('email', $email)->find())) {
             $u_db = $u_db[0];
-            $res = $users->update($u_db['user_id'], ['password' => '']);
-            $encrypted = urlencode($encryter->encrypt($u_db['email'] . '\t\n' . $u_db['address']));
+            $res = $users->update($u_db['id'], ['password' => '']);
+            $encrypted = urlencode($encryter->encrypt($u_db['email'] . '\t\n' . $u_db['fname']));
             if ($res) {
                 $url = base_url('rst?user=') . $encrypted;
                 $data = [
@@ -844,8 +848,8 @@ class Pages extends BaseController
             }
         } else {
             $data = [
-                'title' => 'Incorrect Email',
-                'msg' => 'The email you entered is not registered on this platform',
+                'title' => 'Password Reset',
+                'msg' => 'A reset link has been sent to the provided email',
                 'url' => base_url('login'),
             ];
             $this->msg($data);
@@ -859,7 +863,7 @@ class Pages extends BaseController
             'email' => urlencode($details),
         ];
 
-        echo view('user/authheader');
+        echo view('user/authheader', ['title' => 'Password Reset']);
         echo view('user/reset', $data);
     }
 
@@ -868,13 +872,13 @@ class Pages extends BaseController
         $config = new \Config\Encryption();
         $config->key = $this->key;
         $encryter = \Config\Services::encrypter($config);
-        $users = new \App\Models\Customers();
+        $users = new \App\Models\Users();
         $incoming = $this->request->getPost();
         $loader = urldecode($incoming['loader']);
         $email = strtok($encryter->decrypt($loader), '\t\n');
         $password = hash('sha1', $incoming['password'], false);
         $u_db = $users->where('email', $email)->find()[0];
-        $res = $users->update($u_db['user_id'], ['password' => $password]);
+        $res = $users->update($u_db['id'], ['password' => $password]);
 
         if ($res) {
             $data = [
@@ -888,7 +892,7 @@ class Pages extends BaseController
 
     public function msg($data)
     {
-        echo view('user/authheader');
+        echo view('user/authheader', ['title' => $data['title']]);
         echo view('user/redirect', $data);
         echo view('footer.php');
     }
@@ -967,7 +971,7 @@ class Pages extends BaseController
                 ],
             ];
             // var_dump($ords);
-            echo view('user/header');
+            echo view('user/header', ['title' => 'Profile']);
             echo view('user/profile', $data);
             echo view('user/footer');
         } else {
