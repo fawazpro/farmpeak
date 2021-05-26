@@ -7,7 +7,7 @@
             <div class="col-lg-7 col-md-8 py-5 px-md-5 pBack2">
                 <div>
                     <span class="d-block text-right mb-1">
-                        No Account? <b><a href="signup.html">Sign-Up</a></b></span>
+                        No Account? <b><a href="register">Sign-Up</a></b></span>
                     <form method="post" action="login" class="card p-4">
                         <div class="form-group">
                             <label for="username">Email</label>
