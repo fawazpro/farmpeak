@@ -20,7 +20,7 @@ body {
   margin: auto;
 }
 
-.card {
+.card2 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -150,6 +150,19 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 /* end of farm */
+
+/* investor */
+.subTitle2 {
+  color: #023c74 !important;
+  font-size: 15px;
+}
+.subInfo2 {
+  color: #000000;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+/* end of investor */
 
 /* account */
 .acctCard {

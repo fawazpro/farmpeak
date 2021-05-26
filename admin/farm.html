@@ -33,25 +33,43 @@
           </a>
         </div>
         <div class="list-group list-group-flush mt-5">
+          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-tachometer-alt mr-3"></i
+            >Overview</a
+          >
           <a
             href="farm.html"
             class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
             ><i style="font-size: 19px" class="fas fa-seedling mr-3"></i>Farm</a
           >
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
-            ><i style="font-size: 19px" class="fa fa-list mr-3"></i>My
-            Investment</a
+          <a
+            href="investor.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fa fa-users mr-3"></i
+            >Investors</a
           >
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
-            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Wallet</a
+          <a
+            href="payout.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
-            ><i style="font-size: 19px" class="fa fa-user mr-3"></i>My
-            Profile</a
+          <a
+            href="trainee.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
+            >Trainee</a
           >
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
-            ><i style="font-size: 19px" class="fa fa-question-circle mr-3"></i
-            >Help Center</a
+          <a
+            href="admins.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fa fa-user-lock mr-3"></i
+            >Admins</a
+          >
+          <a
+            href="helpSet.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fa fa-cog mr-3"></i>Help
+            Setting</a
           >
           <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
@@ -89,10 +107,9 @@
             <p>List of Farmpeak farm</p>
           </div>
           <div class="text-right">
+            <!-- #addFarmModal (modal ID) -->
             <a
-              href="#addFarmModal"
-              data-toggle="modal"
-              class="btn"
+              class="btn modalX"
               style="background-color: #023c74 !important; color: #ffffff"
               ><i style="font-size: 19px" class="fas fa-plus-circle mr-2"></i
               >Add Farm</a
@@ -103,7 +120,7 @@
           <div class="row">
             <div class="col-md-4 m-sm-0 m-1">
               <a href="editFarmInfo.html" style="text-decoration: none">
-                <div class="card my-1">
+                <div class="card card2 my-1">
                   <div class="card-body m-0 px-2 px-lg-2 py-2">
                     <h5 style="color: #023c74">Poultry Farm</h5>
                     <div class="row no-gutters align-items-center">
@@ -145,7 +162,7 @@
             <!-- farm2 -->
             <div class="col-md-4 m-sm-0 m-1">
               <a href="editFarmInfo.html" style="text-decoration: none">
-                <div class="card my-1">
+                <div class="card card2 my-1">
                   <div class="card-body m-0 px-2 px-lg-2 py-2">
                     <h5 style="color: #023c74">Tomato Farm</h5>
                     <div class="row no-gutters align-items-center">
@@ -218,7 +235,7 @@
                     </div>
                     <div class="form-row">
                       <div class="col-md-4 mb-3">
-                        <label for="farmAmount">Plot (in numbers)</label>
+                        <label for="farmPlot">Plot (in numbers)</label>
                         <input
                           type="text"
                           class="form-control"
@@ -318,7 +335,7 @@
     <script src="/asset/Scripts/jquery-3.4.1.min.js"></script>
     <script src="/asset/Scripts/popper.min.js"></script>
     <script src="/asset/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/asset/Scripts/wow.min.js"></script>
+    <script src="/asset/Scripts/main.js"></script>
 
     <!-- end of script -->
 

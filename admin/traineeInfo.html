@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/asset/StyleSheet/main.css" />
 
-    <title>Farm Info - Farmpeak</title>
+    <title>Trainee - Farmpeak</title>
   </head>
   <body>
     <div class="d-flex" id="wrapper">
@@ -38,7 +38,7 @@
           >
           <a
             href="farm.html"
-            class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-seedling mr-3"></i>Farm</a
           >
           <a
@@ -54,7 +54,7 @@
           >
           <a
             href="trainee.html"
-            class="list-group-item list-group-item-action bgItemAdmin"
+            class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
             ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
             >Trainee</a
           >
@@ -101,137 +101,75 @@
         </nav>
 
         <div class="container-fluid">
-          <div class="mt-3">
+          <div class="my-3">
             <h5>
-              <a href="farm.html" style="color: #023c74">Farm</a>
-              > farm info
+              <a href="trainee.html" style="color: #023c74">Trainee</a>
+              > trainee info
             </h5>
-            <p>Edit farm information</p>
           </div>
-          <!-- Admin form info edit -->
 
+          <!-- student info -->
           <div class="row justify-content-center">
-            <div class="col-md-8 m-sm-0 m-1">
-              <form action="post" class="card card2 p-4">
+            <div class="col-md-12 m-sm-0 m-1">
+              <div class="card shadow-sm p-4">
                 <div class="form-row">
-                  <div class="col-md-4 mb-3">
-                    <label for="farmId">Farm ID</label>
-                    <input
-                      type="text"
-                      id="farmId"
-                      class="form-control"
-                      value="34HF462"
-                      readonly
-                    />
+                  <div class="col-md-4 mb-2">
+                    <p class="subTitle2 mb-1">Trainee ID</p>
+                    <p class="subInfo2">234HDGE21</p>
                   </div>
-                  <div class="col-md-8 mb-3">
-                    <label for="farmName">Farm Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="farmName"
-                      placeholder="Farm Name"
-                      value="Poultry Farm"
-                      maxlength="27"
-                      required
-                    />
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">First Name</p>
+                    <p class="subInfo2">Abdullah</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">Last Name</p>
+                    <p class="subInfo2">Ryan</p>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
-                    <label for="farmAmount">Plot (in numbers)</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="farmPlot"
-                      placeholder="Plot"
-                      value="100"
-                      required
-                    />
+                    <p class="subTitle2 mb-1">Email</p>
+                    <p class="subInfo2">abdullah@mail.com</p>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <label for="farmAmount">Amount (per plot)</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text px-2">&#x20a6;</span>
-                      </div>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="farmAmount"
-                        placeholder="Amount"
-                        value="34000"
-                        required
-                      />
-                    </div>
+                    <p class="subTitle2 mb-1">Tel no</p>
+                    <p class="subInfo2">08012223333</p>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <label for="farmDuration">Duration (in numbers)</label>
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="farmDuration"
-                        placeholder="Duration"
-                        value="24"
-                        required
-                      />
-                      <div class="input-group-append">
-                        <span class="input-group-text px-1">Month(s)</span>
-                      </div>
-                    </div>
+                    <p class="subTitle2 mb-1">Gender</p>
+                    <p class="subInfo2">Male</p>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-12 mb-3">
-                    <label for="farmDesc">Description</label>
-                    <textarea id="farmDesc" class="form-control">
-Invest in me wella</textarea
-                    >
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">Course</p>
+                    <p class="subInfo2">Fishery</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">Date of Birth</p>
+                    <p class="subInfo2">17-07-1899</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">Reg Date</p>
+                    <p class="subInfo2">22-02-2021 (auto-generate)</p>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-3 mb-3">
-                    <label for="farmRoi">ROI</label>
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="farmRoi"
-                        placeholder="ROI"
-                        value="43"
-                        maxlength="3"
-                        max="100"
-                        min="1"
-                        required
-                      />
-                      <div class="input-group-append">
-                        <span class="input-group-text px-2">%</span>
-                      </div>
-                    </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">Home Address</p>
+                    <p class="subInfo2">
+                      22 heaven street, anbiya close, Sabo Sagamu
+                    </p>
                   </div>
-                  <div class="col-md-4 mb-4">
-                    <label for="farmStatus">Status</label>
-                    <select id="farmStatus" class="form-control">
-                      <option value="open">Open</option>
-                      <option value="closed">Closed</option>
-                    </select>
+                  <div class="col-md-4 mb-3">
+                    <p class="subTitle2 mb-1">State of Origin</p>
+                    <p class="subInfo2">Lagos</p>
                   </div>
                 </div>
-                <!-- submit -->
-                <button
-                  type="submit"
-                  class="btn btn-block"
-                  style="background-color: #023c74; color: #ffffff"
-                >
-                  Update
-                </button>
-                <!-- end of submit button -->
-              </form>
+              </div>
             </div>
           </div>
-
-          <!--end of Admin form info edit -->
+          <!--end of student info -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->
@@ -243,7 +181,7 @@ Invest in me wella</textarea
     <script src="/asset/Scripts/jquery-3.4.1.min.js"></script>
     <script src="/asset/Scripts/popper.min.js"></script>
     <script src="/asset/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/asset/Scripts/wow.min.js"></script>
+    <script src="/asset/Scripts/main.js"></script>
 
     <!-- end of script -->
 
