@@ -1,54 +1,45 @@
-    <!-- Begin page content -->
-    <main class="flex-shrink-0 main-container">
-        <!-- page content goes here -->
-        <div class="banner-hero vh-100 scroll-y bg-white">
-            <div class="container h-100">
-                <div class="row h-100 h-sm-auto">
-                    <div class="col-11 col-sm-8 col-md-6 mx-auto align-self-start">
-                    </div>
-                    <div class="w-100"></div>
-                    <div class="col-11 col-sm-8 col-md-6 mx-auto align-self-center">
-                        <img src="" width="100%" alt="">
-                        <h3 class="">Welcome back!</h3>
-                        <h2 class="font-weight-bold mb-4">Sign In</h2>
-                        <form action="login" method="post">
-                            <div class="form-group">
-                                <label for="inputEmail" class="sr-only">Email address</label>
-                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required="" autofocus="">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="sr-only">Password</label>
-                                <input type="password" id="inputPassword" class="form-control" name="pass" placeholder="Password" required="">
-                            </div>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5 col-md-4 d-flex justify-content-center aligns-items-center pBack">
+                <img src="asset/images/p.svg" alt="logo" style="width: 200px; height: auto" />
+            </div>
+            <div class="col-lg-7 col-md-8 py-5 px-md-5 pBack2">
+                <div>
+                    <span class="d-block text-right mb-1">
+                        No Account? <b><a href="register">Sign-Up</a></b></span>
+                    <form method="post" action="login" class="card p-4">
+                        <div class="form-group">
+                            <label for="username">Email</label>
 
-                            <div class="my-3 row">
-                                <div class="col-6 col-md py-1 text-left">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                        <label class="custom-control-label" for="customCheck1">Remember Me</label>
-                                    </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user text-farm"></i></span>
                                 </div>
-                                <div class="col-6 col-md py-1 text-right text-md-right">
-                                    <a href="#!" data-toggle="modal" data-target="#resetpass">Forgot Password?</a>
-                                </div>
+                                <input type="text" name="email" class="form-control" placeholder="Enter Email" id="uname" />
                             </div>
-                    </div>
-                    <div class="w-100"></div>
-                    <div class="col-11 col-sm-8 col-md-6 mx-auto align-self-end">
-                        <div class="mb-4">
-                            <button type="submit" class=" btn btn-lg btn-default default-shadow btn-block">Sign In <span class="ml-2 icon arrow_right"></span></button>
                         </div>
-                        </form>
-                        <div class="mb-4">
-                            <p>Do not have account yet?<br>Please <a href="register">Sign up</a> here.</p>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-key text-farm"></i></span>
+                                </div>
+                                <input name="pass" type="password" class="form-control" placeholder="Enter Password" id="pwd" />
+                            </div>
                         </div>
+
+                        <button type="submit" class="btn btn-block btn-farm">
+                            Login
+                        </button>
+                    </form>
+                    <div class="text-right mt-2" style="font-weight: 500">
+                        <a href="#!" data-toggle="modal" data-target="#resetpass">forgot password?</a>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    <!-- End of page content -->
-
+    </div>
     <!--Reset Modal -->
     <div class="modal fade" id="resetpass" tabindex="-1" role="dialog" aria-labelledby="Password Reset" aria-hidden="true">
         <div class="modal-dialog" role="document">

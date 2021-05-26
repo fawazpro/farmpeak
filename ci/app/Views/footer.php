@@ -1,11 +1,9 @@
-
-    <!-- Required jquery and libraries -->
-    <script src="assets/vendor/jquery-3.3.1.min.js"></script>
-    <script src="assets/vendor/bootstrap.min.js"></script>
-
-
-    <!-- Customized jquery file  -->
-    <script src="assets/vendor/main.js"></script>
-    </body>
-
-    </html>
+    <!-- script -->
+    <script src="asset/fontawesome-free-5.9.0-web/js/all.min.js"></script>
+    <script src="asset/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="asset/Scripts/popper.min.js"></script>
+    <script src="asset/bootstrap/js/bootstrap.min.js"></script>
+    <script src="asset/Scripts/wow.min.js"></script>
+    <!-- end of script -->
+  </body>
+</html>

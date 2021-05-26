@@ -1,129 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="RayyanTech">
-
-    <title></title>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.html" sizes="180x180">
-    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="mask-icon" href="assets/img/favicons/safari-pinned-tab.html" color="#ffffff">
-    <link rel="icon" href="assets/img/favicons/favicon.ico">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/vendor/style.css" rel="stylesheet" id="style">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <link rel="title icon" href="asset/images/p.svg" type="image/svg" />
+    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="asset/StyleSheet/main.css" />
+    <link rel="stylesheet" href="asset/StyleSheet/main.css" />
+    <title><?= $title ?> - Farmpeak</title>
 </head>
 
-<body class="ui-rounded">
-    <!-- Page laoder -->
-    <!-- <div class="container-fluid pageloader">
-        <div class="row h-100">
-            <div class="col-12 align-self-start text-center">
-            </div>
-            <div class="col-12 align-self-center text-center">
-                <div class="loader-logo"><div class="logo"><img src="assets/img/favicons/skilltaps_single_light.png" width="50%" alt="">
-                        <div class="loader-roller">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bgSide border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading pt-5 d-flex justify-content-center align-items-center">
+                <a href="/index.html" style="text-decoration: none" class="d-block">
+                    <div>
+                        <img src="asset/images/p.svg" style="width: 100px; height: auto" class="mx-auto" alt="p" />
                     </div>
-                    <h4 class="logo-text">SkillTaps<span></span><small>.com</small></h4>
-                </div>
+                    <div>
+                        <p class="ml-2 text-white">Farmpeak</p>
+                    </div>
+                </a>
             </div>
-            <div class="col-12 align-self-end text-center">
-                <p class="my-5">Please wait<br><small class="text-mute">A world of financial freedom is loading...</small></p>
+            <div class="list-group list-group-flush mt-5">
+                <a href="dashboard" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-building mr-3"></i>Farm</a>
+                <a href="investment.html" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-list mr-3"></i>My
+                    Investment</a>
+                <a href="wallet.html" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Wallet</a>
+                <a href="profile" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-user mr-3"></i>My
+                    Profile</a>
+                <a href="help.html" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-question-circle mr-3"></i>Help Center</a>
+                <a href="logout" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i>Logout</a>
             </div>
         </div>
-    </div> -->
-    <!-- Page laoder ends -->
+        <!-- /#sidebar-wrapper -->
 
-    <!-- Fixed navbar -->
-    <header class="header fixed-top">
-        <nav class="navbar">
-            <div>
-                <button class="menu-btn btn btn-link btn-44">
-                    <span class="icon material-icons">menu</span>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn" style="background-color: #039730 !important" id="menu-toggle">
+                    <span class="fas fa-bars" style="color: #ffffff"></span>
                 </button>
-            </div>
-            <div>
-                <a class="navbar-brand" href="<?= base_url()?>">
-                    <div class="logo">F</div>
-                    <h4 class="logo-text"><span>FarmPeak</span><small>.com</small></h4>
-                </a>
-            </div>
-            <div>
-                <form class="form-inline search" action="search" method="get">
-                    <input class="form-control w-100" name="keyword" type="text" placeholder="Search..." aria-label="Search">
-                    <button class="btn btn-link btn-44" type="submit"><span class="icon_search"></span></button>
-                </form>
-                <button class="btn btn-link search-btn" type="button"><span class="icon_search"></span></button>
-                <button class="btn btn-link" data-toggle="modal" data-target="#cart" type="button"><span class=""><i class="material-icons">shopping_cart</i><span class="total-count badge badge-pill badge-danger"></span></span></button>
-                <a href="profile" class="btn btn-link p-2"><span class="avatar avatar-30"><i class="material-icons">account_circle</i></span></a>
-            </div>
-                <!-- <a href="logout" class="btn btn-link p-2"><span class="avatar avatar-30"><i class="material-icons">power_settings_new</i></span></a> -->
-            </div>
-        </nav>
-    </header>
-    <!-- Fixed navbar ends -->
-
-    <!-- sidebar -->
-    <div class="sidebar">
-        <div class="row no-gutters">
-            <div class="col pl-3 align-self-center">
-                <a class="navbar-brand" href="index.html">
-                    <div class="logo">S</div>
-                    <h4 class="logo-text"><span>FarmPeak</span><small>.com</small></h4>
-                </a>
-            </div>
-            <div class="col-auto align-self-center">
-                <a href="logout" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
-            </div>
-        </div>
-        <div class="list-group main-menu my-4">
-            <a href="dashboard" class="list-group-item list-group-item-action"><i class="material-icons">home</i>Home</a>
-            <a href="market" class="list-group-item list-group-item-action"><i class="material-icons">insert_emoticon</i>Market</a>
-            <a href="transactions" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Orders</a>
-            <!-- <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a> -->
-            <!-- <a href="setting.html" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Setting</a> -->
-            <a href="about" class="list-group-item list-group-item-action"><i class="material-icons">business</i>About</a>
-        </div>
-    </div>
-    <!-- sidebar ends -->
-    
-    <!--Cart Modal -->
-    <div class="mt-5 modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="cartTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content bg-light">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="cartTitle">Cart (<span class="total-count"></span>)</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <!-- Full name and email display -->
+                <div class="ml-auto mt-2">
+                    <p class="mb-0" style="font-weight: bold; font-size: 17px">
+                        Abdullah Ryan
+                    </p>
+                    <p class="mb-0" style="font-size: 14px">abdullah@gmail.com</p>
                 </div>
-                <div class="modal-body px-1 bg-white">
-                    <!-- <table class="show-cart table"></table> -->
-                    <div class="showCart"></div>
-                    <div class="float-right pr-3">Total price: &#x20a6;<span class="total-cart"></span></div>
-                </div>
-                <div class="modal-footer bg-primary text-white">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">
-                        Close
-                    </button>
-                    <a href="summary" class="btn btn-danger">CheckOut</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Cart Modal -->
+                <!-- Full name and email display -->
+            </nav>

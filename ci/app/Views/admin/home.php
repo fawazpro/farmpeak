@@ -43,214 +43,138 @@ function type($t)
 }
 
 ?>
-<!-- Begin page content -->
-<main class="flex-shrink-0 main-container pb-0">
-    <!-- page content goes here -->
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="container mt-4">
-                <div class="card border-0 shadow bg-default text-white">
-                    <div class="card-body">
-                        <p class="mb-2">Orders & Withdrawals: <small class="text-light h5"><?= $ord_count ?></small></p>
-                        <div class="progress bg-light-primary h-5 mb-2">
-                            <div class="progress-bar bg-white" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div><div class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 5%"></div>
-                        </div>
-                        <?php foreach ($orders  as $key => $order) : ?>
-                            <div class="row mb-2">
-                                <?php if ($order['type'] == 'p') : ?>
-                                    <a class="col btn btn-outline-light-primary" data-toggle="modal" data-target="#fulfilment<?= $order['order_id'] ?>">
-                                        <p class="float-left"><?= $key + 1 ?>)</p>
-                                        <p class="h4"><span><?= type($order['type']) ?> <?= $order['order_id'] ?> by </span> <?= $order['user_id'] ?> <span class="float-right"> <i class="material-icons">send</i></span></p>
-                                    </a>
-                                    <!-- Modal -->
-                                    <div class="modal fade mt-5 text-dark" id="fulfilment<?= $order['order_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="withdrawal" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Order Fulfillment</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container-fluid">
-                                                        <div class="container">
-                                                            <h5>Ordered Products</h5>
-                                                            <ul class="list-group">
-                                                                <?php foreach (json_decode($order['orders']) as $key => $ord) : ?>
-                                                                    <li class="list-group-item "><?= $ord->name ?><span class="text-danger">x<?= $ord->count ?></span> <span class="float-right">&#x20a6;<?= price($ord->price) ?></span></li>
-                                                            </ul>
-                                                        <?php endforeach; ?>
-                                                        <form method="post" action="fulfillorder">
-                                                            <div class="col text-center">
-                                                                <label for="inputName" class="col-sm-1-12 col-form-label">Status: </label>
-                                                            </div>
-                                                            <div class="form-group col">
-                                                                <div class="col-sm-1-12">
-                                                                    <select name="status" class="form-control" id="">
-                                                                        <option value="">Choose a Status</option>
-                                                                        <option value="Pending">Pending</option>
-                                                                        <option value="Cancelled">Cancelled</option>
-                                                                        <option value="Completed">Completed</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <input type="hidden" name="id" value="<?= $order['order_id'] ?>">
-
-                                                        </div>
-                                                        <p class="text-center text-dark-50 h6">Present Status: <?= $order['status'] ?></p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Update</button></form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                <?php elseif ($order['type'] == 'c') : ?>
-                                    <a class="col btn btn-outline-light-primary" data-toggle="modal" data-target="#withdraw<?= $order['order_id'] ?>">
-                                        <p class="float-left"><?= $key + 1 ?>)</p>
-                                        <p class="h5"><span><?= type($order['type']) ?> of </span> &#x20a6;<?= price($order['orders']) ?> by <?= $order['user_id'] ?> <span class="float-right"> <i class="material-icons">send</i></span></p>
-                                    </a>
-                                    <!-- Modal -->
-                                    <div class="modal fade mt-5 text-dark" id="withdraw<?= $order['order_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="withdrawal" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Withdrawal Fulfillment</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container-fluid">
-                                                        <div class="container">
-                                                            <form method="post" action="fulfillwithdraw">
-
-                                                                <input type="hidden" name="id" value="<?= $order['order_id'] ?>">
-                                                        </div>
-                                                        <p class="text-center text-dark-50 h6"><?= $order['user_id'] ?> Bank: <?= $order['bank'] ?></p>
-                                                        <p class="text-center text-dark-50 h6"><?= $order['user_id'] ?> Acc Name: <?= $order['acc_name'] ?></p>
-                                                        <p class="text-center text-dark-50 h6"><?= $order['user_id'] ?>Acc Number: <?= $order['acc_num'] ?></p>
-                                                        <p class="text-center text-dark-50 h6"><?= $order['user_id'] ?>Phone Number: <?= $order['phone'] ?></p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Transferred</button></form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                <?php endif; ?>
+<div class="container-fluid">
+    <div class="mt-3">
+        <h4>Farm</h4>
+        <p>List of Farmpeak farm</p>
+    </div>
+    <div class="text-right">
+        <a href="#addFarmModal" data-toggle="modal" class="btn" style="background-color: #023c74 !important; color: #ffffff"><i style="font-size: 19px" class="fas fa-plus-circle mr-2"></i>Add Farm</a>
+    </div>
+    <!-- list of farm -->
+    <!-- farm1 -->
+    <div class="row">
+    <?php foreach ($products as $prod): ?>
+        <div class="col-md-4 m-sm-0 m-1">
+            <a href="editpackage?id=<?=$prod['id']?>" style="text-decoration: none">
+                <div class="card my-1">
+                    <div class="card-body m-0 px-2 px-lg-2 py-2">
+                        <h5 style="color: #023c74"><?=$prod['name']?></h5>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-1">
+                                <div class="mb-1">
+                                    <p class="subTitle mb-0">Amount</p>
+                                    <p class="subInfo mb-0">
+                                        <span>&#x20a6;</span><?=price($prod['unit_price'])?>
+                                    </p>
+                                </div>
+                                <div class="mb-1">
+                                    <p class="subTitle mb-0">Duration</p>
+                                    <p class="subInfo mb-0"><?=$prod['duration']?> Months</p>
+                                </div>
+                                <div class="mb-1">
+                                    <p class="subTitle mb-0">Used Plot</p>
+                                    <p class="subInfo mb-0"><?=$prod['status']?>/<?=$prod['unit_stock']?></p>
+                                </div>
                             </div>
-                        <?php endforeach; ?>
-
-                        <!-- <p>ID: <span class="text-mute"> </span> <span class="float-right">Product Wallet:</span></p> -->
+                            <div class="col-auto">
+                                <div class="text-right">
+                                    <p class="subTitle text-dark mb-0">ROI</p>
+                                    <p class="subInfo1Admin mb-0"><?=$prod['ROI']?>%</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <h5 class="card-footer m-0 text-center font-weight-bold text-white" style="background-color: #023c74">
+                        Edit
+                    </h5>
                 </div>
-            </div>
-            <div class="container mb-4 px-2">
-                <h6 class="page-subtitle">Statistics</h6>
+            </a>
+        </div>
+        <?php endforeach; ?>
+        <!-- end of farm1 -->
+    </div>
+    <!--end of list of farm -->
 
-                <div class="swiper-container swiper-offers">
-                    <div class="swiper-wrapper">
-
-                        <div class="swiper-slide w-auto p-2">
-                            <div class="card shadow-sm border-0">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body w-250 text-center">
-                                            <h6 class="display-3 "><?=$prod_count?></h6>
-                                            <p class="text-capitalize">Total number of products & services</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-auto p-2">
-                            <div class="card shadow-sm border-0">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body w-250 text-center">
-                                            <h6 class="display-3 "><?=$cust_count?></h6>
-                                            <p class="text-capitalize">Total number of <span class="text-danger">customers</span> </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-auto p-2">
-                            <div class="card shadow-sm border-0">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body w-250 text-center">
-                                            <h6 class="display-3 "><?=$admin_count?></h6>
-                                            <p class="text-capitalize">Total number of <span class="text-success">admins</span> </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-auto p-2">
-                            <div class="card shadow-sm border-0">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body w-250 text-center">
-                                            <h6 class="display-3 "><?=$order_count?></h6>
-                                            <p class="text-capitalize">Total number of <span class="text-success">Orders</span> </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- add farm modal -->
+    <div id="addFarmModal" class="modal fade zoom-in">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #023c74">
+                    <h3 class="modal-title text-white ml-auto">Add Farm</h3>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
                 </div>
+                <form action="addpackage" method="post">
+                    <div class="modal-body p-4">
+                        <div class="form-row">
+                            <div class="col-12 mb-3">
+                                <label for="farmName">Farm Name</label>
+                                <input type="text" class="form-control" id="farmName" name="name" placeholder="Farm Name" maxlength="27" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="farmAmount">Plot (in numbers)</label>
+                                <input type="text" class="form-control" id="farmPlot" name="unit_stock" placeholder="Plot" required />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="farmAmount">Amount (per plot)</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text px-2">&#x20a6;</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="farmAmount" name="unit_price" placeholder="Amount" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="farmDuration">Duration (in num)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="farmDuration" name="duration" placeholder="1" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text px-1">Month(s)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label for="farmDesc">Description</label>
+                                <textarea id="farmDesc" class="form-control" name="description">
+                        </textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label for="farmRoi">ROI</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="farmRoi" name="ROI" placeholder="ROI" maxlength="3" max="100" min="1" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text px-2">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="farmStatus">Status</label>
+                                <select id="farmStatus" class="form-control" name="status">
+                                    <option value="">Open</option>
+                                    <option value="">Closed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- submit -->
+                        <button type="submit" class="btn btn-block" style="background-color: #023c74; color: #ffffff">
+                            Add Farm
+                        </button>
+                        <!-- end of submit button -->
+                    </div>
+                </form>
             </div>
-            <!-- <div class="container">
-                    <h6 class="page-subtitle">Quick Bills</h6>
-                    <div class="card shadow-sm border-0 mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="font-weight-normal mb-1">$ 1048.00 </h5>
-                                    <p class="text-mute small text-secondary mb-2">20d to pay electricity bill</p>
-                                    <div class="progress h-5 bg-light-warning">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:35%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto align-self-center">
-                                    <button class="btn btn-44 default-shadow border-0 bg-default">
-                                        <i class="material-icons">local_atm</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card shadow-sm border-0 mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="font-weight-normal mb-1">$ 150.00 </h5>
-                                    <p class="text-mute small text-secondary mb-2">5d to pay telephone bill</p>
-                                    <div class="progress h-5 bg-light-danger">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width:80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="col-auto align-self-center">
-                                    <button class="btn btn-44 default-shadow border-0 bg-default">
-                                        <i class="material-icons">local_atm</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
         </div>
     </div>
-</main>
-
-<!-- End of page content -->
+    <!-- end of add farm modal -->
+</div>
+</div>
+<!-- /#page-content-wrapper -->
+</div>
