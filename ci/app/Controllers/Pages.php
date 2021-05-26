@@ -760,7 +760,7 @@ class Pages extends BaseController
                 'message' => ['url' => $url, 'msg' => 'Your registration on farmpeak.com was successfull. However, you need to verify this email to access your dashboard. Kindly use the link below to proceed'],
                 'response' => [
                     'title' => 'Registration Successful',
-                    'msg' => 'The next step has been sent to your email',
+                    'msg' => 'The next step has been sent to your email. <br> <b>PS</b> Check your spam folder if not found in default folder',
                     'url' => base_url('login'),
                 ]
             ];
@@ -841,27 +841,12 @@ class Pages extends BaseController
                 $session->set($ses_data);
                 return redirect()->to(base_url());
             } else {
-                $u_db = $trans->where('user_id', $result[0]['user_id'])->find()[0];
-                if ($this->verifyPayment($u_db['reference'], $u_db['id'])) {
-                    if ($this->processpay($result[0]['user_id'])) {
-                        $ses_data = [
-                            'id' => $result[0]['user_id'],
-                            'f_name' => $result[0]['fname'],
-                            'email' => $result[0]['email'],
-                            'paid' => 1,
-                            'p_wallet' => $result[0]['p_wallet'],
-                            'logged_in' => TRUE,
-                        ];
-                        $session = session();
-                        $session->set($ses_data);
-                        return redirect()->to(base_url());
-                    }
-                } else {
-                    $paymenturl = $u_db['id'];
-                    return redirect()->to(base_url('processpayment?ref=' . $paymenturl . '&utm_src=lgn'));
-
-                    // $this->makePayment($result[0]['user_id'], $paymenturl);
-                }
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Verify the email provided to have access to your dashboard',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
             }
         } else {
             $data = [
