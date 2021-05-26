@@ -48,84 +48,49 @@ function type($t)
         <p>List of Farmpeak farm</p>
     </div>
     <!-- list of farm -->
-    <!-- farm1 -->
-    <div class="row">
+       <div class="row">
+    <?php foreach ($products as $prod): ?>
         <div class="col-md-4 m-sm-0 m-1">
-            <a href="farmInfo.html" style="text-decoration: none">
+            <a href="packageinfo?id=<?=$prod['id']?>" style="text-decoration: none">
                 <div class="card my-1">
                     <div class="card-body m-0 px-2 px-lg-2 py-2">
-                        <h5 style="color: #039730">Poultry Farm</h5>
+                        <h5 style="color: #039730"><?=$prod['name']?></h5>
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-1">
                                 <div class="mb-1">
                                     <p class="subTitle mb-0">Amount</p>
                                     <p class="subInfo mb-0">
-                                        <span>&#x20a6;</span>50 000
+                                        <span>&#x20a6;</span><?=price($prod['unit_price'])?>
                                     </p>
                                 </div>
                                 <div class="mb-1">
                                     <p class="subTitle mb-0">Duration</p>
-                                    <p class="subInfo mb-0">6 Months</p>
+                                    <p class="subInfo mb-0"><?=$prod['duration']?> Months</p>
                                 </div>
                                 <div class="mb-1">
                                     <p class="subTitle mb-0">Used Plot</p>
-                                    <p class="subInfo mb-0">0/200</p>
+                                    <p class="subInfo mb-0"><?=$prod['status']?>/<?=$prod['unit_stock']?></p>
                                 </div>
                             </div>
                             <div class="col-auto">
                                 <div class="text-right">
                                     <p class="subTitle text-dark mb-0">ROI</p>
-                                    <p class="subInfo1 mb-0">23%</p>
+                                    <p class="subInfo1 mb-0"><?=$prod['ROI']?>%</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <h5 class="card-footer m-0 text-center font-weight-bold text-white" style="background-color: #039730">
-                        Invest
-                    </h5>
+                    <h5
+                    class="card-footer m-0 text-center font-weight-bold text-white"
+                    style="background-color: #039730"
+                  >
+                    Invest
+                  </h5>
                 </div>
             </a>
         </div>
+        <?php endforeach; ?>
         <!-- end of farm1 -->
-
-        <!-- farm2 -->
-        <div class="col-md-4 m-sm-0 m-1">
-            <a href="farmInfo.html" style="text-decoration: none">
-                <div class="card my-1">
-                    <div class="card-body m-0 px-2 px-lg-2 py-2">
-                        <h5 style="color: #039730">Tomato Farm</h5>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-1">
-                                <div class="mb-1">
-                                    <p class="subTitle mb-0">Amount</p>
-                                    <p class="subInfo mb-0">
-                                        <span>&#x20a6;</span>30 500
-                                    </p>
-                                </div>
-                                <div class="mb-1">
-                                    <p class="subTitle mb-0">Duration</p>
-                                    <p class="subInfo mb-0">7 Months</p>
-                                </div>
-                                <div class="mb-1">
-                                    <p class="subTitle mb-0">Used Plot</p>
-                                    <p class="subInfo mb-0">100/100</p>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="text-right">
-                                    <p class="subTitle text-dark mb-0">ROI</p>
-                                    <p class="subInfo1 mb-0">15%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h5 class="card-footer m-0 text-center font-weight-bold text-white" style="background-color: #000000">
-                        Closed
-                    </h5>
-                </div>
-            </a>
-        </div>
-        <!-- end of farm2 -->
     </div>
 
     <!--end of list of farm -->

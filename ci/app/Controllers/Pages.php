@@ -47,9 +47,9 @@ class Pages extends BaseController
             $prods = $packages->findAll();
             $orders = new \App\Models\Orders();
             // $ords = $orders->where(['user_id' => $session->id])->findAll(3);
-            foreach ($prods as $key => $value) {
-                $prods[$key]['image'] = $this->getFile1($prods[$key]['image']);
-            }
+            // foreach ($prods as $key => $value) {
+            //     $prods[$key]['image'] = $this->getFile1($prods[$key]['image']);
+            // }
 
             $data = [
                 'user' => $u_db = $users->where('id', $id)->find()[0],
@@ -182,61 +182,164 @@ class Pages extends BaseController
         if ($session->logged_in == TRUE && $session->admin == TRUE) {
             $session = session();
             $id = $session->id;
-            $users = new \App\Models\Customers();
-            $products = new \App\Models\Products();
+            $users = new \App\Models\Users();
+            $products = new \App\Models\Packages();
             $prods = $products->findAll();
             $customers = $users->where('clearance', 1)->findAll();
             $admins = $users->where('clearance', 11)->findAll();
-            $orders = new \App\Models\Orders();
-            $ords = $orders->findAll();
             $notif = 0;
-            $ordes = [];
-            foreach ($prods as $key => $value) {
-                $prods[$key]['image'] = $this->getFile1($prods[$key]['image']);
-            }
-            foreach ($ords as $key => $order) {
-                if ($order['notif'] == 0) {
-                    $notif++;
-                    $ordes[$key] = $order;
+            // $ordes = [];
+            // foreach ($prods as $key => $value) {
+            //     $prods[$key]['image'] = $this->getFile1($prods[$key]['image']);
+            // }
+            // foreach ($ords as $key => $order) {
+            //     if ($order['notif'] == 0) {
+            //         $notif++;
+            //         $ordes[$key] = $order;
 
-                    if ($order['type'] == 'c') {
-                        $indiv = $this->indiv($order['user_id']);
-                        $ordes[$key]['bank'] = $indiv['bank'];
-                        $ordes[$key]['acc_num'] = $indiv['acc_num'];
-                        $ordes[$key]['acc_name'] = $indiv['acc_name'];
-                        $ordes[$key]['phone'] = $indiv['phone'];
-                    }
-                }
-                continue;
-            }
+            //         if ($order['type'] == 'c') {
+            //             $indiv = $this->indiv($order['user_id']);
+            //             $ordes[$key]['bank'] = $indiv['bank'];
+            //             $ordes[$key]['acc_num'] = $indiv['acc_num'];
+            //             $ordes[$key]['acc_name'] = $indiv['acc_name'];
+            //             $ordes[$key]['phone'] = $indiv['phone'];
+            //         }
+            //     }
+            //     continue;
+            // }
 
             $data = [
-                'user' => $users->where('user_id', $id)->find()[0],
+                'user' => $users->where('id', $id)->find()[0],
                 'products' => $prods,
                 'prod_count' => count($prods),
-                'cust_count' => count($customers),
-                'admin_count' => count($admins),
-                'order_count' => count($ords),
-                'dir_img' => getenv('directus'),
-                'orders' => $ordes,
+                // 'cust_count' => count($customers),
+                // 'admin_count' => count($admins),
+                // 'dir_img' => getenv('directus'),
+                // 'orders' => $ordes,
                 'ord_count' => $notif
             ];
 
-            echo view('admin/header');
+            echo view('admin/header', ['title' => 'Admin Farm']);
             echo view('admin/home', $data);
-            echo view('user/footer');
+            echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
             $dt = [
                 'title' => "😠Out of Bound😡",
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header');
+            echo view('user/header', ['title' => 'Out of Bound']);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
             $this->login();
         }
+    }
+
+    public function addpackage()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $packages = new \App\Models\Packages();
+            $incoming = $this->request->getPost();
+            if (null !== ($packages->insert($incoming))) {
+                $data = [
+                    'title' => 'Farm Added',
+                    'msg' => "The new farm has been added! <br> It is always editable from the dashboard",
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Farm addition Failed 💔',
+                    'msg' => "We are sorry! <br>Your upload was not successful.",
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function editpackage()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $packages = new \App\Models\Packages();
+            $id = $this->request->getGet('id');
+            $details = $packages->find($id);
+
+            echo view('admin/header', ['title' => 'Farm Edit']);
+            echo view('admin/editpackage', $details);
+            echo view('admin/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function posteditpackage()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $packages = new \App\Models\Packages();
+            $incoming = $this->request->getPost();
+            if (null !== ($packages->update($incoming['id'], $incoming))) {
+                $data = [
+                    'title' => 'Farm Updates',
+                    'msg' => "The farm has been updated! <br> You can always edit as much as you wish from the dashboard",
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Farm Update Failed 💔',
+                    'msg' => "We are sorry! <br>Your update was not successful.",
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function packageinfo()
+    {
+            $packages = new \App\Models\Packages();
+            $id = $this->request->getGet('id');
+            $details = $packages->find($id);
+
+            echo view('user/header', ['title' => 'Farm Information']);
+            echo view('user/packageinfo', $details);
+            echo view('user/footer');
     }
 
     public function profit()
@@ -472,7 +575,7 @@ class Pages extends BaseController
 
     public function login()
     {
-        echo view('user/authheader',['title' => 'Login']);
+        echo view('user/authheader', ['title' => 'Login']);
         echo view('user/login');
         echo view('footer');
     }
@@ -536,7 +639,7 @@ class Pages extends BaseController
 
     public function register()
     {
-        echo view('user/authheader',['title' => 'Sign Up']);
+        echo view('user/authheader', ['title' => 'Sign Up']);
         echo view('user/register');
         echo view('footer');
     }
@@ -649,7 +752,7 @@ class Pages extends BaseController
         if (null !== ($users->insert($data))) {
             // $paymenturl = $this->payment($incoming['email'], $user_id);
             // return redirect()->to(base_url('processpayment?ref=' . $paymenturl . '&utm_src=rgst'));
-            $url = base_url('verify'. '?token='.$token.'&email='.$incoming['email'].'&utm_src=rgst');
+            $url = base_url('verify' . '?token=' . $token . '&email=' . $incoming['email'] . '&utm_src=rgst');
             $data = [
                 'to' => $incoming['email'],
                 'type' => 'link',
@@ -688,7 +791,7 @@ class Pages extends BaseController
             $new_data = [
                 'token' => '0'
             ];
-            $users->update($result[0]['id'],$new_data);
+            $users->update($result[0]['id'], $new_data);
             $data = [
                 'title' => 'Verification Succesful',
                 'msg' => 'Click the link below to login to your account',
@@ -698,7 +801,7 @@ class Pages extends BaseController
         } else {
             $data = [
                 'title' => 'Verification Failed 💔',
-                'msg' => 'The link is either invalid or expired. Contact the admin on '.$this->phone.' for help',
+                'msg' => 'The link is either invalid or expired. Contact the admin on ' . $this->phone . ' for help',
                 'url' => base_url()
             ];
             $this->msg($data);
@@ -728,7 +831,7 @@ class Pages extends BaseController
                 return redirect()->to(base_url());
             } else if ($result[0]['token'] == 0 && $result[0]['clearance'] == 11) {
                 $ses_data = [
-                    'id' => $result[0]['user_id'],
+                    'id' => $result[0]['id'],
                     'f_name' => $result[0]['fname'],
                     'email' => $result[0]['email'],
                     'admin' => TRUE,
@@ -736,7 +839,6 @@ class Pages extends BaseController
                 ];
                 $session = session();
                 $session->set($ses_data);
-                // $this->index();
                 return redirect()->to(base_url());
             } else {
                 $u_db = $trans->where('user_id', $result[0]['user_id'])->find()[0];
@@ -807,7 +909,7 @@ class Pages extends BaseController
     public function mailer(array $data)
     {
         $email = \Config\Services::email();
-        $email->setFrom(getenv('smtpuser'), getenv('smtptitle').' Account Manager');
+        $email->setFrom(getenv('smtpuser'), getenv('smtptitle') . ' Account Manager');
         $email->setTo($data['to']);
         // $email->setCC('another@another-example.com');
         // $email->setBCC('them@their-example.com');
