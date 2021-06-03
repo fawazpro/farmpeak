@@ -162,6 +162,15 @@ body {
   font-weight: 500;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.infoBtn {
+  background-color: #023c74 !important;
+}
+.progress-bg {
+  background-color: #4671ffc7 !important;
+}
+.progress-purple {
+  background-color: #023c74 !important;
+}
 /* end of investor */
 
 /* account */

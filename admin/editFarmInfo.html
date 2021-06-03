@@ -31,8 +31,11 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush mt-5">
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
+        <div class="list-group list-group-flush mt-3">
+          <a
+            hidden
+            href="#"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-tachometer-alt mr-3"></i
             >Overview</a
           >
@@ -53,6 +56,12 @@
             ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
+            href="pay_transactions.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-exchange-alt mr-3"></i
+            >Paystack</a
+          >
+          <a
             href="trainee.html"
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
@@ -69,6 +78,12 @@
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-cog mr-3"></i>Help
             Setting</a
+          >
+          <a
+            href="/investor/farm.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-briefcase mr-3"></i
+            >Investor Mode</a
           >
           <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
@@ -108,8 +123,8 @@
             </h5>
             <p>Edit farm information</p>
           </div>
-          <!-- Admin form info edit -->
 
+          <!-- Edit farm info -->
           <div class="row justify-content-center">
             <div class="col-md-8 m-sm-0 m-1">
               <form action="post" class="card card2 p-4">
@@ -139,7 +154,7 @@
                 </div>
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
-                    <label for="farmAmount">Plot (in numbers)</label>
+                    <label for="farmPlot">Plot (in numbers)</label>
                     <input
                       type="text"
                       class="form-control"
@@ -156,7 +171,7 @@
                         <span class="input-group-text px-2">&#x20a6;</span>
                       </div>
                       <input
-                        type="text"
+                        type="tel"
                         class="form-control"
                         id="farmAmount"
                         placeholder="Amount"
@@ -169,7 +184,7 @@
                     <label for="farmDuration">Duration (in numbers)</label>
                     <div class="input-group">
                       <input
-                        type="text"
+                        type="tel"
                         class="form-control"
                         id="farmDuration"
                         placeholder="Duration"
@@ -185,13 +200,11 @@
                 <div class="form-row">
                   <div class="col-md-12 mb-3">
                     <label for="farmDesc">Description</label>
-                    <textarea id="farmDesc" class="form-control">
-Invest in me wella</textarea
-                    >
+                    <textarea id="farmDesc" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-md-3 mb-3">
+                  <div class="col-md-2 mb-3">
                     <label for="farmRoi">ROI</label>
                     <div class="input-group">
                       <input
@@ -217,6 +230,17 @@ Invest in me wella</textarea
                       <option value="closed">Closed</option>
                     </select>
                   </div>
+                  <!-- FOR AUTHORIZED UPDATE (Admin password) -->
+                  <div class="col-md-6 mb-3">
+                    <label for="adminPwd">Admin password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="adminPwd"
+                      placeholder="Password"
+                      required
+                    />
+                  </div>
                 </div>
                 <!-- submit -->
                 <button
@@ -231,7 +255,7 @@ Invest in me wella</textarea
             </div>
           </div>
 
-          <!--end of Admin form info edit -->
+          <!--end of Edit farm info -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->

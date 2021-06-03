@@ -36,8 +36,11 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush mt-5">
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
+        <div class="list-group list-group-flush mt-3">
+          <a
+            hidden
+            href="#"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-tachometer-alt mr-3"></i
             >Overview</a
           >
@@ -58,6 +61,12 @@
             ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
+            href="pay_transactions.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-exchange-alt mr-3"></i
+            >Paystack</a
+          >
+          <a
             href="trainee.html"
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
@@ -74,6 +83,12 @@
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-cog mr-3"></i>Help
             Setting</a
+          >
+          <a
+            href="/investor/farm.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-briefcase mr-3"></i
+            >Investor Mode</a
           >
           <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
@@ -108,16 +123,189 @@
         <div class="container-fluid">
           <div class="mt-3">
             <h4>Admin</h4>
-            <!-- <p>List of Farmpeak Investors</p> -->
+            <p>List of Admins</p>
           </div>
 
           <!-- payout -->
           <div class="row">
-            <div class="col-12 m-sm-0 m-1">
-              <h3 class="display-4">Under Development</h3>
+            <!-- admin table -->
+            <div class="col-md-12">
+              <div class="m-2 m-sm-0 card shadow-sm">
+                <div class="card-body px-2 px-lg-2 py-2">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead class="thead-dark text-center">
+                        <tr>
+                          <th hidden>Admin Id</th>
+                          <th>First-Name</th>
+                          <th>Last-Name</th>
+                          <th>Email</th>
+                          <th>Remove</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-center">
+                        <tr>
+                          <td hidden>10D35</td>
+                          <td>Ambali</td>
+                          <td>Daud</td>
+                          <td>daud@mail.com</td>
+                          <td class="text-center">
+                            <a
+                              href="#removeAdminModal"
+                              data-toggle="modal"
+                              rel="tooltip"
+                              class="shadow p-1"
+                              ><i class="text-danger fas fa-trash-alt fa-1x"></i
+                            ></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td hidden>10D35</td>
+                          <td>Abdullah</td>
+                          <td>Ryan</td>
+                          <td>abdullah@mail.com</td>
+                          <td class="text-center">
+                            <a
+                              href="#removeAdminModal"
+                              data-toggle="modal"
+                              rel="tooltip"
+                              class="shadow p-1"
+                              ><i class="text-danger fas fa-trash-alt fa-1x"></i
+                            ></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!--end of admin table -->
             </div>
           </div>
-          <!--end of payout -->
+
+          <!-- Edit farm info -->
+          <div class="row justify-content-center">
+            <div class="col-md-8 m-sm-0 m-1">
+              <form action="post" class="card shadow-sm my-5">
+                <div
+                  class="card-header text-white text-center"
+                  style="background-color: #023c74 !important"
+                >
+                  <h5>Add New Admin</h5>
+                </div>
+                <div class="card-body p-4">
+                  <p class="text-info">
+                    Note:
+                    <span
+                      >Make sure you enter a
+                      <b>registered farmpeak account email</b> for the role of
+                      Admin</span
+                    >
+                  </p>
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label for="adminEmailAdd">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="adminEmailAdd"
+                        placeholder="Enter email"
+                        maxlength="40"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="form-row">
+                    <!-- FOR AUTHORIZED UPDATE (Admin password) -->
+                    <div class="col-md-12 mb-3">
+                      <label for="adminPwd">Admin password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="adminPwd"
+                        placeholder="Password"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <!-- submit -->
+                  <button
+                    type="submit"
+                    class="btn btn-block"
+                    style="background-color: #023c74; color: #ffffff"
+                  >
+                    Authorize
+                  </button>
+                  <!-- end of submit button -->
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!--end of Edit farm info -->
+          <!--end of admin -->
+
+          <!-- removeAdmin modal -->
+          <div id="removeAdminModal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #ff0000">
+                  <h5 class="modal-title text-white ml-auto">Remove Admin</h5>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form method="post">
+                  <div class="modal-body p-4">
+                    <h5>Are you sure you want to remove this Admin?</h5>
+                    <!-- <p class="text-danger">
+                      <small style="font-size: large; font-weight: bold"
+                        >This action cannot be undone.</small
+                      >
+                    </p> -->
+                    <div class="form-row">
+                      <div class="col-0 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="AdminId"
+                          hidden
+                        />
+                      </div>
+                      <div class="col-12 mb-3">
+                        <label for="adminPwd">Admin password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="adminPwd"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #ff0000; color: #ffffff"
+                    >
+                      Remove
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end of removeAdmin modal -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->

@@ -32,8 +32,11 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush mt-5">
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
+        <div class="list-group list-group-flush mt-3">
+          <a
+            hidden
+            href="#"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-tachometer-alt mr-3"></i
             >Overview</a
           >
@@ -54,6 +57,12 @@
             ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
+            href="pay_transactions.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-exchange-alt mr-3"></i
+            >Paystack</a
+          >
+          <a
             href="trainee.html"
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
@@ -70,6 +79,12 @@
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-cog mr-3"></i>Help
             Setting</a
+          >
+          <a
+            href="/investor/farm.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-briefcase mr-3"></i
+            >Investor Mode</a
           >
           <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
@@ -110,7 +125,11 @@
             <!-- #addFarmModal (modal ID) -->
             <a
               class="btn modalX"
-              style="background-color: #023c74 !important; color: #ffffff"
+              style="
+                background-color: #023c74 !important;
+                color: #ffffff;
+                cursor: pointer;
+              "
               ><i style="font-size: 19px" class="fas fa-plus-circle mr-2"></i
               >Add Farm</a
             >
@@ -136,7 +155,7 @@
                           <p class="subInfo mb-0">6 Months</p>
                         </div>
                         <div class="mb-1">
-                          <p class="subTitle mb-0">Used Plot</p>
+                          <p class="subTitle mb-0">Plot Used</p>
                           <p class="subInfo mb-0">0/200</p>
                         </div>
                       </div>
@@ -178,7 +197,7 @@
                           <p class="subInfo mb-0">7 Months</p>
                         </div>
                         <div class="mb-1">
-                          <p class="subTitle mb-0">Used Plot</p>
+                          <p class="subTitle mb-0">Plot Used</p>
                           <p class="subInfo mb-0">100/100</p>
                         </div>
                       </div>
@@ -331,19 +350,17 @@
 
     <!-- script -->
 
-<<<<<<< HEAD
     <script src="/asset/fontawesome-free-5.9.0-web/js/all.min.js"></script>
     <script src="/asset/Scripts/jquery-3.4.1.min.js"></script>
     <script src="/asset/Scripts/popper.min.js"></script>
     <script src="/asset/bootstrap/js/bootstrap.min.js"></script>
     <script src="/asset/Scripts/main.js"></script>
-=======
+
     <script src="../asset/fontawesome-free-5.9.0-web/js/all.min.js"></script>
     <script src="../asset/Scripts/jquery-3.4.1.min.js"></script>
     <script src="../asset/Scripts/popper.min.js"></script>
     <script src="../asset/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../asset/Scripts/wow.min.js"></script>
->>>>>>> 891d93c7acad5fd1368c2fae13e697e8ef608bfc
+    <script src="../asset/Scripts/main.js"></script>
 
     <!-- end of script -->
 

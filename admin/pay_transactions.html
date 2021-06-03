@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="/asset/StyleSheet/main.css" />
 
-    <title>Investors - Farmpeak</title>
+    <title>Help Setting - Farmpeak</title>
   </head>
   <body>
     <div class="d-flex" id="wrapper">
@@ -51,7 +51,7 @@
           >
           <a
             href="investor.html"
-            class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-users mr-3"></i
             >Investors</a
           >
@@ -62,7 +62,7 @@
           >
           <a
             href="pay_transactions.html"
-            class="list-group-item list-group-item-action bgItemAdmin"
+            class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
             ><i style="font-size: 19px" class="fas fa-exchange-alt mr-3"></i
             >Paystack</a
           >
@@ -121,15 +121,16 @@
         </nav>
 
         <div class="container-fluid">
-          <div class="mt-3">
-            <h4>Investor</h4>
-            <p>List of Farmpeak Investors</p>
+          <div class="mt-3 mb-1">
+            <h4>Paystack Transactions</h4>
+            <!-- <p>List of Farmpeak Investors</p> -->
           </div>
 
-          <!-- investors -->
+          <!-- list of paystack transaction -->
+
           <div class="row">
             <div class="col-12 m-sm-0 m-1">
-              <div class="card p-2 mb-4">
+              <div class="card p-1 mb-4">
                 <div class="card-body">
                   <div class="table-responsive">
                     <table
@@ -138,35 +139,36 @@
                       width="100%"
                     >
                       <thead class="thead-dark">
-                        <tr class="text-center">
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Tel</th>
-                          <th>No of Farm</th>
-                          <th>Details</th>
+                        <tr class="">
+                          <th>Date</th>
+                          <th>Trans ID</th>
+                          <th>Amount</th>
+                          <th>Payment from</th>
+                          <th>Payment to</th>
+                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>Abdullah Ryan</td>
+                          <td>03/06/2021</td>
+                          <td>234HDGE21</td>
+                          <td><span>&#x20a6;</span>117,600</td>
+                          <td>farmpeak</td>
                           <td>abdullah@mail.com</td>
-                          <td>0802223333</td>
-                          <td>4</td>
-                          <td class="text-center">
-                            <a href="investorInfo.html" class="shadow px-3 py-1"
-                              ><i class="text-info fas fa-info-circle fa-1x"></i
-                            ></a>
+                          <td>
+                            <span class="badge badge-success px-2">paid</span>
                           </td>
                         </tr>
                         <tr>
-                          <td>Lionel Messi</td>
-                          <td>merciless@mail.com</td>
-                          <td>0802223333</td>
-                          <td>2</td>
-                          <td class="text-center">
-                            <a href="investorInfo.html" class="shadow px-3 py-1"
-                              ><i class="text-info fas fa-info-circle fa-1x"></i
-                            ></a>
+                          <td>20/06/2021</td>
+                          <td>234HDGE21</td>
+                          <td><span>&#x20a6;</span>100,000</td>
+                          <td>abdullah@mail.com</td>
+                          <td>farmpeak</td>
+                          <td>
+                            <span class="badge badge-warning px-2"
+                              >transit</span
+                            >
                           </td>
                         </tr>
                       </tbody>
@@ -176,7 +178,7 @@
               </div>
             </div>
           </div>
-          <!--end of investors -->
+          <!-- end of paystack transaction -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->

@@ -36,8 +36,11 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush mt-5">
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
+        <div class="list-group list-group-flush mt-3">
+          <a
+            hidden
+            href="#"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-tachometer-alt mr-3"></i
             >Overview</a
           >
@@ -58,18 +61,34 @@
             ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
+            href="pay_transactions.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-exchange-alt mr-3"></i
+            >Paystack</a
+          >
+          <a
             href="trainee.html"
             class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
             ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
             >Trainee</a
           >
-          <a href="admins.html" class="list-group-item list-group-item-action bgItemAdmin"
+          <a
+            href="admins.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-user-lock mr-3"></i
             >Admins</a
           >
-          <a href="helpSet.html" class="list-group-item list-group-item-action bgItemAdmin"
+          <a
+            href="helpSet.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-cog mr-3"></i>Help
             Setting</a
+          >
+          <a
+            href="/investor/farm.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-briefcase mr-3"></i
+            >Investor Mode</a
           >
           <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
@@ -107,7 +126,7 @@
             <p>List of Farmpeak students</p>
           </div>
 
-          <!-- payout -->
+          <!-- trainee -->
           <div class="row">
             <div class="col-12 m-sm-0 m-1">
               <div class="card p-2 mb-4">
@@ -136,19 +155,16 @@
                           <td>0802223333</td>
                           <td>Fishery</td>
                           <td>22-02-2021</td>
-                          <td>
-                            <a
-                              href="traineeInfo.html"
-                              class="btn btn-block btn-primary"
-                              >info</a
-                            >
+                          <td class="text-center">
+                            <a href="traineeInfo.html" class="shadow px-3 py-1"
+                              ><i class="text-info fas fa-info-circle fa-1x"></i
+                            ></a>
                           </td>
-                          <td>
+                          <td class="text-center">
                             <a
                               href="#deleteStudentModal"
                               data-toggle="modal"
-                              rel="tooltip"
-                              title="Delete"
+                              class="shadow px-3 py-1"
                               ><i
                                 class="fas text-danger fa-trash-alt fa-1x actionDelete"
                               ></i
@@ -161,19 +177,16 @@
                           <td>0802223333</td>
                           <td>Horticulture</td>
                           <td>26-02-2021</td>
-                          <td>
-                            <a
-                              href="traineeInfo.html"
-                              class="btn btn-block btn-primary"
-                              >info</a
-                            >
+                          <td class="text-center">
+                            <a href="traineeInfo.html" class="shadow px-3 py-1"
+                              ><i class="text-info fas fa-info-circle fa-1x"></i
+                            ></a>
                           </td>
-                          <td>
+                          <td class="text-center">
                             <a
                               href="#deleteStudentModal"
                               data-toggle="modal"
-                              rel="tooltip"
-                              title="Delete"
+                              class="shadow px-3 py-1"
                               ><i
                                 class="fas text-danger fa-trash-alt fa-1x actionDelete"
                               ></i
@@ -187,9 +200,9 @@
               </div>
             </div>
           </div>
-          <!--end of payout -->
+          <!--end of trainee -->
 
-          <!-- delete farm modal -->
+          <!-- deleteStudent modal -->
           <div id="deleteStudentModal" class="modal fade zoom-in">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -226,12 +239,13 @@
                         />
                       </div>
                       <div class="col-12 mb-3">
+                        <label for="adminPwd">Admin password</label>
                         <input
-                          type="text"
+                          type="password"
                           class="form-control"
-                          id="TraineeName"
-                          value="Abdullah Ryan"
-                          readonly
+                          id="adminPwd"
+                          placeholder="Password"
+                          required
                         />
                       </div>
                     </div>
@@ -250,7 +264,7 @@
               </div>
             </div>
           </div>
-          <!-- end of delete farm modal -->
+          <!-- end of deleteStudent modal -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->

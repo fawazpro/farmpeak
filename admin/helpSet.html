@@ -36,8 +36,11 @@
             </div>
           </a>
         </div>
-        <div class="list-group list-group-flush mt-5">
-          <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
+        <div class="list-group list-group-flush mt-3">
+          <a
+            hidden
+            href="#"
+            class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-tachometer-alt mr-3"></i
             >Overview</a
           >
@@ -58,6 +61,12 @@
             ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
+            href="pay_transactions.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-exchange-alt mr-3"></i
+            >Paystack</a
+          >
+          <a
             href="trainee.html"
             class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fa fa-user-circle mr-3"></i
@@ -74,6 +83,12 @@
             class="list-group-item list-group-item-action bgItemAdmin activeAdmin"
             ><i style="font-size: 19px" class="fa fa-cog mr-3"></i>Help
             Setting</a
+          >
+          <a
+            href="/investor/farm.html"
+            class="list-group-item list-group-item-action bgItemAdmin"
+            ><i style="font-size: 19px" class="fas fa-briefcase mr-3"></i
+            >Investor Mode</a
           >
           <a href="#" class="list-group-item list-group-item-action bgItemAdmin"
             ><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i
@@ -106,18 +121,286 @@
         </nav>
 
         <div class="container-fluid">
-          <div class="mt-3">
+          <div class="mt-3 mb-1">
             <h4>Help Center Setting</h4>
             <!-- <p>List of Farmpeak Investors</p> -->
           </div>
 
-          <!-- payout -->
+          <!-- list of helpline -->
+
           <div class="row">
-            <div class="col-12 m-sm-0 m-1">
-              <h3 class="display-4">Under Development</h3>
+            <!-- help1 -->
+            <div class="col-md-4 m-sm-0 m-1">
+              <a
+                href="#editHelp1Modal"
+                data-toggle="modal"
+                style="text-decoration: none"
+              >
+                <div class="card shadow my-1">
+                  <div
+                    class="card-body m-0 px-2 px-lg-2 py-4 d-flex justify-content-center align-items-center"
+                  >
+                    <span
+                      ><i
+                        class="fas fa-headset fa-7x"
+                        style="color: #023c74 !important"
+                      ></i
+                    ></span>
+                  </div>
+                  <h5
+                    class="card-footer m-0 text-center font-weight-bold text-white"
+                    style="background-color: #023c74"
+                  >
+                    Edit Call Help-1
+                  </h5>
+                </div>
+              </a>
+            </div>
+            <!-- end of help1 -->
+            <!-- help2 -->
+            <div class="col-md-4 m-sm-0 m-1">
+              <a
+                href="#editHelp2Modal"
+                data-toggle="modal"
+                style="text-decoration: none"
+              >
+                <div class="card shadow my-1">
+                  <div
+                    class="card-body m-0 px-2 px-lg-2 py-4 d-flex justify-content-center align-items-center"
+                  >
+                    <span
+                      ><i
+                        class="fas fa-headset fa-7x"
+                        style="color: #000000 !important"
+                      ></i
+                    ></span>
+                  </div>
+                  <h5
+                    class="card-footer m-0 text-center font-weight-bold text-white"
+                    style="background-color: #000000"
+                  >
+                    Edit Call Help-2
+                  </h5>
+                </div>
+              </a>
+            </div>
+            <!-- end of help2 -->
+            <!-- helpmail -->
+            <div class="col-md-4 m-sm-0 m-1">
+              <a
+                href="#editHelpMailModal"
+                data-toggle="modal"
+                style="text-decoration: none"
+              >
+                <div class="card shadow my-1">
+                  <div
+                    class="card-body m-0 px-2 px-lg-2 py-4 d-flex justify-content-center align-items-center"
+                  >
+                    <span
+                      ><i
+                        class="fas fa-envelope-open-text fa-7x"
+                        style="color: #023c74 !important"
+                      ></i
+                    ></span>
+                  </div>
+                  <h5
+                    class="card-footer m-0 text-center font-weight-bold text-white"
+                    style="background-color: #023c74"
+                  >
+                    Edit Mail Us
+                  </h5>
+                </div>
+              </a>
             </div>
           </div>
-          <!--end of payout -->
+          <!-- end of helpmail -->
+          <!-- end of helpline -->
+
+          <!-- editHelp1 modal -->
+          <div id="editHelp1Modal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #023c74">
+                  <h5 class="modal-title text-white ml-auto">
+                    Edit Helpline-1
+                  </h5>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form action="">
+                  <div class="modal-body p-4">
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        <label for="helpline1">Tel no</label>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="helpline1"
+                          placeholder="08101110000"
+                          value="08001112222"
+                          maxlength="11"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        <label for="adminPwd">Admin password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="adminPwd"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #023c74; color: #ffffff"
+                    >
+                      Update
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end of editHelp1 modal -->
+
+          <!-- editHelp2 modal -->
+          <div id="editHelp2Modal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #023c74">
+                  <h5 class="modal-title text-white ml-auto">
+                    Edit Helpline-2
+                  </h5>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form action="">
+                  <div class="modal-body p-4">
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        <label for="helpline2">Tel no</label>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="helpline2"
+                          placeholder="08001112222"
+                          value="08012223333"
+                          maxlength="11"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        <label for="adminPwd">Admin password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="adminPwd"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #023c74; color: #ffffff"
+                    >
+                      Update
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end of editHelp2 modal -->
+
+          <!-- editHelp2 modal -->
+          <div id="editHelpMailModal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #023c74">
+                  <h5 class="modal-title text-white ml-auto">
+                    Edit Helpline-2
+                  </h5>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form action="">
+                  <div class="modal-body p-4">
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        <label for="helpMail">Email</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="helpMail"
+                          placeholder="mail@mail.com"
+                          value="farmpeak222@gmail.com"
+                          maxlength="11"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        <label for="adminPwd">Admin password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="adminPwd"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #023c74; color: #ffffff"
+                    >
+                      Update
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end of editHelp2 modal -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->
