@@ -35,7 +35,7 @@
           <a
             href="farm.html"
             class="list-group-item list-group-item-action bgItem active"
-            ><i style="font-size: 19px" class="fa fa-building mr-3"></i>Farm</a
+            ><i style="font-size: 19px" class="fas fa-seedling mr-3"></i>Farm</a
           >
           <a
             href="investment.html"
@@ -44,9 +44,9 @@
             Investment</a
           >
           <a
-            href="wallet.html"
+            href="payout.html"
             class="list-group-item list-group-item-action bgItem"
-            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Wallet</a
+            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
             href="profile.html"
@@ -99,16 +99,20 @@
           <!-- farm1 -->
           <div class="row">
             <div class="col-md-4 m-sm-0 m-1">
-              <a href="farmInfo.html" style="text-decoration: none">
-                <div class="card my-1">
+              <a
+                href="#addInvestModal"
+                data-toggle="modal"
+                style="text-decoration: none"
+              >
+                <div class="card shadow my-1">
                   <div class="card-body m-0 px-2 px-lg-2 py-2">
-                    <h5 style="color: #039730">Poultry Farm</h5>
+                    <h5 style="color: #038d2c">Poultry Farm</h5>
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-1">
                         <div class="mb-1">
                           <p class="subTitle mb-0">Amount</p>
                           <p class="subInfo mb-0">
-                            <span>&#x20a6;</span>50 000
+                            <span>&#x20a6;</span>50,000
                           </p>
                         </div>
                         <div class="mb-1">
@@ -116,7 +120,7 @@
                           <p class="subInfo mb-0">6 Months</p>
                         </div>
                         <div class="mb-1">
-                          <p class="subTitle mb-0">Used Plot</p>
+                          <p class="subTitle mb-0">Plot Used</p>
                           <p class="subInfo mb-0">0/200</p>
                         </div>
                       </div>
@@ -130,10 +134,17 @@
                   </div>
                   <h5
                     class="card-footer m-0 text-center font-weight-bold text-white"
-                    style="background-color: #039730"
+                    style="background-color: #038d2c"
                   >
                     Invest
                   </h5>
+                  <!-- OR OR OR OR OR-->
+                  <!-- <h5
+                    class="card-footer m-0 text-center font-weight-bold text-white"
+                    style="background-color: #000000"
+                  >
+                    Closed
+                  </h5> -->
                 </div>
               </a>
             </div>
@@ -141,16 +152,16 @@
 
             <!-- farm2 -->
             <div class="col-md-4 m-sm-0 m-1">
-              <a href="farmInfo.html" style="text-decoration: none">
-                <div class="card my-1">
+              <a href="#" style="text-decoration: none">
+                <div class="card shadow my-1">
                   <div class="card-body m-0 px-2 px-lg-2 py-2">
-                    <h5 style="color: #039730">Tomato Farm</h5>
+                    <h5 style="color: #038d2c">Tomato Farm</h5>
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-1">
                         <div class="mb-1">
                           <p class="subTitle mb-0">Amount</p>
                           <p class="subInfo mb-0">
-                            <span>&#x20a6;</span>30 500
+                            <span>&#x20a6;</span>30,500
                           </p>
                         </div>
                         <div class="mb-1">
@@ -158,7 +169,7 @@
                           <p class="subInfo mb-0">7 Months</p>
                         </div>
                         <div class="mb-1">
-                          <p class="subTitle mb-0">Used Plot</p>
+                          <p class="subTitle mb-0">Plot Used</p>
                           <p class="subInfo mb-0">100/100</p>
                         </div>
                       </div>
@@ -181,8 +192,147 @@
             </div>
             <!-- end of farm2 -->
           </div>
-
           <!--end of list of farm -->
+
+          <!-- add farm modal -->
+          <div id="addInvestModal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #025c1d">
+                  <h3 class="modal-title text-white ml-auto">
+                    Investment Info
+                  </h3>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form method="post">
+                  <div class="modal-body p-4">
+                    <div class="form-row">
+                      <div class="col-md-4 mb-2">
+                        <p class="subTitle1 mb-1">Farm ID</p>
+                        <p class="subInfo2">234HDGE21</p>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <p class="subTitle1 mb-1">Farm Name</p>
+                        <p class="subInfo2">Poultry Farm</p>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <p class="subTitle1 mb-1">Price (per plot)</p>
+                        <!-- help in rendering plotPrice1 nd totalPrice1 with diff id on diff modal -->
+                        <p class="subInfo2">
+                          &#x20a6;<span id="plotPrice1">50,000</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-4 mb-2">
+                        <p class="subTitle1 mb-1">Plot Used</p>
+                        <p class="subInfo2">0/200</p>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <p class="subTitle1 mb-1">Duration</p>
+                        <p class="subInfo2">6 Months</p>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <p class="subTitle1 mb-1">ROI</p>
+                        <p class="subInfo2">23%</p>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-12 mb-0">
+                        <p class="subTitle1 mb-1">Description</p>
+                        <p class="subInfo2">
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Ab accusamus, aut, illum veniam itaque quis cum
+                          dolore alias numquam cupiditate pariatur. Porro sint
+                          blanditiis quae adipisci sit odit expedita nostrum.
+                          Repudiandae dolore ipsum aliquid vel porro sapiente!
+                          Non, officiis. Quod illo minus corporis soluta nam
+                          explicabo ipsum possimus eius quo ducimus! Porro
+                          aspernatur eveniet alias. Amet neque soluta facilis
+                          voluptatum in consectetur incidunt libero repellat.
+                        </p>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <div class="form-row">
+                      <div class="col-md-6 mb-3">
+                        <label for="buyPlot" class="subTitle1">
+                          No of plots will you invest in?</label
+                        >
+                        <div class="input-group">
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="buyPlot"
+                            min="1"
+                            onkeyup="calculate()"
+                            required
+                          />
+                          <div class="input-group-append">
+                            <span class="input-group-text appended px-2"
+                              >plot(s)</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 text-right">
+                        <p class="subTitle1 mb-1">Total Price</p>
+                        <!-- help in rendering plotPrice1 nd totalPrice1 with diff id on diff modal -->
+                        <p class="subInfo3" id="totalPrice1"></p>
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #025c1d; color: #ffffff"
+                    >
+                      Invest
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+                <script>
+                  // help me in feeding diff plotPrice Id nd totalPrice1 to script if needed
+                  function calculate() {
+                    let formatTotalprice;
+
+                    let plotPrice = parseInt(
+                      document
+                        .getElementById("plotPrice1")
+                        .innerHTML.replace(/,/g, "")
+                    );
+                    let plotNo = parseInt(
+                      document.getElementById("buyPlot").value
+                    );
+                    if (isNaN(plotNo)) {
+                      formatTotalprice = "Invalid input";
+                    } else {
+                      let totalPrice = plotNo * plotPrice;
+                      formatTotalprice = formatter.format(totalPrice);
+                    }
+
+                    document.getElementById(
+                      "totalPrice1"
+                    ).innerHTML = formatTotalprice;
+                  }
+                  var formatter = new Intl.NumberFormat("en-NG", {
+                    style: "currency",
+                    currency: "NGN",
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
+          <!-- end of add farm modal -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->

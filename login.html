@@ -65,11 +65,53 @@
               </button>
             </form>
             <div class="text-right mt-2" style="font-weight: 500">
-              <a href="forgotP.html">forgot password?</a>
+              <a href="#forgotPModal" data-toggle="modal">forgot password?</a>
             </div>
           </div>
         </div>
       </div>
+      <!-- add farm modal -->
+      <div id="forgotPModal" class="modal fade zoom-in">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header btn-farm">
+              <h5 class="modal-title text-white ml-auto">Forgot Password</h5>
+              <button
+                type="button"
+                class="close text-white"
+                data-dismiss="modal"
+                aria-hidden="true"
+              >
+                &times;
+              </button>
+            </div>
+            <form method="post">
+              <div class="modal-body p-4">
+                <div class="form-row">
+                  <div class="col-12 mb-3">
+                    <label for="resetEmail">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="resetEmail"
+                      placeholder="Farm Name"
+                      maxlength="27"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- submit -->
+                <button type="submit" class="btn btn-block btn-farm">
+                  Send Reset-link
+                </button>
+                <!-- end of submit button -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- end of add farm modal -->
     </div>
 
     <!-- script -->

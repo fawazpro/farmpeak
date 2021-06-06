@@ -11,7 +11,7 @@ body {
 }
 
 .pBack {
-  background-color: #039730;
+  background-color: #038d2c;
   height: 100vh;
 }
 
@@ -25,11 +25,11 @@ body {
 }
 
 .text-farm {
-  color: #039730 !important;
+  color: #038d2c !important;
 }
 
 .btn-farm {
-  background-color: #039730;
+  background-color: #038d2c;
   color: #ffffff;
 }
 
@@ -38,13 +38,13 @@ body {
   overflow-x: hidden;
 }
 .bgSide {
-  background-color: #039730;
+  background-color: #038d2c;
 }
 .bgSideAdmin {
   background-color: #0356a3;
 }
 .bgItem {
-  background-color: #04c93f;
+  background-color: #025c1d;
   color: #ffffff;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
@@ -61,8 +61,8 @@ body {
 }
 .bgItem:hover {
   background-color: #ffffff;
-  color: #04c93f;
-  border-left: 5px solid #04c93f;
+  color: #038d2c;
+  border-left: 5px solid #038d2c;
 }
 .bgItemAdmin:hover {
   background-color: #ffffff;
@@ -71,8 +71,8 @@ body {
 }
 .list-group .active {
   background-color: #ffffff;
-  color: #04c93f;
-  border-left: 5px solid #04c93f;
+  color: #038d2c;
+  border-left: 5px solid #038d2c;
 }
 .list-group .activeAdmin {
   background-color: #ffffff;
@@ -136,7 +136,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .col-auto > div > .subInfo1 {
-  color: #039730;
+  color: #038d2c;
   margin-top: -17px;
   font-size: 50px;
   font-weight: 500;
@@ -152,6 +152,10 @@ body {
 /* end of farm */
 
 /* investor */
+.subTitle1 {
+  color: #038d2c !important;
+  font-size: 15px;
+}
 .subTitle2 {
   color: #023c74 !important;
   font-size: 15px;
@@ -162,14 +166,31 @@ body {
   font-weight: 500;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.subInfo3 {
+  color: #000000;
+  margin-top: 0px;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.appended {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
 .infoBtn {
   background-color: #023c74 !important;
+}
+.progress-bg1 {
+  background-color: #6e6e6e5e !important;
 }
 .progress-bg {
   background-color: #4671ffc7 !important;
 }
 .progress-purple {
   background-color: #023c74 !important;
+}
+.progress-green {
+  background-color: #038d2c !important;
 }
 /* end of investor */
 
@@ -189,6 +210,9 @@ body {
 }
 
 /* end of account */
+.hide {
+  display: none;
+}
 
 /* modal */
 .zoom-in {
@@ -214,4 +238,8 @@ body {
     height: 40vh;
   }
 }
-/* @media screen and (max-width: 800px) and (min-width: 541px){} */
+@media screen and (max-width: 500px) {
+  .hide {
+    display: block;
+  }
+}

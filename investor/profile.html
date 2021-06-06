@@ -35,7 +35,7 @@
           <a
             href="farm.html"
             class="list-group-item list-group-item-action bgItem"
-            ><i style="font-size: 19px" class="fa fa-building mr-3"></i>Farm</a
+            ><i style="font-size: 19px" class="fas fa-seedling mr-3"></i>Farm</a
           >
           <a
             href="investment.html"
@@ -44,9 +44,9 @@
             Investment</a
           >
           <a
-            href="wallet.html"
+            href="payout.html"
             class="list-group-item list-group-item-action bgItem"
-            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Wallet</a
+            ><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a
           >
           <a
             href="profile.html"
@@ -105,6 +105,7 @@
                       <label for="investorId">Investor ID</label>
                       <input
                         type="text"
+                        id="investorId"
                         class="form-control"
                         value="34HF462"
                         readonly
@@ -116,6 +117,7 @@
                       <label for="first_Name">First Name</label>
                       <input
                         type="text"
+                        id="first_Name"
                         class="form-control"
                         placeholder="First Name"
                         value="Abdullah"
@@ -127,6 +129,7 @@
                       <label for="last_Name">Last Name</label>
                       <input
                         type="text"
+                        id="last_Name"
                         class="form-control"
                         placeholder="Last Name"
                         value="Ryan"
@@ -153,7 +156,7 @@
                         type="tel"
                         id="telNo"
                         class="form-control"
-                        placeholder="0800 000 0000"
+                        placeholder="08000000000"
                         value="08123441902"
                         required
                       />
@@ -164,11 +167,11 @@
                       <label for="acctNo">Account No</label>
                       <input
                         type="tel"
-                        id="phoneNo"
+                        id="acctNo"
                         class="form-control"
-                        placeholder="0000011111"
                         value="1023456789"
                         maxlength="10"
+                        minlength="10"
                         required
                       />
                     </div>
@@ -180,6 +183,31 @@
                         <option value="access">Access</option>
                         <option value="fcmb">FCMB</option>
                       </select>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="form-row">
+                    <div class="col mb-3">
+                      <label for="userPwd">Your Password</label>
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          id="userPwd"
+                          class="form-control pwd"
+                          placeholder="Password"
+                          required
+                        />
+                        <div
+                          class="input-group-append"
+                          style="cursor: pointer"
+                          rel="tooltip"
+                          title="show"
+                        >
+                          <span class="input-group-text reveal">
+                            <i class="fa fa-eye"></i
+                          ></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- submit -->
@@ -202,37 +230,58 @@
                   <div class="form-row">
                     <div class="col mb-3">
                       <label for="currentPwd">Current Password</label>
-                      <input
-                        type="password"
-                        id="currentPwd"
-                        class="form-control"
-                        placeholder="Password"
-                        required
-                      />
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          id="currentPwd"
+                          class="form-control pwd1"
+                          placeholder="Password"
+                          required
+                        />
+                        <div class="input-group-append" style="cursor: pointer">
+                          <span class="input-group-text reveal1">
+                            <i class="fa fa-eye"></i>
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col mb-3">
                       <label for="newPwd">New Password</label>
-                      <input
-                        type="password"
-                        id="newPwd"
-                        class="form-control"
-                        placeholder="Password"
-                        required
-                      />
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          id="newPwd"
+                          class="form-control pwd2"
+                          placeholder="Password"
+                          required
+                        />
+                        <div class="input-group-append" style="cursor: pointer">
+                          <span class="input-group-text reveal2">
+                            <i class="fa fa-eye"></i>
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col mb-3">
                       <label for="confirmPwd">Confirm Password</label>
-                      <input
-                        type="password"
-                        id="confirmPwd"
-                        class="form-control"
-                        placeholder="Password"
-                        required
-                      />
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          id="confirmPwd"
+                          class="form-control pwd3"
+                          placeholder="Password"
+                          required
+                        />
+                        <div class="input-group-append" style="cursor: pointer">
+                          <span class="input-group-text reveal3">
+                            <i class="fa fa-eye"></i>
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- submit -->
@@ -257,7 +306,7 @@
     <script src="/asset/Scripts/jquery-3.4.1.min.js"></script>
     <script src="/asset/Scripts/popper.min.js"></script>
     <script src="/asset/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/asset/Scripts/wow.min.js"></script>
+    <script src="/asset/Scripts/main.js"></script>
 
     <!-- end of script -->
 

@@ -156,7 +156,7 @@
                   <div class="col-md-4 mb-3">
                     <label for="farmPlot">Plot (in numbers)</label>
                     <input
-                      type="text"
+                      type="tel"
                       class="form-control"
                       id="farmPlot"
                       placeholder="Plot"
@@ -189,6 +189,7 @@
                         id="farmDuration"
                         placeholder="Duration"
                         value="24"
+                        maxlength="2"
                         required
                       />
                       <div class="input-group-append">
@@ -233,13 +234,20 @@
                   <!-- FOR AUTHORIZED UPDATE (Admin password) -->
                   <div class="col-md-6 mb-3">
                     <label for="adminPwd">Admin password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="adminPwd"
-                      placeholder="Password"
-                      required
-                    />
+                    <div class="input-group">
+                      <input
+                        type="password"
+                        class="form-control pwd4"
+                        id="adminPwd"
+                        placeholder="Password"
+                        required
+                      />
+                      <div class="input-group-append" style="cursor: pointer">
+                        <span class="input-group-text reveal4">
+                          <i class="fa fa-eye"></i>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <!-- submit -->
