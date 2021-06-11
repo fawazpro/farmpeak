@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Controllers;
+require 'autoload.php';
 
-use Yabacon\Paystack;
+// use Yabacon\Paystack;
 // use AshleyDawson\SimplePagination\Paginator;
 use CodeIgniter\Encryption\Encryption;
 // use TeamTNT\TNTSearch\TNTSearch;
@@ -637,6 +638,66 @@ class Pages extends BaseController
         echo view('user/footer');
     }
 
+    public function investment()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $users = new \App\Models\Users();
+            $user = $users->where(['id' => $session->id])->find()[0];
+
+            $data = [
+                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                'user' => $user,
+            ];
+            // var_dump($ords);
+            echo view('user/header', ['title' => 'My Investment']);
+            echo view('user/investment', $data);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function wallet()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $users = new \App\Models\Users();
+            $user = $users->where(['id' => $session->id])->find()[0];
+
+            $data = [
+                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                'user' => $user,
+            ];
+            // var_dump($ords);
+            echo view('user/header', ['title' => 'Payout']);
+            echo view('user/wallet', $data);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function help()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $users = new \App\Models\Users();
+            $user = $users->where(['id' => $session->id])->find()[0];
+
+            $data = [
+                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                'user' => $user,
+            ];
+            // var_dump($ords);
+            echo view('user/header', ['title' => 'Payout']);
+            echo view('user/help', $data);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
     public function register()
     {
         echo view('user/authheader', ['title' => 'Sign Up']);
@@ -706,11 +767,13 @@ class Pages extends BaseController
             'status' => 'initiated'
         ];
         $db_id = $trans->insert($data);
+        // echo $tranx->data->authorization_url;
         // var_dump($tranx->data->reference);
         // return $tranx->data->authorization_url;
         // return $db_id;
         // redirect to page so User can pay
-        return redirect()->to($tranx->data->authorization_url);
+        echo "About to redirect....";
+        return $this->response->redirect($tranx->data->authorization_url);
     }
 
     public function initPayment()

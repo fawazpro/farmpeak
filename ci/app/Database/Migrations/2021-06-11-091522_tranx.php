@@ -27,6 +27,10 @@ class Tranx extends Migration
                     'type'           => 'TEXT',
                     'null' => false,
             ],
+            'url' => [
+                    'type'           => 'TEXT',
+                    'null' => false,
+            ],
             'status' => [
                     'type'           => 'TEXT',
                     'null' => false,
