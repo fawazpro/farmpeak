@@ -59,6 +59,7 @@ $routes->post('/register', 'Pages::postregister');
 $routes->get('/login', 'Pages::login');
 $routes->get('/logout', 'Pages::logout');
 $routes->get('/processpayment', 'Pages::processPayment');
+$routes->post('/processpay', 'Pages::initPayment');
 $routes->post('/login', 'Pages::postlogin');
 $routes->post('/rst', 'Pages::passreset');
 $routes->post('/rstpassword', 'Pages::passreset');

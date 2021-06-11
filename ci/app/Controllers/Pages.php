@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use AshleyDawson\SimplePagination\Paginator;
-use CodeIgniter\Encryption\Encryption;
-use TeamTNT\TNTSearch\TNTSearch;
 use Yabacon\Paystack;
+// use AshleyDawson\SimplePagination\Paginator;
+use CodeIgniter\Encryption\Encryption;
+// use TeamTNT\TNTSearch\TNTSearch;
 
 
 class Pages extends BaseController
@@ -16,10 +16,10 @@ class Pages extends BaseController
     public $P_Bonus = 12000;
     public $C_Bonus = 5000;
     public $PRICE = 25000;
-    // private $SK = "sk_test_d5db1e8edf8b693c381771783732f2768540ed06";
-    private $SK = "sk_live_120523c403f470836f4376602e42810be2dca860";
-    // private $PK = 'pk_test_85e0f9981d42e18b5401808ccf490b2b344892ea';
-    private $PK = "pk_live_fad5b2e553041c06fa662dbad248b4f1787d9583";
+    private $SK = "sk_test_e3a8002593887c115e353a6a9635e92d188a2a11";
+    // private $SK = "sk_live_120523c403f470836f4376602e42810be2dca860";
+    private $PK = 'pk_test_1d734c2d1006d51c301eae04cd1bf9c6690353a4';
+    // private $PK = "pk_live_fad5b2e553041c06fa662dbad248b4f1787d9583";
     public $key = '85e0f9981d42e18b5401808ccf490b2b344892ea';
     private function tntConfig()
     {
@@ -679,11 +679,11 @@ class Pages extends BaseController
         }
     }
 
-    private function payment($email, $user)
+    private function payment($email, $user, $amount)
     {
         $trans = new \App\Models\Tranx();
-        $amount = $this->PRICE * 100;
-        $reference = uniqid("skilltaps");
+        $amount = $amount * 100;
+        $reference = uniqid("farmpeak");
         $paystack = new \Yabacon\Paystack($this->SK);
         try {
             $tranx = $paystack->transaction->initialize([
@@ -708,9 +708,22 @@ class Pages extends BaseController
         $db_id = $trans->insert($data);
         // var_dump($tranx->data->reference);
         // return $tranx->data->authorization_url;
-        return $db_id;
+        // return $db_id;
         // redirect to page so User can pay
-        // return redirect()->to(base_url());
+        return redirect()->to($tranx->data->authorization_url);
+    }
+
+    public function initPayment()
+    {
+        $incoming = $this->request->getPost();
+        $packages = new \App\Models\Packages();
+        $session = session();
+        $p_db = $packages->where('name',$incoming['name'])->find()[0];
+        $p_price = $p_db['unit_price'];
+        $amount = $p_price * $incoming['plot'];
+        $email = $session->email;
+        $user = $session->id;
+        $this->payment($email, $user, $amount);
     }
 
     public function processPayment()
