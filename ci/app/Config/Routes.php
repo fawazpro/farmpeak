@@ -32,7 +32,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 // PAystack Callback
-$routes->get('/paystack/paymentveri', 'Pages::autoVeri');
+$routes->post('/paystack/paymentveri', 'Pages::autoVeri');
+$routes->get('/paystack/congrat', 'Pages::congrat');
 // PAystack Callback
 $routes->get('/about', 'Pages::about');
 $routes->get('/dashboard', 'Pages::index');

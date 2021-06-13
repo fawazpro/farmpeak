@@ -671,6 +671,12 @@ class Pages extends BaseController
                     'inv' => $invs,
                     'user' => $user,
                 ];
+            } else {
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => [],
+                    'user' => $user,
+                ];
             }
             
             // var_dump($ords);

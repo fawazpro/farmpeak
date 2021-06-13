@@ -23,6 +23,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php if(empty($inv)): ?>
+                        <tr> No investment yet!! </tr>
                         <?php foreach ($inv as $key => $in) : ?>
                             <?php if ($in['status'] == 'successful') : ?>
                                 <tr>
