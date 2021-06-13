@@ -14,6 +14,7 @@ class Migrate extends \CodeIgniter\Controller
                 catch (\Throwable $e)
                 {
                         // Do something with the error here...
+                        var_dump($e);
                 }
         }
 

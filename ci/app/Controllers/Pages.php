@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 require 'autoload.php';
 
 // use Yabacon\Paystack;
@@ -334,13 +335,13 @@ class Pages extends BaseController
 
     public function packageinfo()
     {
-            $packages = new \App\Models\Packages();
-            $id = $this->request->getGet('id');
-            $details = $packages->find($id);
+        $packages = new \App\Models\Packages();
+        $id = $this->request->getGet('id');
+        $details = $packages->find($id);
 
-            echo view('user/header', ['title' => 'Farm Information']);
-            echo view('user/packageinfo', $details);
-            echo view('user/footer');
+        echo view('user/header', ['title' => 'Farm Information']);
+        echo view('user/packageinfo', $details);
+        echo view('user/footer');
     }
 
     public function profit()
@@ -643,12 +644,35 @@ class Pages extends BaseController
         $session = session();
         if ($session->logged_in == TRUE) {
             $users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $Packages = new \App\Models\Packages();
             $user = $users->where(['id' => $session->id])->find()[0];
+            $investments = $Investments->where('user_id',$session->id)->find();
+            if(!empty($investments)){
+                $invs = [];
+                foreach ($investments as $key => $invest) {
+                    $indiv_package = $Packages->where('id',$invest['packages_id'])->find()[0];
+                    $invs[$key]['plot'] = $invest['unit_bought'];
+                    $invs[$key]['status'] = $invest['payment_status'];
+                    $invs[$key]['invested'] = $invest['date'];
+                    $invs[$key]['farmID'] = $indiv_package['id'];
+                    $invs[$key]['farmName'] = $indiv_package['name'];
+                    $invs[$key]['roi'] = $indiv_package['ROI'];
+                    $invs[$key]['unit_price'] = $indiv_package['unit_price'];
+                    $invs[$key]['total_price'] = $indiv_package['unit_price']*$invest['unit_bought'];
+                    $invs[$key]['duration'] = $indiv_package['duration'];
+                    // TO BE EXAMINED
+                    $invs[$key]['total_payout'] = '100000';
+                    $invs[$key]['payout_month'] = 'December';
 
-            $data = [
-                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
-                'user' => $user,
-            ];
+                }
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => $invs,
+                    'user' => $user,
+                ];
+            }
+            
             // var_dump($ords);
             echo view('user/header', ['title' => 'My Investment']);
             echo view('user/investment', $data);
@@ -711,10 +735,11 @@ class Pages extends BaseController
         echo view('user/payment', ['id' => $id, 'url' => $url]);
     }
 
-    private function verifyPayment($ref, $id)
+    private function verifyPayment($ref)
     {
         $trans = new \App\Models\Tranx();
         $reference = $ref;
+        $id = $trans->where('reference',$ref)->find()[0]['id'];
         if (!$reference) {
             die('No reference supplied');
         }
@@ -733,16 +758,75 @@ class Pages extends BaseController
 
         if ('success' === $tranx->data->status) {
             $data = [
-                'status' => 'Payment successful'
+                'status' => 'successful'
             ];
             $trans->update($id, $data);
+            $this->assignPlot($id);
             return TRUE;
         }
     }
 
-    private function payment($email, $user, $amount)
+    private function assignPlot($tranx_id)
+    {
+        $investments = new \App\Models\Investments();
+        $db = $investments->where('tranx_id', $tranx_id)->find()[0];
+        $data = [
+            'payment_status' => 'successful'
+        ];
+        $investments->update($db['id'],$data);
+        //Deduct bought stock from original
+        $Packages = new \App\Models\Packages();
+        $p_db = $Packages->where('id',$db['packages_id'])->find()[0];
+        $p_data = [
+            'status' => $p_db['status']+$db['unit_bought'],
+        ];
+        $Packages->update($db['packages_id'], $p_data);
+    }
+
+    public function autoVeri()
+    {
+        // Retrieve the request's body and parse it as JSON
+        $event = \Yabacon\Paystack\Event::capture();
+        http_response_code(200);
+
+        /* It is a important to log all events received. Add code *
+     * here to log the signature and body to db or file       */
+        openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
+        syslog(LOG_INFO, $event->raw);
+        closelog();
+
+        /* Verify that the signature matches one of your keys*/
+        $my_keys = [
+            'live' => $this->SK,
+            'test' => $this->SK,
+        ];
+        $owner = $event->discoverOwner($my_keys);
+        if (!$owner) {
+            // None of the keys matched the event's signature
+            die();
+        }
+
+        // Do something with $event->obj
+        // Give value to your customer but don't give any output
+        // Remember that this is a call from Paystack's servers and
+        // Your customer is not seeing the response here at all
+        switch ($event->obj->event) {
+                // charge.success
+            case 'charge.success':
+                if ('success' === $event->obj->data->status) {
+                    // TIP: you may still verify the transaction
+                    // via an API call before giving value.
+                    $this->verifyPayment($event->obj->data->reference);
+                }
+                break;
+        }
+    }
+
+    private function payment($email, $user, $amount, $p_id, $plot)
     {
         $trans = new \App\Models\Tranx();
+        $investments = new \App\Models\Investments();
+        $session = session();
         $amount = $amount * 100;
         $reference = uniqid("farmpeak");
         $paystack = new \Yabacon\Paystack($this->SK);
@@ -767,6 +851,15 @@ class Pages extends BaseController
             'status' => 'initiated'
         ];
         $db_id = $trans->insert($data);
+        $inv_data = [
+            'user_id' => $session->id,
+            'packages_id' => $p_id,
+            'tranx_id' => $db_id,
+            'payment_status' => 'initiated',
+            'unit_bought' => $plot,
+            'date' => date('c')
+        ];
+        $inv_id = $investments->insert($inv_data);
         // echo $tranx->data->authorization_url;
         // var_dump($tranx->data->reference);
         // return $tranx->data->authorization_url;
@@ -781,12 +874,14 @@ class Pages extends BaseController
         $incoming = $this->request->getPost();
         $packages = new \App\Models\Packages();
         $session = session();
-        $p_db = $packages->where('name',$incoming['name'])->find()[0];
+        $p_db = $packages->where('name', $incoming['name'])->find()[0];
+        //Insert details into investment for user
+
         $p_price = $p_db['unit_price'];
         $amount = $p_price * $incoming['plot'];
         $email = $session->email;
         $user = $session->id;
-        $this->payment($email, $user, $amount);
+        $this->payment($email, $user, $amount, $p_db['id'], $incoming['plot']);
     }
 
     public function processPayment()
@@ -808,6 +903,8 @@ class Pages extends BaseController
             $paymenturl = $u_db['url'];
             $this->makePayment($u_db['user_id'], $paymenturl);
         }
+        // Callback URL https://farmpeak.abk.ng/paystack/congrat
+        // Webhook URL https://farmpeak.abk.ng/paystack/paymentveri
     }
 
     public function postregister()

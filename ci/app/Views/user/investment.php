@@ -16,73 +16,123 @@
                             <th>Amount</th>
                             <th>Plot</th>
                             <th>ROI</th>
-                            <th>Total Amount</th>
+                            <th>Duration</th>
                             <th>Total Payout</th>
                             <th>Status</th>
                             <th>Info</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td hidden>10D35</td>
-                            <td>Fish Farm</td>
-                            <td><span>&#x20a6;</span>35,000</td>
-                            <td>3</td>
-                            <td>12<span>%</span></td>
-                            <td>6 month</td>
-                            <td hidden><span>&#x20a6;</span>105,000</td>
-                            <td><span>&#x20a6;</span>117,600</td>
-                            <td>
-                                <div class="progress progress-bg1">
-                                    <div class="progress-bar progress-green" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
-                                        35%
+                        <?php foreach ($inv as $key => $in) : ?>
+                            <?php if ($in['status'] == 'successful') : ?>
+                                <tr>
+                                    <td hidden><?=$in['farmID'] ?></td>
+                                    <td><?=$in['farmName'] ?></td>
+                                    <td><span>&#x20a6;</span><?=price($in['unit_price']) ?></td>
+                                    <td><?=$in['plot'] ?></td>
+                                    <td><?=$in['roi'] ?><span>%</span></td>
+                                    <td><?=$in['duration'] ?> month</td>
+                                    <td><span>&#x20a6;</span><?=price($in['total_price']) ?></td>
+                                    <td>
+                                        <div class="progress progress-bg1">
+                                            <div class="progress-bar progress-green" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
+                                                35%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#investInfoModal<?=$in['farmID'] ?>" data-toggle="modal" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-info-circle fa-1x"></i></a>
+                                    </td>
+                                </tr>
+
+                                <!-- investment info modal -->
+                                <div id="investInfoModal<?=$in['farmID'] ?>" class="modal fade zoom-in">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #038d2c">
+                                                <h5 class="modal-title text-white ml-auto">More Info</h5>
+                                                <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">
+                                                    &times;
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body p-4">
+                                                <div class="form-row">
+                                                    <div class="col-md-4 mb-2">
+                                                        <p class="subTitle1 mb-1">Farm ID</p>
+                                                        <p class="subInfo2"><?=$in['farmID'] ?></p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Farm Name</p>
+                                                        <p class="subInfo2"><?=$in['farmName'] ?></p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Invested on</p>
+                                                        <p class="subInfo2"><?=$in['invested'] ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Plot</p>
+                                                        <p class="subInfo2"><?=$in['plot'] ?></p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">ROI</p>
+                                                        <p class="subInfo2"><?=$in['roi'] ?><span>%</span></p>
+                                                    </div>
+
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Payout Month</p>
+                                                        <p class="subInfo2"><?=$in['payout_month'] ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Unit Price</p>
+                                                        <p class="subInfo2"><span>&#x20a6;</span><?=price($in['unit_price']) ?></p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Total Price</p>
+                                                        <p class="subInfo2"><span>&#x20a6;</span><?=price($in['total_price']) ?></p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <p class="subTitle1 mb-1">Total Payout</p>
+                                                        <p class="subInfo2"><span>&#x20a6;</span><?=price($in['total_payout']) ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <p class="subTitle2 mb-1">Status</p>
+                                                        <div class="progress progress-bg1">
+                                                            <div class="progress-bar progress-green" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
+                                                                35%
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </td>
-                            <td class="text-center">
-                                <a href="#investInfoModal" data-toggle="modal" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-info-circle fa-1x"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td hidden>10D35</td>
-                            <td>Tomato Farm</td>
-                            <td><span>&#x20a6;</span>50,000</td>
-                            <td>3</td>
-                            <td>25%</td>
-                            <td>6 month</td>
-                            <td hidden><span>&#x20a6;</span>150,000</td>
-                            <td><span>&#x20a6;</span>187,000</td>
-                            <td>
-                                <div class="progress progress-bg1">
-                                    <div class="progress-bar progress-green" role="progressbar" style="width: 5%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
-                                        5%
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <a href="#investInfoModal" data-toggle="modal" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-info-circle fa-1x"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td hidden>10D35</td>
-                            <td>Cassava Farm</td>
-                            <td><span>&#x20a6;</span>70,000</td>
-                            <td>4</td>
-                            <td>56%</td>
-                            <td>6 month</td>
-                            <td hidden><span>&#x20a6;</span>280,000</td>
-                            <td><span>&#x20a6;</span>436,800</td>
-                            <td>
-                                <div class="progress progress-bg1">
-                                    <div class="progress-bar progress-green" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
-                                        Completed
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <a href="#investInfoModal" data-toggle="modal" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-info-circle fa-1x"></i></a>
-                            </td>
-                        </tr>
+                                <!-- end of add farm modal -->
+                            <?php else : ?>
+                                <tr style="background-color: black; color: white;">
+                                    <td hidden><?=$in['farmID'] ?></td>
+                                    <td><?=$in['farmName'] ?></td>
+                                    <td><span>&#x20a6;</span><?=price($in['unit_price']) ?></td>
+                                    <td><?=$in['plot'] ?></td>
+                                    <td><?=$in['roi'] ?><span>%</span></td>
+                                    <td><?=$in['duration'] ?> month</td>
+                                    <td><span>&#x20a6;</span><?=price($in['total_price']) ?></td>
+                                    <td>
+                                        Pending
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#!" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-times fa-1x"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -90,75 +140,5 @@
     </div>
     <!--end of investment table -->
 
-    <!-- investment info modal -->
-    <div id="investInfoModal" class="modal fade zoom-in">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #038d2c">
-                    <h5 class="modal-title text-white ml-auto">More Info</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                </div>
-
-                <div class="modal-body p-4">
-                    <div class="form-row">
-                        <div class="col-md-4 mb-2">
-                            <p class="subTitle1 mb-1">Farm ID</p>
-                            <p class="subInfo2">234HDGE21</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Farm Name</p>
-                            <p class="subInfo2">Poultry Farm</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Invested on</p>
-                            <p class="subInfo2">22/05/2021</p>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Plot</p>
-                            <p class="subInfo2">3</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">ROI</p>
-                            <p class="subInfo2">12<span>%</span></p>
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Payout Month</p>
-                            <p class="subInfo2">December</p>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Unit Price</p>
-                            <p class="subInfo2"><span>&#x20a6;</span>35,000</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Total Price</p>
-                            <p class="subInfo2"><span>&#x20a6;</span>105,000</p>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <p class="subTitle1 mb-1">Total Payout</p>
-                            <p class="subInfo2"><span>&#x20a6;</span>117,600</p>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <p class="subTitle2 mb-1">Status</p>
-                            <div class="progress progress-bg1">
-                                <div class="progress-bar progress-green" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
-                                    35%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end of add farm modal -->
 </div>
 <!-- /#page-content-wrapper -->
