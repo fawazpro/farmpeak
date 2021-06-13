@@ -11,7 +11,7 @@ class Tranx extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['reference', 'url', 'user_id', 'email', 'status'];
+    protected $allowedFields = ['reference', 'url', 'amount', 'user_id', 'email', 'status'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

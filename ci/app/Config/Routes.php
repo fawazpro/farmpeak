@@ -35,6 +35,18 @@ $routes->setAutoRoute(true);
 $routes->post('/paystack/paymentveri', 'Pages::autoVeri');
 $routes->get('/paystack/congrat', 'Pages::congrat');
 // PAystack Callback
+
+// Admin
+$routes->get('/investors', 'Pages::investor');
+$routes->get('/investorinfo', 'Pages::investorinfo');
+$routes->get('/payout', 'Pages::payout');
+$routes->get('/pay_transactions', 'Pages::pay_transactions');
+$routes->get('/trainee', 'Pages::trainee');
+$routes->get('/admins', 'Pages::admins');
+$routes->get('/helpset', 'Pages::helpset');
+$routes->get('/switch', 'Pages::switch');
+// Admin
+
 $routes->get('/about', 'Pages::about');
 $routes->get('/dashboard', 'Pages::index');
 $routes->get('/transactions', 'Pages::transactions');
