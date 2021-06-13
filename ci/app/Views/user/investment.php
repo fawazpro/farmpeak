@@ -25,6 +25,7 @@
                     <tbody>
                         <?php if(empty($inv)): ?>
                         <tr> No investment yet!! </tr>
+                        <?php else : ?>
                         <?php foreach ($inv as $key => $in) : ?>
                             <?php if ($in['status'] == 'successful') : ?>
                                 <tr>
@@ -135,6 +136,7 @@
                                 </tr>
                             <?php endif; ?>
                         <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
