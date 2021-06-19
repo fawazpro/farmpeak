@@ -98,7 +98,7 @@
           </div>
           <!-- myInvestment table -->
           <div class="m-2 m-sm-0 card">
-            <div class="card-body px-2 px-lg-2 py-2">
+            <div class="card-body p-0 px-lg-2 py-lg-2">
               <div class="table-responsive">
                 <table class="table">
                   <thead class="thead-dark">
@@ -108,7 +108,9 @@
                       <th>Amount</th>
                       <th>Plot</th>
                       <th>ROI</th>
-                      <th>Total Amount</th>
+                      <th>Duration</th>
+                      <th hidden>Invested on</th>
+                      <th hidden>Todays date</th>
                       <th>Total Payout</th>
                       <th>Status</th>
                       <th>Info</th>
@@ -121,87 +123,209 @@
                       <td><span>&#x20a6;</span>35,000</td>
                       <td>3</td>
                       <td>12<span>%</span></td>
-                      <td>6 month</td>
-                      <td hidden><span>&#x20a6;</span>105,000</td>
+                      <!-- unique Id ooo -->
+                      <!-- plz render out d dates as DD/MM/YYYY format -->
+                      <td><span id="duration1">9</span> month</td>
+                      <td hidden id="investDate1">11/02/2021</td>
+                      <td hidden id="todayDate1">19/06/2021</td>
+                      <!-- //////////////////////////////////// -->
                       <td><span>&#x20a6;</span>117,600</td>
-                      <td>
-                        <div class="progress progress-bg1">
-                          <div
-                            class="progress-bar progress-green"
-                            role="progressbar"
-                            style="width: 35%"
-                            aria-valuenow="35"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          >
-                            35%
-                          </div>
-                        </div>
-                      </td>
+                      <!-- unique status class name -->
+                      <td class="status1"></td>
                       <td class="text-center">
                         <a
                           href="#investInfoModal"
                           data-toggle="modal"
                           rel="tooltip"
-                          class="shadow p-1"
+                          class="shadow py-1 px-2"
                           ><i class="text-info fas fa-info-circle fa-1x"></i
                         ></a>
                       </td>
+                      <script>
+                        // unique function name
+                        window.addEventListener(
+                          "load",
+                          function updateProgress1() {
+                            let percentage;
+
+                            // spoon feed investDate unique Id
+                            let investDate = new Date(
+                              document
+                                .getElementById("investDate1")
+                                .innerHTML.replace(
+                                  /(\d{2})[-/](\d{2})[-/](\d{4})/,
+                                  "$2/$1/$3"
+                                )
+                            );
+
+                            // spoon feed todayDate unique Id
+                            let today = new Date(
+                              document
+                                .getElementById("todayDate1")
+                                .innerHTML.replace(
+                                  /(\d{2})[-/](\d{2})[-/](\d{4})/,
+                                  "$2/$1/$3"
+                                )
+                            );
+
+                            let diffInTime =
+                              today.getTime() - investDate.getTime();
+                            let statusDay = diffInTime / (1000 * 3600 * 24);
+
+                            // spoon feed duration unique Id
+                            let durationInDays =
+                              parseInt(
+                                document.getElementById("duration1").innerHTML
+                              ) * 31;
+
+                            percentage = Math.round(
+                              (statusDay / durationInDays) * 100
+                            );
+
+                            // spoon feed status and statusText unique class as in Class
+
+                            let progress = `<div class="progress progress-bg1">
+                        <div
+                          class="progress-bar progress-green"
+                          role="progressbar"
+                          style="width: ${percentage}%"
+                          aria-valuenow="${percentage}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        >
+                          <span>${percentage}%</span>
+                        </div>
+                      </div>`;
+                            let payBtn = `<a href="#" style="text-decoration: none;">
+            <button class="btn p-0 m-0 btn-block btn-farm smallex"><i style="font-size: 12px" class="fas fa-wallet mr-1"></i>
+              Payout
+            </button>
+          </a>`;
+                            // pass unique content class
+                            if (percentage < 100) {
+                              $(".status1").html(progress);
+                            } else {
+                              $(".status1").html(payBtn);
+                            }
+                          }
+                        );
+                      </script>
                     </tr>
                     <tr>
                       <td hidden>10D35</td>
                       <td>Tomato Farm</td>
-                      <td><span>&#x20a6;</span>50,000</td>
+                      <td><span>&#x20a6;</span>35,000</td>
                       <td>3</td>
-                      <td>25%</td>
-                      <td>6 month</td>
-                      <td hidden><span>&#x20a6;</span>150,000</td>
-                      <td><span>&#x20a6;</span>187,000</td>
-                      <td>
-                        <div class="progress progress-bg1">
-                          <div
-                            class="progress-bar progress-green"
-                            role="progressbar"
-                            style="width: 5%"
-                            aria-valuenow="35"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          >
-                            5%
-                          </div>
-                        </div>
-                      </td>
+                      <td>12<span>%</span></td>
+                      <!-- unique Id ooo -->
+                      <!-- plz render out d dates as DD/MM/YYYY format -->
+                      <td><span id="duration2">6</span> month</td>
+                      <td hidden id="investDate2">21/03/2021</td>
+                      <td hidden id="todayDate2">24/09/2021</td>
+                      <!-- //////////////////////////////////// -->
+                      <td><span>&#x20a6;</span>117,600</td>
+                      <!-- unique status class name -->
+                      <td class="status2"></td>
                       <td class="text-center">
                         <a
                           href="#investInfoModal"
                           data-toggle="modal"
                           rel="tooltip"
-                          class="shadow p-1"
+                          class="shadow py-1 px-2"
                           ><i class="text-info fas fa-info-circle fa-1x"></i
                         ></a>
                       </td>
+                      <script>
+                        // unique function name
+                        window.addEventListener(
+                          "load",
+                          function updateProgress2() {
+                            let percentage;
+
+                            // spoon feed investDate unique Id
+                            let investDate = new Date(
+                              document
+                                .getElementById("investDate2")
+                                .innerHTML.replace(
+                                  /(\d{2})[-/](\d{2})[-/](\d{4})/,
+                                  "$2/$1/$3"
+                                )
+                            );
+
+                            // spoon feed todayDate unique Id
+                            let today = new Date(
+                              document
+                                .getElementById("todayDate2")
+                                .innerHTML.replace(
+                                  /(\d{2})[-/](\d{2})[-/](\d{4})/,
+                                  "$2/$1/$3"
+                                )
+                            );
+
+                            let diffInTime =
+                              today.getTime() - investDate.getTime();
+                            let statusDay = diffInTime / (1000 * 3600 * 24);
+
+                            // spoon feed duration unique Id
+                            let durationInDays =
+                              parseInt(
+                                document.getElementById("duration2").innerHTML
+                              ) * 31;
+
+                            percentage = Math.round(
+                              (statusDay / durationInDays) * 100
+                            );
+
+                            // spoon feed status and statusText unique class as in Class
+
+                            let progress = `<div class="progress progress-bg1">
+                        <div
+                          class="progress-bar progress-green"
+                          role="progressbar"
+                          style="width: ${percentage}%"
+                          aria-valuenow="${percentage}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        >
+                          <span>${percentage}%</span>
+                        </div>
+                      </div>`;
+                            // pass unique href modal id
+                            let payBtn = `<a href="#requestPayoutModal" data-toggle="modal" data-dismiss="modal" style="text-decoration: none;">
+            <button class="btn p-0 m-0 btn-block btn-farm smallex"><i style="font-size: 12px" class="fas fa-wallet mr-1"></i>
+              Payout
+            </button>
+          </a>`;
+
+                            if (percentage < 100) {
+                              $(".status2").html(progress);
+                            } else {
+                              $(".status2").html(payBtn);
+                            }
+                          }
+                        );
+                      </script>
                     </tr>
                     <tr>
                       <td hidden>10D35</td>
-                      <td>Cassava Farm</td>
-                      <td><span>&#x20a6;</span>70,000</td>
-                      <td>4</td>
-                      <td>56%</td>
-                      <td>6 month</td>
-                      <td hidden><span>&#x20a6;</span>280,000</td>
-                      <td><span>&#x20a6;</span>436,800</td>
+                      <td>Tomato Farm</td>
+                      <td><span>&#x20a6;</span>35,000</td>
+                      <td>3</td>
+                      <td>12<span>%</span></td>
+                      <!-- unique Id ooo -->
+                      <!-- plz render out d dates as DD/MM/YYYY format -->
+                      <td><span>6</span> month</td>
+                      <td hidden>21/03/2021</td>
+                      <td hidden>24/09/2021</td>
+                      <!-- //////////////////////////////////// -->
+                      <td><span>&#x20a6;</span>117,600</td>
+                      <!-- unique status class name -->
                       <td>
-                        <div class="progress progress-bg1">
-                          <div
-                            class="progress-bar progress-green"
-                            role="progressbar"
-                            style="width: 100%"
-                            aria-valuenow="35"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
+                        <div>
+                          <span
+                            class="badge badge-success smallex btn-block px-2"
+                            >completed</span
                           >
-                            Completed
-                          </div>
                         </div>
                       </td>
                       <td class="text-center">
@@ -209,7 +333,7 @@
                           href="#investInfoModal"
                           data-toggle="modal"
                           rel="tooltip"
-                          class="shadow p-1"
+                          class="shadow-sm py-1 px-2"
                           ><i class="text-info fas fa-info-circle fa-1x"></i
                         ></a>
                       </td>
@@ -284,18 +408,8 @@
                   <div class="form-row">
                     <div class="col-md-12 mb-3">
                       <p class="subTitle2 mb-1">Status</p>
-                      <div class="progress progress-bg1">
-                        <div
-                          class="progress-bar progress-green"
-                          role="progressbar"
-                          style="width: 35%"
-                          aria-valuenow="35"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        >
-                          35%
-                        </div>
-                      </div>
+                      <!-- pass the same unique content class name as its relative row  -->
+                      <div class="status2"></div>
                     </div>
                   </div>
                 </div>
@@ -303,6 +417,85 @@
             </div>
           </div>
           <!-- end of add farm modal -->
+
+          <!-- request payout modal -->
+          <div id="requestPayoutModal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #000000">
+                  <h5 class="modal-title text-white ml-auto">Request Payout</h5>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form action="">
+                  <div class="modal-body p-4">
+                    <div class="form-row">
+                      <div hidden class="col-md-0 mb-2">
+                        <p class="subTitle1 mb-1">Farm ID</p>
+                        <p class="subInfo2">234HDGE21</p>
+                      </div>
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle1 mb-1">Farm Name</p>
+                        <p class="subInfo2">Poultry Farm</p>
+                      </div>
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle1 mb-1">ROI</p>
+                        <p class="subInfo2"><span id="roi">12</span>%</p>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle1 mb-1">Amount Invested</p>
+                        <p class="subInfo2">
+                          &#x20a6;<span id="totalPrice">105,000</span>
+                        </p>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <p class="subTitle1 mb-1">Total Payout</p>
+                        <p class="subInfo2">
+                          &#x20a6;<span id="totalPayout">117,600</span>
+                        </p>
+                      </div>
+                    </div>
+                    <span class="text-dark"
+                      >Note: Check your Bank Acct details under
+                      <b>My Profile</b> before requesting payout</span
+                    >
+                    <hr />
+                    <!-- user password -->
+                    <div class="form-row">
+                      <div class="col-md-12 mb-1">
+                        <label for="userPwd">Your password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="userPwd"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #038d2c; color: #ffffff"
+                    >
+                      Request Payout
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end of request payout modal -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The best farming investment portal in Nigeria"
+    />
+    <meta
+      name="keywords"
+      content="Farm investment, farmpeak, Agriculture experts, farming, agric training, Farming investment portal"
+    />
+    <link rel="title icon" href="/asset/images/p.svg" type="image/svg" />
+    <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/asset/StyleSheet/animate.min.css" />
+    <link rel="stylesheet" href="/asset/StyleSheet/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/asset/StyleSheet/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="/asset/StyleSheet/main.css" />
+    <title>Training Registration - Farmpeak</title>
+  </head>
+  <body>
+    <!-- nav -->
+    <nav
+      class="navbar navbar-expand-md nav-menu fixed-top navbar-dark scrolling-navbar"
+    >
+      <div class="container">
+        <a href="index.html" class="navbar-brand pl-1 pl-md-2">
+          <img
+            src="asset/images/farmpeak.svg"
+            alt="logo"
+            style="width: 150px; height: auto"
+          />
+        </a>
+        <button
+          class="bg-light navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span class="fas fa-bars" style="color: #038d2c"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="collapsibleNavbar"
+        >
+          <ul class="navbar-nav text-lowercase">
+            <li class="nav-item nav-itemT">
+              <a href="ourFarm.html" class="nav-link text-white px-4 mr-2"
+                >our farms</a
+              >
+            </li>
+            <li class="nav-item nav-itemT">
+              <a href="training.html" class="nav-link text-white px-4 mr-2"
+                >training</a
+              >
+            </li>
+            <!-- /////Login or My Account Link u knw am insinuating -->
+            <li class="nav-item nav-itemT">
+              <a
+                href="login.html"
+                class="nav-link bordered text-white px-4 mr-2"
+                >Login</a
+              >
+            </li>
+            <!-- <li class="nav-item nav-itemT">
+          <a href="#" class="nav-link bordered text-white px-4 mr-2"
+            >My Account</a
+          >
+        </li> -->
+            <!-- /////////////////////////////////////////////// -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end of nav -->
+    <!-- training reg -->
+    <div class="container-fluid px-md-5 py-2 px-sm-1">
+      <h4 class="text-center display-4 mt-5 mb-4 text-dark">
+        Training Registration
+      </h4>
+
+      <!-- Edit farm info -->
+      <div class="row justify-content-center">
+        <div class="col-lg-8 m-sm-0 m-1">
+          <p class="text-left mt-2 text-dark">fill the form below</p>
+          <form action="post" class="card shadow-sm p-4">
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  maxlength="27"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  maxlength="27"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-8 mb-3">
+                <label for="traineemail">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="traineemail"
+                  maxlength="35"
+                  required
+                />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="telNo">Tel no</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="telNo"
+                  maxlength="15"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-2 mb-4">
+                <label for="gender">Gender</label>
+                <select id="gender" class="form-control">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="course">Course</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="course"
+                  placeholder="e.g Fishery"
+                  maxlength="19"
+                  required
+                />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="dob">Date of Birth</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dob"
+                  placeholder="e.g Fishery"
+                  maxlength="19"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-8 mb-3">
+                <label for="homeAddress">Home Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="homeAddress"
+                  maxlength="19"
+                  required
+                />
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="state">State of Origin</label>
+                <select id="state" class="form-control">
+                  <option value="Ogun">Ogun</option>
+                  <option value="Osun">Osun</option>
+                  <option value="Ondo">Ondo</option>
+                  <option value="Ekiti">Ekiti</option>
+                  <option value="Lagos">Lagos</option>
+                  <option value="Oyo">Oyo</option>
+                </select>
+                <!-- //////////////////////////////////////////////////////// -->
+                <!-- Note: State Auto generate or maybe we should jst use normal textbox for trainne to input their state of origin -->
+                <!-- //////////////////////////////////////////////////////// -->
+              </div>
+            </div>
+
+            <!-- submit -->
+            <button
+              type="submit"
+              class="btn btn-block"
+              style="background-color: #038d2c; color: #ffffff"
+            >
+              Register
+            </button>
+            <!-- end of submit button -->
+            <br />
+            <p>
+              Once you've successfully register on our website, you will have to
+              complete your
+              <b>student registration by visiting any of our offices</b>.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!--end of Edit farm info -->
+    </div>
+    <!-- end of training reg -->
+    <!-- script -->
+    <script src="/asset/fontawesome-free-5.9.0-web/js/all.min.js"></script>
+    <script src="/asset/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="/asset/Scripts/popper.min.js"></script>
+    <script src="/asset/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/asset/Scripts/wow.min.js"></script>
+    <script src="/asset/Scripts/owl.carousel.min.js"></script>
+    <script src="/asset/Scripts/main.js"></script>
+    <!-- end of script -->
+  </body>
+</html>

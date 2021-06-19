@@ -123,16 +123,148 @@
         <div class="container-fluid">
           <div class="mt-3">
             <h4>Payout</h4>
-            <!-- <p>List of Farmpeak Investors</p> -->
+            <p>Record / Request of Farmpeak payout</p>
+            <i class="text-info hide">swipe table for info</i>
           </div>
-
-          <!-- payout -->
-          <div class="row">
-            <div class="col-12 m-sm-0 m-1">
-              <h3 class="display-4">Awaiting business registration approval</h3>
+          <!-- payout table -->
+          <div class="m-2 m-sm-0 card">
+            <div class="card-body p-0 px-lg-2 py-lg-2">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th hidden>Trans ID</th>
+                      <th>Date</th>
+                      <th>Farm Name</th>
+                      <th>Payment to</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td hidden>10D35</td>
+                      <td>19/06/2021</td>
+                      <td>Fish Farm</td>
+                      <td>abdullah@mail.com</td>
+                      <td>&#x20a6;<span id="">117,000</span></td>
+                      <td>
+                        <a
+                          href="#confirmPayoutModal"
+                          data-toggle="modal"
+                          data-dismiss="modal"
+                          style="text-decoration: none"
+                        >
+                          <button
+                            class="btn p-0 m-0 btn-block btn-farm2 smallex"
+                          >
+                            Confirm
+                          </button>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td hidden>10D35</td>
+                      <td>12/04/2021</td>
+                      <td>Tomato Farm</td>
+                      <td>abdullah@mail.com</td>
+                      <td>&#x20a6;<span id="">123,000</span></td>
+                      <td>
+                        <span class="badge badge-success px-2">confirmed</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <!--end of payout -->
+          <!-- end of payout table -->
+
+          <!-- request payout modal -->
+          <div id="confirmPayoutModal" class="modal fade zoom-in">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #000000">
+                  <h5 class="modal-title text-white ml-auto">
+                    Confirm Payout Request
+                  </h5>
+                  <button
+                    type="button"
+                    class="close text-white"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <form action="">
+                  <div class="modal-body p-4">
+                    <div class="form-row">
+                      <!-- hidden info -->
+                      <div hidden class="col-md-0 mb-2">
+                        <p id="farmId">Farm ID</p>
+                        <p id="investor_email">abdullah@mail.com</p>
+                      </div>
+                      <!-- end of hidden -->
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle2 mb-1">Farm Name</p>
+                        <p class="subInfo2">Poultry Farm</p>
+                      </div>
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle2 mb-1">ROI</p>
+                        <p class="subInfo2"><span id="roi">12</span>%</p>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle2 mb-1">Payment to</p>
+                        <p class="subInfo2">abdullah@mail.com</p>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6 mb-1">
+                        <p class="subTitle2 mb-1">Amount Invested</p>
+                        <p class="subInfo2">
+                          &#x20a6;<span id="totalPrice">105,000</span>
+                        </p>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <p class="subTitle2 mb-1">Total Payout</p>
+                        <p class="subInfo2">
+                          &#x20a6;<span id="totalPayout">117,600</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <!-- user password -->
+                    <div class="form-row">
+                      <div class="col-md-12 mb-1">
+                        <label for="adminPwd">Admin password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="adminPwd"
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      style="background-color: #023c74; color: #ffffff"
+                    >
+                      Confirm Payout
+                    </button>
+                    <!-- end of submit button -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end of request payout modal -->
         </div>
       </div>
       <!-- /#page-content-wrapper -->
