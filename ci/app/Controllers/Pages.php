@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
-use AshleyDawson\SimplePagination\Paginator;
+require 'autoload.php';
+
+// use Yabacon\Paystack;
+// use AshleyDawson\SimplePagination\Paginator;
 use CodeIgniter\Encryption\Encryption;
-use TeamTNT\TNTSearch\TNTSearch;
-use Yabacon\Paystack;
+// use TeamTNT\TNTSearch\TNTSearch;
 
 
 class Pages extends BaseController
@@ -16,11 +18,13 @@ class Pages extends BaseController
     public $P_Bonus = 12000;
     public $C_Bonus = 5000;
     public $PRICE = 25000;
-    // private $SK = "sk_test_d5db1e8edf8b693c381771783732f2768540ed06";
-    private $SK = "sk_live_120523c403f470836f4376602e42810be2dca860";
-    // private $PK = 'pk_test_85e0f9981d42e18b5401808ccf490b2b344892ea';
-    private $PK = "pk_live_fad5b2e553041c06fa662dbad248b4f1787d9583";
+    private $SK = "sk_test_e3a8002593887c115e353a6a9635e92d188a2a11";
+    // private $SK1 = getenv('paystack_sk');
+    // private $SK = "sk_live_120523c403f470836f4376602e42810be2dca860";
+    private $PK = 'pk_test_1d734c2d1006d51c301eae04cd1bf9c6690353a4';
+    // private $PK = "pk_live_fad5b2e553041c06fa662dbad248b4f1787d9583";
     public $key = '85e0f9981d42e18b5401808ccf490b2b344892ea';
+
     private function tntConfig()
     {
         return [
@@ -333,13 +337,178 @@ class Pages extends BaseController
 
     public function packageinfo()
     {
-            $packages = new \App\Models\Packages();
-            $id = $this->request->getGet('id');
-            $details = $packages->find($id);
+        $packages = new \App\Models\Packages();
+        $id = $this->request->getGet('id');
+        $details = $packages->find($id);
 
-            echo view('user/header', ['title' => 'Farm Information']);
-            echo view('user/packageinfo', $details);
+        echo view('user/header', ['title' => 'Farm Information']);
+        echo view('user/packageinfo', $details);
+        echo view('user/footer');
+    }
+
+    public function admintemplate()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
             echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function investor()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $investments = $Investments->distinct()->findAll();
+            if (!empty($investments)) {
+                $invs = [];
+                foreach ($investments as $key => $invst) {
+                    $user = $users->where(['id' => $invst['user_id']])->find()[0];
+                    $invs[$key]['name'] = $user['fname'].' '.$user['lname'];
+                    $invs[$key]['email'] = $user['email'];
+                    $invs[$key]['id'] = $user['id'];
+                    $invs[$key]['tel'] = $user['phone'];
+                    $invs[$key]['plot'] = $this->level($user['clearance']);
+                }
+                $data = [
+                    'inv' => $invs,
+                ];
+            }else{
+                $data = [
+                ];
+            }
+            echo view('admin/header', ['title' => 'Investors']);
+            echo view('admin/investor', $data);
+            echo view('user/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function investorinfo()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $user_id = $this->request->getGet('user');
+            $users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $Packages = new \App\Models\Packages();
+            $user = $users->where(['id' => $user_id])->find()[0];
+            $investments = $Investments->where('user_id', $user_id)->find();
+            if (!empty($investments)) {
+                $invs = [];
+                foreach ($investments as $key => $invest) {
+                    $indiv_package = $Packages->where('id', $invest['packages_id'])->find()[0];
+                    $invs[$key]['plot'] = $invest['unit_bought'];
+                    $invs[$key]['status'] = $invest['payment_status'];
+                    $invs[$key]['invested'] = $invest['date'];
+                    $invs[$key]['farmID'] = $indiv_package['id'];
+                    $invs[$key]['farmName'] = $indiv_package['name'];
+                    $invs[$key]['roi'] = $indiv_package['ROI'];
+                    $invs[$key]['unit_price'] = $indiv_package['unit_price'];
+                    $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
+                    $invs[$key]['duration'] = $indiv_package['duration'];
+                    // TO BE EXAMINED
+                    $invs[$key]['total_payout'] = '100000';
+                    $invs[$key]['payout_month'] = 'December';
+                }
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => $invs,
+                    'user' => $user
+                ];
+            } else {
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'user' => $user,
+                    'inv' => [],
+                ];
+            }
+            echo view('admin/header', ['title' => 'Investor Personal Data']);
+            echo view('admin/investorinfo', $data);
+            echo view('user/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function level($lv)
+    {
+        if($lv == '1'){return 'Investor'; }else {return 'Admin';}
+    }
+
+    
+    public function pay_transactions()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Tranx = new \App\Models\Tranx();
+            $Users = new \App\Models\Users();
+           $trans = $Tranx->findAll();
+            if (!empty($trans)) {
+                $invs = [];
+                foreach ($trans as $key => $invest) {
+                    $invs[$key]['date'] = $invest['created_at'];
+                    $invs[$key]['trans_id'] = $invest['reference'];
+                    $invs[$key]['amount'] = $invest['amount'];
+                    $invs[$key]['email'] = $invest['email'];
+                    $invs[$key]['user'] = $Users->where('id',$invest['user_id'])->find()[0];
+                    $invs[$key]['status'] = $invest['status'];
+                }
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => $invs,
+                ];
+            } else {
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => [],
+                ];
+            }
+            echo view('admin/header', ['title' => 'Paystack Transactions']);
+            echo view('admin/tranx', $data);
+            echo view('user/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
     }
 
     public function profit()
@@ -637,6 +806,94 @@ class Pages extends BaseController
         echo view('user/footer');
     }
 
+    public function investment()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $Packages = new \App\Models\Packages();
+            $user = $users->where(['id' => $session->id])->find()[0];
+            $investments = $Investments->where('user_id', $session->id)->find();
+            if (!empty($investments)) {
+                $invs = [];
+                foreach ($investments as $key => $invest) {
+                    $indiv_package = $Packages->where('id', $invest['packages_id'])->find()[0];
+                    $invs[$key]['plot'] = $invest['unit_bought'];
+                    $invs[$key]['status'] = $invest['payment_status'];
+                    $invs[$key]['invested'] = $invest['date'];
+                    $invs[$key]['farmID'] = $indiv_package['id'];
+                    $invs[$key]['farmName'] = $indiv_package['name'];
+                    $invs[$key]['roi'] = $indiv_package['ROI'];
+                    $invs[$key]['unit_price'] = $indiv_package['unit_price'];
+                    $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
+                    $invs[$key]['duration'] = $indiv_package['duration'];
+                    // TO BE EXAMINED
+                    $invs[$key]['total_payout'] = '100000';
+                    $invs[$key]['payout_month'] = 'December';
+                }
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => $invs,
+                    'user' => $user,
+                ];
+            } else {
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => [],
+                    'user' => $user,
+                ];
+            }
+
+            // var_dump($ords);
+            echo view('user/header', ['title' => 'My Investment']);
+            echo view('user/investment', $data);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function wallet()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $users = new \App\Models\Users();
+            $user = $users->where(['id' => $session->id])->find()[0];
+
+            $data = [
+                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                'user' => $user,
+            ];
+            // var_dump($ords);
+            echo view('user/header', ['title' => 'Payout']);
+            echo view('user/wallet', $data);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function help()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $users = new \App\Models\Users();
+            $user = $users->where(['id' => $session->id])->find()[0];
+
+            $data = [
+                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                'user' => $user,
+            ];
+            // var_dump($ords);
+            echo view('user/header', ['title' => 'Payout']);
+            echo view('user/help', $data);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
     public function register()
     {
         echo view('user/authheader', ['title' => 'Sign Up']);
@@ -650,10 +907,11 @@ class Pages extends BaseController
         echo view('user/payment', ['id' => $id, 'url' => $url]);
     }
 
-    private function verifyPayment($ref, $id)
+    private function verifyPayment($ref)
     {
         $trans = new \App\Models\Tranx();
         $reference = $ref;
+        $id = $trans->where('reference', $ref)->find()[0]['id'];
         if (!$reference) {
             die('No reference supplied');
         }
@@ -672,18 +930,77 @@ class Pages extends BaseController
 
         if ('success' === $tranx->data->status) {
             $data = [
-                'status' => 'Payment successful'
+                'status' => 'successful'
             ];
             $trans->update($id, $data);
+            $this->assignPlot($id);
             return TRUE;
         }
     }
 
-    private function payment($email, $user)
+    private function assignPlot($tranx_id)
+    {
+        $investments = new \App\Models\Investments();
+        $db = $investments->where('tranx_id', $tranx_id)->find()[0];
+        $data = [
+            'payment_status' => 'successful'
+        ];
+        $investments->update($db['id'], $data);
+        //Deduct bought stock from original
+        $Packages = new \App\Models\Packages();
+        $p_db = $Packages->where('id', $db['packages_id'])->find()[0];
+        $p_data = [
+            'status' => $p_db['status'] + $db['unit_bought'],
+        ];
+        $Packages->update($db['packages_id'], $p_data);
+    }
+
+    public function autoVeri()
+    {
+        // Retrieve the request's body and parse it as JSON
+        $event = \Yabacon\Paystack\Event::capture();
+        http_response_code(200);
+
+        /* It is a important to log all events received. Add code *
+     * here to log the signature and body to db or file       */
+        openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
+        syslog(LOG_INFO, $event->raw);
+        closelog();
+
+        /* Verify that the signature matches one of your keys*/
+        $my_keys = [
+            'live' => $this->SK,
+            'test' => $this->SK,
+        ];
+        $owner = $event->discoverOwner($my_keys);
+        if (!$owner) {
+            // None of the keys matched the event's signature
+            die();
+        }
+
+        // Do something with $event->obj
+        // Give value to your customer but don't give any output
+        // Remember that this is a call from Paystack's servers and
+        // Your customer is not seeing the response here at all
+        switch ($event->obj->event) {
+                // charge.success
+            case 'charge.success':
+                if ('success' === $event->obj->data->status) {
+                    // TIP: you may still verify the transaction
+                    // via an API call before giving value.
+                    $this->verifyPayment($event->obj->data->reference);
+                }
+                break;
+        }
+    }
+
+    private function payment($email, $user, $amount, $p_id, $plot)
     {
         $trans = new \App\Models\Tranx();
-        $amount = $this->PRICE * 100;
-        $reference = uniqid("skilltaps");
+        $investments = new \App\Models\Investments();
+        $session = session();
+        $amount = $amount * 100;
+        $reference = uniqid("farmpeak");
         $paystack = new \Yabacon\Paystack($this->SK);
         try {
             $tranx = $paystack->transaction->initialize([
@@ -701,16 +1018,43 @@ class Pages extends BaseController
         $data = [
             'reference' => $tranx->data->reference,
             'url' => $tranx->data->authorization_url,
+            'amount' => $amount,
             'user_id' => $user,
             'email' => $email,
             'status' => 'initiated'
         ];
         $db_id = $trans->insert($data);
+        $inv_data = [
+            'user_id' => $session->id,
+            'packages_id' => $p_id,
+            'tranx_id' => $db_id,
+            'payment_status' => 'initiated',
+            'unit_bought' => $plot,
+            'date' => date('c')
+        ];
+        $inv_id = $investments->insert($inv_data);
+        // echo $tranx->data->authorization_url;
         // var_dump($tranx->data->reference);
         // return $tranx->data->authorization_url;
-        return $db_id;
+        // return $db_id;
         // redirect to page so User can pay
-        // return redirect()->to(base_url());
+        echo "About to redirect....";
+        return $this->response->redirect($tranx->data->authorization_url);
+    }
+
+    public function initPayment()
+    {
+        $incoming = $this->request->getPost();
+        $packages = new \App\Models\Packages();
+        $session = session();
+        $p_db = $packages->where('name', $incoming['name'])->find()[0];
+        //Insert details into investment for user
+
+        $p_price = $p_db['unit_price'];
+        $amount = $p_price * $incoming['plot'];
+        $email = $session->email;
+        $user = $session->id;
+        $this->payment($email, $user, $amount, $p_db['id'], $incoming['plot']);
     }
 
     public function processPayment()
@@ -732,6 +1076,8 @@ class Pages extends BaseController
             $paymenturl = $u_db['url'];
             $this->makePayment($u_db['user_id'], $paymenturl);
         }
+        // Callback URL https://farmpeak.abk.ng/paystack/congrat
+        // Webhook URL https://farmpeak.abk.ng/paystack/paymentveri
     }
 
     public function postregister()

@@ -31,6 +31,22 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
+// PAystack Callback
+$routes->post('/paystack/paymentveri', 'Pages::autoVeri');
+$routes->get('/paystack/congrat', 'Pages::congrat');
+// PAystack Callback
+
+// Admin
+$routes->get('/investors', 'Pages::investor');
+$routes->get('/investorinfo', 'Pages::investorinfo');
+$routes->get('/payout', 'Pages::payout');
+$routes->get('/pay_transactions', 'Pages::pay_transactions');
+$routes->get('/trainee', 'Pages::trainee');
+$routes->get('/admins', 'Pages::admins');
+$routes->get('/helpset', 'Pages::helpset');
+$routes->get('/switch', 'Pages::switch');
+// Admin
+
 $routes->get('/about', 'Pages::about');
 $routes->get('/dashboard', 'Pages::index');
 $routes->get('/transactions', 'Pages::transactions');
@@ -46,6 +62,9 @@ $routes->post('/addpackage', 'Pages::addpackage');
 $routes->get('/editpackage', 'Pages::editpackage');
 $routes->post('/editpackage', 'Pages::posteditpackage');
 $routes->get('/packageinfo', 'Pages::packageinfo');
+$routes->get('/investment', 'Pages::investment');
+$routes->get('/wallet', 'Pages::wallet');
+$routes->get('/help', 'Pages::help');
 $routes->post('/withdraw', 'Pages::withdraw');
 $routes->post('/personalinfo', 'Pages::personalinfo');
 $routes->post('/fulfillorder', 'Pages::fulfillorder');
@@ -59,6 +78,7 @@ $routes->post('/register', 'Pages::postregister');
 $routes->get('/login', 'Pages::login');
 $routes->get('/logout', 'Pages::logout');
 $routes->get('/processpayment', 'Pages::processPayment');
+$routes->post('/processpay', 'Pages::initPayment');
 $routes->post('/login', 'Pages::postlogin');
 $routes->post('/rst', 'Pages::passreset');
 $routes->post('/rstpassword', 'Pages::passreset');

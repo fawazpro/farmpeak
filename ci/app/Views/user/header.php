@@ -28,12 +28,12 @@
             </div>
             <div class="list-group list-group-flush mt-5">
                 <a href="dashboard" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-building mr-3"></i>Farm</a>
-                <a href="investment.html" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-list mr-3"></i>My
+                <a href="investment" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-list mr-3"></i>My
                     Investment</a>
-                <a href="wallet.html" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Wallet</a>
+                <a href="wallet" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a>
                 <a href="profile" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-user mr-3"></i>My
                     Profile</a>
-                <a href="help.html" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-question-circle mr-3"></i>Help Center</a>
+                <a href="help" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-question-circle mr-3"></i>Help Center</a>
                 <a href="logout" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-sign-out-alt mr-3"></i>Logout</a>
             </div>
         </div>
@@ -54,3 +54,39 @@
                 </div>
                 <!-- Full name and email display -->
             </nav>
+
+            <?php
+function price(int $pri)
+{
+    $len =  mb_strlen($pri);
+    if ($len == 4) {
+        $end = substr($pri, -3);
+        $first = substr($pri, 0, 1);
+        return $first . ',' . $end;
+    } elseif ($len == 3) {
+        return $pri;
+    } elseif ($len == 2) {
+        return $pri;
+    } elseif ($len == 1) {
+        return $pri;
+    } elseif ($len == 5) {
+        $end = substr($pri, -3);
+        $first = substr($pri, 0, 2);
+        return $first . ',' . $end;
+    } elseif ($len == 6) {
+        $end = substr($pri, -3);
+        $first = substr($pri, 0, 3);
+        return $first . ',' . $end;
+    } elseif ($len == 7) {
+        $end = substr($pri, -3);
+        $mid = substr($pri, -6, 3);
+        $first = substr($pri, 0, 1);
+        return $first . ',' . $mid . ',' . $end;
+    } elseif ($len == 8) {
+        $end = substr($pri, -3);
+        $mid = substr($pri, -6, 3);
+        $first = substr($pri, 0, 2);
+        return $first . ',' . $mid . ',' . $end;
+    }
+}
+?>
