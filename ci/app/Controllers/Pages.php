@@ -472,7 +472,6 @@ class Pages extends BaseController
         }
     }
 
-
     public function pay_transactions()
     {
         $session = session();
@@ -516,6 +515,106 @@ class Pages extends BaseController
             $this->login();
         }
     }
+
+    public function payout()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $Packages = new \App\Models\Packages();
+            $investments = $Investments->where(['payout>' => 0])->find();
+            if (!empty($investments)) {
+                $invs = [];
+                foreach ($investments as $key => $invest) {
+                    $indiv_package = $Packages->where('id', $invest['packages_id'])->find()[0];
+                    $indiv_user = $Users->where('id', $invest['user_id'])->find()[0];
+                    $invs[$key]['plot'] = $invest['unit_bought'];
+                    $invs[$key]['status'] = $invest['payment_status'];
+                    $invs[$key]['invested'] = date('d/m/Y', strtotime($invest['date']));
+                    $invs[$key]['todayDate'] = date('d') . '/' . date('m') . '/' . date('Y');
+                    $invs[$key]['farmID'] = $indiv_package['id'];
+                    $invs[$key]['investID'] = $invest['id'];
+                    $invs[$key]['farmName'] = $indiv_package['name'];
+                    $invs[$key]['email'] = $indiv_user['email'];
+                    $invs[$key]['bank'] = $indiv_user['bank'];
+                    $invs[$key]['acc_name'] = $indiv_user['acc_name'];
+                    $invs[$key]['acc_no'] = $indiv_user['acc_no'];
+                    $invs[$key]['roi'] = $indiv_package['ROI'];
+                    $invs[$key]['unit_price'] = $indiv_package['unit_price'];
+                    $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
+                    $invs[$key]['duration'] = $indiv_package['duration'];
+                    $invs[$key]['tpayout'] = $invest['payout'];
+                }
+                $data = [
+                    'inv' => $invs,
+                ];
+            } else {
+                $data = [
+                    'inv' => [],
+                ];
+            }
+            echo view('admin/header', ['title' => 'Payout']);
+            echo view('admin/payout', $data);
+            echo view('admin/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    
+    public function postwallet()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $incoming = $this->request->getPost();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $invdata = ['payment_status' => $incoming['message']];
+                $Investments->update($incoming['investID'], $invdata);
+                $data = [
+                    'title' => 'Payout Status Updated',
+                    'msg' => 'You can always update it status anytime, anywhere',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided as an admin',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
 
     public function profit()
     {
@@ -835,8 +934,7 @@ class Pages extends BaseController
                     $invs[$key]['roi'] = $indiv_package['ROI'];
                     $invs[$key]['unit_price'] = $indiv_package['unit_price'];
                     $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
-                    // $invs[$key]['duration'] = $indiv_package['duration'];
-                    $invs[$key]['duration'] = 0.1;
+                    $invs[$key]['duration'] = $indiv_package['duration'];
                     // TO BE EXAMINED
                     $invs[$key]['total_payout'] = (($indiv_package['unit_price'] * $invest['unit_bought']) * $indiv_package['ROI'] / 100) + $indiv_package['unit_price'] * $invest['unit_bought'];
                     $ndate = new DateTime(strtotime($invest['date']));
@@ -879,7 +977,6 @@ class Pages extends BaseController
             ];
             $result = $Users->where($data)->find();
             if ($result) {
-                var_dump($incoming['payout']);
                 $invdata = ['payment_status' => 'Processing Payout', 'payout' => $incoming['payout']];
                 $Investments->update($incoming['investID'], $invdata);
                 $data = [
@@ -906,13 +1003,40 @@ class Pages extends BaseController
         $session = session();
         if ($session->logged_in == TRUE) {
             $users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $Packages = new \App\Models\Packages();
             $user = $users->where(['id' => $session->id])->find()[0];
-
-            $data = [
-                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
-                'user' => $user,
-            ];
-            // var_dump($ords);
+            $investments = $Investments->where(['user_id' => $session->id, 'payout>' => 0])->find();
+            if (!empty($investments)) {
+                $invs = [];
+                foreach ($investments as $key => $invest) {
+                    $indiv_package = $Packages->where('id', $invest['packages_id'])->find()[0];
+                    $invs[$key]['plot'] = $invest['unit_bought'];
+                    $invs[$key]['status'] = $invest['payment_status'];
+                    $invs[$key]['invested'] = date('d/m/Y', strtotime($invest['date']));
+                    $invs[$key]['todayDate'] = date('d') . '/' . date('m') . '/' . date('Y');
+                    $invs[$key]['farmID'] = $indiv_package['id'];
+                    $invs[$key]['investID'] = $invest['id'];
+                    $invs[$key]['farmName'] = $indiv_package['name'];
+                    $invs[$key]['roi'] = $indiv_package['ROI'];
+                    $invs[$key]['unit_price'] = $indiv_package['unit_price'];
+                    $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
+                    $invs[$key]['duration'] = $indiv_package['duration'];
+                    // TO BE EXAMINED
+                    $invs[$key]['tpayout'] = $invest['payout'];
+                }
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => $invs,
+                    'user' => $user,
+                ];
+            } else {
+                $data = [
+                    // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
+                    'inv' => [],
+                    'user' => $user,
+                ];
+            }
             echo view('user/header', ['title' => 'Payout']);
             echo view('user/wallet', $data);
             echo view('user/footer');

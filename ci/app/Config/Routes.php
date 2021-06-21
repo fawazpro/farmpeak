@@ -47,6 +47,7 @@ $routes->get('/trainee', 'Pages::trainee');
 $routes->get('/admins', 'Pages::admins');
 $routes->get('/helpset', 'Pages::helpset');
 $routes->get('/switch', 'Pages::switch');
+$routes->post('/wallet', 'Pages::postwallet');
 // Admin
 
 $routes->get('/about', 'Pages::about');
