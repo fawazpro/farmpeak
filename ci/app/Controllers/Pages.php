@@ -7,6 +7,9 @@ require 'autoload.php';
 // use Yabacon\Paystack;
 // use AshleyDawson\SimplePagination\Paginator;
 use CodeIgniter\Encryption\Encryption;
+use DateInterval;
+use DateTime;
+
 // use TeamTNT\TNTSearch\TNTSearch;
 
 
@@ -375,7 +378,7 @@ class Pages extends BaseController
                 $invs = [];
                 foreach ($investments as $key => $invst) {
                     $user = $users->where(['id' => $invst['user_id']])->find()[0];
-                    $invs[$key]['name'] = $user['fname'].' '.$user['lname'];
+                    $invs[$key]['name'] = $user['fname'] . ' ' . $user['lname'];
                     $invs[$key]['email'] = $user['email'];
                     $invs[$key]['id'] = $user['id'];
                     $invs[$key]['tel'] = $user['phone'];
@@ -384,9 +387,8 @@ class Pages extends BaseController
                 $data = [
                     'inv' => $invs,
                 ];
-            }else{
-                $data = [
-                ];
+            } else {
+                $data = [];
             }
             echo view('admin/header', ['title' => 'Investors']);
             echo view('admin/investor', $data);
@@ -463,17 +465,21 @@ class Pages extends BaseController
 
     public function level($lv)
     {
-        if($lv == '1'){return 'Investor'; }else {return 'Admin';}
+        if ($lv == '1') {
+            return 'Investor';
+        } else {
+            return 'Admin';
+        }
     }
 
-    
+
     public function pay_transactions()
     {
         $session = session();
         if ($session->logged_in == TRUE && $session->admin == TRUE) {
             $Tranx = new \App\Models\Tranx();
             $Users = new \App\Models\Users();
-           $trans = $Tranx->findAll();
+            $trans = $Tranx->findAll();
             if (!empty($trans)) {
                 $invs = [];
                 foreach ($trans as $key => $invest) {
@@ -481,7 +487,7 @@ class Pages extends BaseController
                     $invs[$key]['trans_id'] = $invest['reference'];
                     $invs[$key]['amount'] = $invest['amount'];
                     $invs[$key]['email'] = $invest['email'];
-                    $invs[$key]['user'] = $Users->where('id',$invest['user_id'])->find()[0];
+                    $invs[$key]['user'] = $Users->where('id', $invest['user_id'])->find()[0];
                     $invs[$key]['status'] = $invest['status'];
                 }
                 $data = [
@@ -821,16 +827,22 @@ class Pages extends BaseController
                     $indiv_package = $Packages->where('id', $invest['packages_id'])->find()[0];
                     $invs[$key]['plot'] = $invest['unit_bought'];
                     $invs[$key]['status'] = $invest['payment_status'];
-                    $invs[$key]['invested'] = $invest['date'];
+                    $invs[$key]['invested'] = date('d/m/Y', strtotime($invest['date']));
+                    $invs[$key]['todayDate'] = date('d') . '/' . date('m') . '/' . date('Y');
                     $invs[$key]['farmID'] = $indiv_package['id'];
+                    $invs[$key]['investID'] = $invest['id'];
                     $invs[$key]['farmName'] = $indiv_package['name'];
                     $invs[$key]['roi'] = $indiv_package['ROI'];
                     $invs[$key]['unit_price'] = $indiv_package['unit_price'];
                     $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
-                    $invs[$key]['duration'] = $indiv_package['duration'];
+                    // $invs[$key]['duration'] = $indiv_package['duration'];
+                    $invs[$key]['duration'] = 0.1;
                     // TO BE EXAMINED
-                    $invs[$key]['total_payout'] = '100000';
-                    $invs[$key]['payout_month'] = 'December';
+                    $invs[$key]['total_payout'] = (($indiv_package['unit_price'] * $invest['unit_bought']) * $indiv_package['ROI'] / 100) + $indiv_package['unit_price'] * $invest['unit_bought'];
+                    $ndate = new DateTime(strtotime($invest['date']));
+                    $ndate->add(new DateInterval('P6M'));
+                    $invs[$key]['payout_month'] = $ndate->format('F');
+                    $invs[$key]['tpayout'] = $invest['payout'];
                 }
                 $data = [
                     // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
@@ -849,6 +861,41 @@ class Pages extends BaseController
             echo view('user/header', ['title' => 'My Investment']);
             echo view('user/investment', $data);
             echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function postpayout()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $Users = new \App\Models\Users();
+            $Investments = new \App\Models\Investments();
+            $incoming = $this->request->getPost();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                var_dump($incoming['payout']);
+                $invdata = ['payment_status' => 'Processing Payout', 'payout' => $incoming['payout']];
+                $Investments->update($incoming['investID'], $invdata);
+                $data = [
+                    'title' => 'Payout Request Sent',
+                    'msg' => 'Wait for 3 days for successful payout',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided.',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
         } else {
             $this->login();
         }
@@ -953,6 +1000,7 @@ class Pages extends BaseController
             'status' => $p_db['status'] + $db['unit_bought'],
         ];
         $Packages->update($db['packages_id'], $p_data);
+        // Update Users package with number of investment
     }
 
     public function autoVeri()

@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid">
     <div class="mt-3">
         <h4>Farm</h4>
@@ -26,7 +24,7 @@
                                         <p class="subInfo mb-0"><?= $prod['duration'] ?> Months</p>
                                     </div>
                                     <div class="mb-1">
-                                        <p class="subTitle mb-0">Used Plot</p>
+                                        <p class="subTitle mb-0">Unit Used</p>
                                         <p class="subInfo mb-0"><?= $prod['status'] ?>/<?= $prod['unit_stock'] ?></p>
                                     </div>
                                 </div>
@@ -61,24 +59,24 @@
                                 <div class="form-row">
                                     <div class="col-md-4 mb-2">
                                         <p class="subTitle1 mb-1">Farm ID</p>
-                                        <p class="subInfo2"><?=$prod['id']?></p>
+                                        <p class="subInfo2"><?= $prod['id'] ?></p>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <p class="subTitle1 mb-1">Farm Name</p>
                                         <p class="subInfo2"><?= $prod['name'] ?></p>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <p class="subTitle1 mb-1">Price (per plot)</p>
+                                        <p class="subTitle1 mb-1">Price (per unit)</p>
                                         <!-- help in rendering plotPrice1 nd totalPrice1 with diff id on diff modal -->
                                         <p class="subInfo2">
-                                            &#x20a6;<span id="plotPrice1"><?= price($prod['unit_price']) ?></span>
+                                            &#x20a6;<span id="plotPrice<?= $prod['id'] ?>"><?= price($prod['unit_price']) ?></span>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-2">
-                                        <p class="subTitle1 mb-1">Plot Used</p>
-                                        <p class="subInfo2"><?= $prod['status'] ?>/<?= $prod['unit_stock'] ?></p>
+                                        <p class="subTitle1 mb-1">Unit Used</p>
+                                        <p class="subInfo2"> <span id="plotUsed<?= $prod['id'] ?>"><?= $prod['status'] ?></span>/ <span id="totalPlot<?= $prod['id'] ?>"><?= $prod['unit_stock'] ?></span> </p>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <p class="subTitle1 mb-1">Duration</p>
@@ -93,7 +91,7 @@
                                     <div class="col-md-12 mb-0">
                                         <p class="subTitle1 mb-1">Description</p>
                                         <p class="subInfo2">
-                                        <?= $prod['description'] ?>
+                                            <?= $prod['description'] ?>
                                         </p>
                                     </div>
                                 </div>
@@ -102,10 +100,10 @@
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="buyPlot" class="subTitle1">
-                                            No of plots will you invest in?</label>
+                                            No of units will you invest in?</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="buyPlot" name="plot" min="1" onkeyup="calculate()" required />
-                                            <input type="hidden" class="form-control" name="name" value="<?=$prod['name']?>">
+                                            <input type="number" class="form-control" id="buyPlot<?= $prod['id'] ?>" name="plot" min="1" onkeyup="calculate<?= $prod['id'] ?>()" required />
+                                            <input type="hidden" class="form-control" name="name" value="<?= $prod['name'] ?>">
                                             <div class="input-group-append">
                                                 <span class="input-group-text appended px-2">plot(s)</span>
                                             </div>
@@ -114,11 +112,11 @@
                                     <div class="col-md-6 text-right">
                                         <p class="subTitle1 mb-1">Total Price</p>
                                         <!-- help in rendering plotPrice1 nd totalPrice1 with diff id on diff modal -->
-                                        <p class="subInfo3" id="totalPrice<?=$prod['id']?>"></p>
+                                        <p class="subInfo3" id="totalPrice<?= $prod['id'] ?>"></p>
                                     </div>
                                 </div>
                                 <!-- submit -->
-                                <button type="submit" class="btn btn-block" style="background-color: #025c1d; color: #ffffff">
+                                <button id="investBtn<?= $prod['id'] ?>" type="submit" disabled="" class="btn btn-block" style="background-color: #025c1d; color: #ffffff">
                                     Invest
                                 </button>
                                 <!-- end of submit button -->
@@ -126,26 +124,51 @@
                         </form>
                         <script>
                             // help me in feeding diff plotPrice Id nd totalPrice1 to script if needed
-                            function calculate() {
+                            function calculate<?= $prod['id'] ?>() {
+                                // plotUsed<?= $prod['id'] ?>, totalPlot<?= $prod['id'] ?>, investBtn<?= $prod['id'] ?>
                                 let formatTotalprice;
+                                let availablePlot;
+
 
                                 let plotPrice = parseInt(
                                     document
-                                    .getElementById("plotPrice<?=$prod['id']?>")
+                                    .getElementById("plotPrice<?= $prod['id'] ?>")
                                     .innerHTML.replace(/,/g, "")
                                 );
-                                let plotNo = parseInt(
-                                    document.getElementById("buyPlot").value
+                                let investBtn = document.getElementById("investBtn<?= $prod['id'] ?>");
+                                
+
+                                let plotUsed = parseInt(
+                                    document
+                                    .getElementById("plotUsed<?= $prod['id'] ?>")
+                                    .innerHTML.replace(/,/g, "")
                                 );
-                                if (isNaN(plotNo)) {
+                                let totalPlot = parseInt(
+                                    document
+                                    .getElementById("totalPlot<?= $prod['id'] ?>")
+                                    .innerHTML.replace(/,/g, "")
+                                );
+                                
+                                let plotNo = parseInt(
+                                    document.getElementById("buyPlot<?= $prod['id'] ?>").value
+                                );
+
+                                availablePlot = totalPlot - plotUsed;
+
+                                if(plotNo > availablePlot){
+                                    investBtn.disabled = true;
+                                    formatTotalprice = "Exceeds available plot";
+                                } else if (isNaN(plotNo)) {
+                                    investBtn.disabled = true;
                                     formatTotalprice = "Invalid input";
                                 } else {
+                                    investBtn.disabled = false;
                                     let totalPrice = plotNo * plotPrice;
                                     formatTotalprice = formatter.format(totalPrice);
                                 }
 
                                 document.getElementById(
-                                    "totalPrice<?=$prod['id']?>"
+                                    "totalPrice<?= $prod['id'] ?>"
                                 ).innerHTML = formatTotalprice;
                             }
                             var formatter = new Intl.NumberFormat("en-NG", {

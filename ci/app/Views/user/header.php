@@ -27,7 +27,7 @@
                 </a>
             </div>
             <div class="list-group list-group-flush mt-5">
-                <a href="dashboard" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-building mr-3"></i>Farm</a>
+                <a href="dashboard" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-seedling mr-3"></i>Farm</a>
                 <a href="investment" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fa fa-list mr-3"></i>My
                     Investment</a>
                 <a href="wallet" class="list-group-item list-group-item-action bgItem"><i style="font-size: 19px" class="fas fa-wallet mr-3"></i>Payout</a>

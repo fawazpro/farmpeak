@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 $routes->post('/paystack/paymentveri', 'Pages::autoVeri');
 $routes->get('/paystack/congrat', 'Pages::congrat');
 // PAystack Callback
+$routes->post('/training', 'Pages::posttraining');
+
 
 // Admin
 $routes->get('/investors', 'Pages::investor');
@@ -57,12 +59,14 @@ $routes->get('/details', 'Pages::details');
 $routes->get('/buy', 'Pages::buy');
 $routes->get('/summary', 'Pages::summary');
 $routes->get('/verify', 'Pages::verify');
+$routes->post('/payout', 'Pages::postpayout');
 $routes->post('/pay', 'Pages::pay');
 $routes->post('/addpackage', 'Pages::addpackage');
 $routes->get('/editpackage', 'Pages::editpackage');
 $routes->post('/editpackage', 'Pages::posteditpackage');
 $routes->get('/packageinfo', 'Pages::packageinfo');
 $routes->get('/investment', 'Pages::investment');
+$routes->post('/investment', 'Pages::postpayout');
 $routes->get('/wallet', 'Pages::wallet');
 $routes->get('/help', 'Pages::help');
 $routes->post('/withdraw', 'Pages::withdraw');
