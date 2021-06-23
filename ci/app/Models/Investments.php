@@ -11,7 +11,7 @@ class Investments extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['user_id','packages_id', 'tranx_id', 'payment_status', 'unit_bought', 'date'];
+    protected $allowedFields = ['user_id','packages_id', 'tranx_id', 'payment_status', 'unit_bought', 'date', 'payout'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
