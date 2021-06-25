@@ -10,6 +10,7 @@ class Migrate extends \CodeIgniter\Controller
                 try
                 {
                         $migrate->latest();
+
                 }
                 catch (\Throwable $e)
                 {

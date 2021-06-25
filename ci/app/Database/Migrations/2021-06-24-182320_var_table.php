@@ -35,6 +35,8 @@ class varTable extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('variables');
+        $seeder = \Config\Database::seeder();
+        $seeder->call('Seeder');
     }
 
     public function down()

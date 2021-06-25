@@ -504,6 +504,248 @@ class Pages extends BaseController
         }
     }
 
+    public function admins()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $users = new \App\Models\Users();
+            $data = [
+                'users' => $users->where('clearance',11)->findAll(),
+                ];
+            echo view('admin/header', [
+                'title' => 'Administrator',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('admin/admins', $data);
+            echo view('admin/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function postaddadmin()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $incoming = $this->request->getPost();
+            $Users = new \App\Models\Users();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $db = $Users->where('email',$incoming['email'])->find()[0];
+                if($Users->update($db['id'],['clearance' => 11,])){
+                $data = [
+                    'title' => 'New admin added',
+                    'msg' => 'You can always update this priviledge anytime, anywhere',
+                    'url' => base_url()
+                ];}
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided as an admin',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('admin/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('admin/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function postupvariables()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $incoming = $this->request->getPost();
+            $Users = new \App\Models\Users();
+            $Variables = new \App\Models\Variables();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $db = $Variables->where('name',$incoming['name'])->find()[0];
+                if($Variables->update($db['id'],['value' => $incoming['val'],])){
+                $data = [
+                    'title' => 'Your data has been updated',
+                    'msg' => 'You can always change this anytime, anywhere',
+                    'url' => base_url()
+                ];}
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided as an admin',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('admin/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('admin/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function postremoveadmin()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $incoming = $this->request->getPost();
+            $Users = new \App\Models\Users();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $Users->update($incoming['id'],['clearance'=> 1]);
+                $data = [
+                    'title' => 'Admin priviledge revoked',
+                    'msg' => 'You can always update this priviledge anytime, anywhere',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided as an admin',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('admin/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('admin/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function helpset()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Variables = new \App\Models\Variables();
+            $data = [
+                'phone1' => $Variables->where('name','phone1')->find()[0]['value'],
+                'phone2' => $Variables->where('name','phone2')->find()[0]['value'],
+                'email1' => $Variables->where('name','email1')->find()[0]['value'],
+                ];
+            echo view('admin/header', [
+                'title' => 'Help Settings',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('admin/help', $data);
+            echo view('admin/footer');
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function switch()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Variables = new \App\Models\Variables();
+            $session = session();
+            $session->remove('admin');
+            $ses_data = [
+                'id' => $session->id,
+                'fname' => $session->fname,
+                'lname' => $session->lname,
+                'email' => $session->email,
+                // 'admin' => TRUE,
+                'logged_in' => TRUE,
+            ];
+            $session->set($ses_data);
+            // $this->index();
+            return redirect()->to(base_url());
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
     public function level($lv)
     {
         if ($lv == '1') {
@@ -947,11 +1189,13 @@ class Pages extends BaseController
         $session = session();
         if ($session->logged_in == TRUE) {
             $users = new \App\Models\Users();
+            $Variables = new \App\Models\Variables();
             $user = $users->where(['id' => $session->id])->find()[0];
 
             $data = [
-                // 'init' => strtoupper(substr($user['fname'], 0, 1) . substr($user['lname'], 0, 1)),
-                'user' => $user,
+                'phone1' => $Variables->where('name','phone1')->find()[0]['value'],
+                'phone2' => $Variables->where('name','phone2')->find()[0]['value'],
+                'email1' => $Variables->where('name','email1')->find()[0]['value'],
             ];
             // var_dump($ords);
             echo view('user/header', [

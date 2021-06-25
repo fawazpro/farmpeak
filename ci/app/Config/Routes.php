@@ -48,6 +48,9 @@ $routes->get('/admins', 'Pages::admins');
 $routes->get('/helpset', 'Pages::helpset');
 $routes->get('/switch', 'Pages::switch');
 $routes->post('/wallet', 'Pages::postwallet');
+$routes->post('/addadmin', 'Pages::postaddadmin');
+$routes->post('/removeadmin', 'Pages::postremoveadmin');
+$routes->post('/upvariables', 'Pages::postupvariables');
 // Admin
 
 $routes->get('/about', 'Pages::about');

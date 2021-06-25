@@ -3,15 +3,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Users extends Model
+class Variables extends Model
 {
-    protected $table      = 'users';
+    protected $table      = 'variables';
     protected $primaryKey = 'id';
 
     protected $returnType = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['fname', 'lname', 'email', 'phone', 'password','packages','bank','acc_name','acc_no','clearance','token','balance'];
+    protected $allowedFields = ['name', 'value'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
