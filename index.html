@@ -22,6 +22,7 @@
   <body>
     <nav
       class="navbar navbar-expand-md nav-menu fixed-top navbar-dark scrolling-navbar"
+      style="background-color: #ffffffe0 !important"
     >
       <div class="container">
         <a href="index.html" class="navbar-brand pl-1 pl-md-2">
@@ -45,14 +46,20 @@
         >
           <ul class="navbar-nav text-lowercase">
             <li class="nav-item nav-itemT">
-              <a href="ourFarm.html" class="nav-link text-white px-4 mr-2">our farms</a>
+              <a href="ourFarm.html" class="nav-link text-white px-4 mr-2"
+                >our farms</a
+              >
             </li>
             <li class="nav-item nav-itemT">
-              <a href="training.html" class="nav-link text-white px-4 mr-2">training</a>
+              <a href="training.html" class="nav-link text-white px-4 mr-2"
+                >training</a
+              >
             </li>
-            <!-- /////Login or My Account Link u knw am insinuating -->
+            <!-- /////Login or My Account Link u knw what am insinuating -->
             <li class="nav-item nav-itemT">
-              <a href="login.html" class="nav-link bordered text-white px-4 mr-2"
+              <a
+                href="login.html"
+                class="nav-link bordered text-white px-4 mr-2"
                 >Login</a
               >
             </li>
@@ -109,12 +116,11 @@
           </p>
         </div>
       </div>
-
     </div>
     <!-- end of slider -->
     <!-- aboutUs -->
     <div class="container-fluid px-md-5 py-2 px-sm-1">
-      <h4 class="text-center display-4 mt-2 mb-4">About us</h4>
+      <h4 class="text-center display-4 mb-4">About us</h4>
       <div class="row">
         <div class="col-md-5">
           <h5>What we are</h5>
@@ -241,33 +247,37 @@
     <!-- end of gallery -->
     <!-- how it works -->
     <div class="container-fluid mt-2 px-md-5 py-2 px-sm-1">
-      <h4 class="text-center display-4 mb-3">how it works</h4>
+      <h4 class="text-center display-4">how it works</h4>
+      <p class="text-center mb-3">
+        Our investor portal just require this 4-easy step
+      </p>
       <div class="row">
         <div class="col-md-6 col-lg-3" style="overflow: hidden">
-          <div class="card shadow mb-3">
+          <div class="card shadow mb-3 wow animate__backInLeft">
             <div class="card-body text-center serCard">
               <img src="asset/images/create.svg" alt="create" class="mb-3" />
               <h5>Create an Account</h5>
               <p>
-                Create and verify your account with us, plus make sure you enter your genuine email address
+                Create and verify your account with us, plus make sure you enter
+                your genuine email address
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-3" style="overflow: hidden">
-          <div class="card shadow mt-md-5 mb-3">
+          <div class="card shadow mt-md-5 mb-3 wow animate__backInUp">
             <div class="card-body text-center serCard">
               <img src="asset/images/invest1.svg" alt="invest" class="mb-3" />
               <h5>Invest</h5>
               <p>
-                invest in any of our farm plan and let your money do the farming for
-                you
+                invest in any of our farm plan and let your money do the farming
+                for you
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-3" style="overflow: hidden">
-          <div class="card shadow mb-3">
+          <div class="card shadow mb-3 wow animate__backInDown">
             <div class="card-body text-center serCard">
               <img src="asset/images/inspect.svg" alt="monitor" class="mb-3" />
               <h5>Monitor</h5>
@@ -279,7 +289,7 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-3" style="overflow: hidden">
-          <div class="card shadow mt-md-5 mb-3">
+          <div class="card shadow mt-md-5 mb-3 wow animate__backInRight">
             <div class="card-body text-center serCard">
               <img
                 src="asset/images/credited.svg"
@@ -470,10 +480,7 @@
         <div class="contacte col-lg-4">
           <h4>Contact Us</h4>
           <div>
-            <i
-              class="fas fa-home mr-2 mt-1"
-              style="color: #038d2c"
-            ></i>
+            <i class="fas fa-home mr-2 mt-1" style="color: #038d2c"></i>
             <p>
               <span
                 style="
@@ -521,11 +528,11 @@
             </li>
           </ul> -->
           <div>
-            <p></p>
+            <p>
               <span
                 ><i
                   class="fas fa-phone mr-2 mt-1"
-                  style="color: #038d2c; transform: rotate(90 );"
+                  style="color: #038d2c; transform: rotate(90)"
                 ></i></span
               >+234(0)811-012-5278, +111-234-567.
             </p>
@@ -536,9 +543,8 @@
           <h4>What are you waiting for?</h4>
           <p>
             Farmpeak offer the best according to your wierdest imagination and
-            be rest assured about your investment. We love
-            and we are here to serve you better. Do business with
-            us and be amazed.
+            be rest assured about your investment. We love and we are here to
+            serve you better. Do business with us and be amazed.
           </p>
         </div>
       </div>
@@ -559,6 +565,20 @@
     <script src="/asset/Scripts/wow.min.js"></script>
     <script src="/asset/Scripts/owl.carousel.min.js"></script>
     <script src="/asset/Scripts/main.js"></script>
+    <script>
+      var wow = new WOW({
+        boxClass: "wow",
+        animateClass: "animate__animated",
+        offset: 0,
+        mobile: true,
+        live: true,
+        callback: function (box) {},
+        scrollContainer: null,
+        resetAnimation: true,
+      });
+
+      wow.init();
+    </script>
     <!-- end of script -->
   </body>
 </html>
