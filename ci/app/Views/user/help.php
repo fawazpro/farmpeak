@@ -11,7 +11,7 @@
     <div class="row">
         <!-- help1 -->
         <div class="col-md-4 m-sm-0 m-1">
-            <a href="tel:08001112222" style="text-decoration: none">
+            <a href="tel:<?=$phone1?>" style="text-decoration: none">
                 <div class="card my-1">
                     <div class="card-body m-0 px-2 px-lg-2 py-4 d-flex justify-content-center align-items-center">
                         <span><i class="fas fa-headset fa-7x" style="color: #039730 !important"></i></span>
@@ -25,7 +25,7 @@
         <!-- end of help1 -->
         <!-- help2 -->
         <div class="col-md-4 m-sm-0 m-1">
-            <a href="tel:08001112222" style="text-decoration: none">
+            <a href="tel:<?=$phone2?>" style="text-decoration: none">
                 <div class="card my-1">
                     <div class="card-body m-0 px-2 px-lg-2 py-4 d-flex justify-content-center align-items-center">
                         <span><i class="fas fa-headset fa-7x" style="color: #000000 !important"></i></span>
@@ -39,7 +39,7 @@
         <!-- end of help2 -->
         <!-- helpmail -->
         <div class="col-md-4 m-sm-0 m-1">
-            <a href="mailto:farmpeak222@gmail.com" style="text-decoration: none">
+            <a href="mailto:<?=$email1?>" style="text-decoration: none">
                 <div class="card my-1">
                     <div class="card-body m-0 px-2 px-lg-2 py-4 d-flex justify-content-center align-items-center">
                         <span><i class="fas fa-envelope-open-text fa-7x" style="color: #000000 !important"></i></span>

@@ -61,6 +61,7 @@ $routes->get('/buy', 'Pages::buy');
 $routes->get('/summary', 'Pages::summary');
 $routes->get('/verify', 'Pages::verify');
 $routes->post('/payout', 'Pages::postpayout');
+$routes->post('/chgpassword', 'Pages::postchgpassword');
 $routes->post('/pay', 'Pages::pay');
 $routes->post('/addpackage', 'Pages::addpackage');
 $routes->get('/editpackage', 'Pages::editpackage');

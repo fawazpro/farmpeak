@@ -68,6 +68,8 @@ class Pages extends BaseController
 
             $head_data = [
                 'title' => 'Farms',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
             ];
 
             echo view('user/header', $head_data);
@@ -226,7 +228,11 @@ class Pages extends BaseController
                 'ord_count' => $notif
             ];
 
-            echo view('admin/header', ['title' => 'Admin Farm']);
+            echo view('admin/header', [
+                'title' => 'Admin Farm',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('admin/home', $data);
             echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
@@ -270,7 +276,11 @@ class Pages extends BaseController
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -295,7 +305,11 @@ class Pages extends BaseController
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -330,7 +344,11 @@ class Pages extends BaseController
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -340,11 +358,16 @@ class Pages extends BaseController
 
     public function packageinfo()
     {
+        $session = session();
         $packages = new \App\Models\Packages();
         $id = $this->request->getGet('id');
         $details = $packages->find($id);
 
-        echo view('user/header', ['title' => 'Farm Information']);
+        echo view('user/header', [
+            'title' => 'Farm Information',
+            'name' => $session->fname . ' ' . $session->lname,
+            'email' => $session->email,
+        ]);
         echo view('user/packageinfo', $details);
         echo view('user/footer');
     }
@@ -359,7 +382,11 @@ class Pages extends BaseController
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -390,16 +417,22 @@ class Pages extends BaseController
             } else {
                 $data = [];
             }
-            echo view('admin/header', ['title' => 'Investors']);
+            echo view('admin/header', ['title' => 'Investors',
+            'name' => $session->fname . ' ' . $session->lname,
+            'email' => $session->email,]);
             echo view('admin/investor', $data);
-            echo view('user/footer');
+            echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
             $dt = [
                 'title' => "😠Out of Bound😡",
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -446,16 +479,24 @@ class Pages extends BaseController
                     'inv' => [],
                 ];
             }
-            echo view('admin/header', ['title' => 'Investor Personal Data']);
+            echo view('admin/header', [
+                'title' => 'Investor Personal Data',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('admin/investorinfo', $data);
-            echo view('user/footer');
+            echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
             $dt = [
                 'title' => "😠Out of Bound😡",
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -499,16 +540,24 @@ class Pages extends BaseController
                     'inv' => [],
                 ];
             }
-            echo view('admin/header', ['title' => 'Paystack Transactions']);
+            echo view('admin/header', [
+                'title' => 'Paystack Transactions',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('admin/tranx', $data);
-            echo view('user/footer');
+            echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
             $dt = [
                 'title' => "😠Out of Bound😡",
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -554,7 +603,11 @@ class Pages extends BaseController
                     'inv' => [],
                 ];
             }
-            echo view('admin/header', ['title' => 'Payout']);
+            echo view('admin/header', [
+                'title' => 'Payout',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('admin/payout', $data);
             echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
@@ -563,7 +616,11 @@ class Pages extends BaseController
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -571,7 +628,7 @@ class Pages extends BaseController
         }
     }
 
-    
+
     public function postwallet()
     {
         $session = session();
@@ -607,179 +664,11 @@ class Pages extends BaseController
                 'msg' => "You are not authorised to visit this page",
                 'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
             ];
-            echo view('user/header', ['title' => 'Out of Bound']);
-            echo view('user/message', $dt);
-            echo view('user/footer');
-        } else {
-            $this->login();
-        }
-    }
-
-
-    public function profit()
-    {
-        $session = session();
-        if ($session->logged_in == TRUE && $session->admin == TRUE) {
-            $session = session();
-            $id = $session->id;
-            $profits = new \App\Models\Profit();
-            $profit = $profits->findAll();
-            $paginator = new Paginator();
-            $paginator
-                ->setItemsPerPage(10) // Give us a maximum of 10 items per page
-                ->setPagesInRange(5) // How many pages to display in navigation (e.g. if we have a lot of pages to get through)
-            ;
-            $paginator->setItemTotalCallback(function () use ($profit) {
-                return count($profit);
-            });
-            $paginator->setSliceCallback(function ($offset, $length) use ($profit) {
-                return array_slice($profit, $offset, $length);
-            });
-            $page = $this->page();
-            $pagination = $paginator->paginate((int) $page);
-
-            $data = [
-                'pagination' => $pagination,
-                'current' => $pagination->getCurrentPageNumber(),
-                'profits' => $profit,
-            ];
-
-            echo view('admin/header');
-            echo view('admin/profit', $data);
-            echo view('user/footer');
-        } else if ($session->logged_in == TRUE) {
-            $dt = [
-                'title' => "😠Out of Bound😡",
-                'msg' => "You are not authorised to visit this page",
-                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
-            ];
-            echo view('user/header');
-            echo view('user/message', $dt);
-            echo view('user/footer');
-        } else {
-            $this->login();
-        }
-    }
-
-    public function order()
-    {
-        $session = session();
-        if ($session->logged_in == TRUE && $session->admin == TRUE) {
-            $session = session();
-            $id = $session->id;
-            $orders = new \App\Models\Orders();
-            $ords = $orders->findAll();
-            $notif = 0;
-            $ordes = [];
-            $standardOrder = [];
-
-            foreach ($ords as $key => $order) {
-                $standardOrder[$key] = $order;
-                if ($order['type'] == 'c') {
-                    $indiv = $this->indiv($order['user_id']);
-                    $standardOrder[$key]['bank'] = $indiv['bank'];
-                    $standardOrder[$key]['acc_num'] = $indiv['acc_num'];
-                    $standardOrder[$key]['acc_name'] = $indiv['acc_name'];
-                    $standardOrder[$key]['phone'] = $indiv['phone'];
-                }
-                if ($order['notif'] == 0) {
-                    $notif++;
-                    $ordes[$key] = $order;
-
-
-                    if ($order['type'] == 'c') {
-                        $indiv = $this->indiv($order['user_id']);
-                        $ordes[$key]['bank'] = $indiv['bank'];
-                        $ordes[$key]['acc_num'] = $indiv['acc_num'];
-                        $ordes[$key]['acc_name'] = $indiv['acc_name'];
-                        $ordes[$key]['phone'] = $indiv['phone'];
-                    }
-                }
-                continue;
-            }
-
-            $paginator = new Paginator();
-            $paginator
-                ->setItemsPerPage(10) // Give us a maximum of 10 items per page
-                ->setPagesInRange(5) // How many pages to display in navigation (e.g. if we have a lot of pages to get through)
-            ;
-            $paginator->setItemTotalCallback(function () use ($standardOrder) {
-                return count($standardOrder);
-            });
-            $paginator->setSliceCallback(function ($offset, $length) use ($standardOrder) {
-                return array_slice($standardOrder, $offset, $length);
-            });
-            $page = $this->page();
-            $pagination = $paginator->paginate((int) $page);
-
-            $data = [
-                'orders' => $ordes,
-                'ordes' => $standardOrder,
-                'pagination' => $pagination,
-                'count' => $notif,
-                'current' => $pagination->getCurrentPageNumber(),
-            ];
-            echo view('admin/header');
-            echo view('admin/order', $data);
-            echo view('user/footer');
-        } else if ($session->logged_in == TRUE) {
-            $orders = new \App\Models\Orders();
-            $ords = $orders->where('user_id', $session->id)->findAll(3);
-            var_dump($ords);
-            $data = [
-                'orders' => $ords,
-            ];
-            echo view('user/header');
-            echo view('user/transactions', $data);
-            echo view('user/footer');
-        } else {
-            $this->login();
-        }
-    }
-
-    public function customers()
-    {
-        $session = session();
-        if ($session->logged_in == TRUE && $session->admin == TRUE) {
-            $session = session();
-            $id = $session->id;
-            $users = new \App\Models\Customers();
-            $user = $users->findAll();
-            foreach ($user as $key => $usr) {
-                $user[$key]['downlines'] = $users->where('ref_id', $usr['user_id'])->findAll();
-            }
-
-
-            $paginator = new Paginator();
-            $paginator
-                ->setItemsPerPage(10) // Give us a maximum of 10 items per page
-                ->setPagesInRange(5) // How many pages to display in navigation (e.g. if we have a lot of pages to get through)
-            ;
-            $paginator->setItemTotalCallback(function () use ($user) {
-                return count($user);
-            });
-            $paginator->setSliceCallback(function ($offset, $length) use ($user) {
-                return array_slice($user, $offset, $length);
-            });
-            $page = $this->page();
-            $pagination = $paginator->paginate((int) $page);
-
-            $data = [
-                'customers' => $user,
-                'pagination' => $pagination,
-                'current' => $pagination->getCurrentPageNumber(),
-            ];
-
-            echo view('admin/header');
-            echo view('admin/customer', $data);
-            echo view('user/footer');
-        } else if ($session->logged_in == TRUE) {
-            $dt = [
-                'title' => "😠Out of Bound😡",
-                'msg' => "You are not authorised to visit this page",
-                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
-            ];
-            echo view('user/header');
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/message', $dt);
             echo view('user/footer');
         } else {
@@ -956,7 +845,11 @@ class Pages extends BaseController
             }
 
             // var_dump($ords);
-            echo view('user/header', ['title' => 'My Investment']);
+            echo view('user/header', [
+                'title' => 'My Investment',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/investment', $data);
             echo view('user/footer');
         } else {
@@ -1037,7 +930,11 @@ class Pages extends BaseController
                     'user' => $user,
                 ];
             }
-            echo view('user/header', ['title' => 'Payout']);
+            echo view('user/header', [
+                'title' => 'Payout',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/wallet', $data);
             echo view('user/footer');
         } else {
@@ -1057,7 +954,11 @@ class Pages extends BaseController
                 'user' => $user,
             ];
             // var_dump($ords);
-            echo view('user/header', ['title' => 'Payout']);
+            echo view('user/header', [
+                'title' => 'Help',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/help', $data);
             echo view('user/footer');
         } else {
@@ -1340,6 +1241,7 @@ class Pages extends BaseController
                 $ses_data = [
                     'id' => $result[0]['id'],
                     'fname' => $result[0]['fname'],
+                    'lname' => $result[0]['lname'],
                     'email' => $result[0]['email'],
                     'logged_in' => TRUE,
                 ];
@@ -1350,7 +1252,8 @@ class Pages extends BaseController
             } else if ($result[0]['token'] == 0 && $result[0]['clearance'] == 11) {
                 $ses_data = [
                     'id' => $result[0]['id'],
-                    'f_name' => $result[0]['fname'],
+                    'fname' => $result[0]['fname'],
+                    'lname' => $result[0]['lname'],
                     'email' => $result[0]['email'],
                     'admin' => TRUE,
                     'logged_in' => TRUE,
@@ -1552,7 +1455,7 @@ class Pages extends BaseController
                 'banks' => [
                     array('id' => '1', 'name' => 'Access Bank', 'code' => '044'),
                     array('id' => '2', 'name' => 'Citibank', 'code' => '023'),
-                    array('id' => '3', 'name' => 'Diamond Bank', 'code' => '063'),
+                    array('id' => '3', 'name' => 'Access (Diamond) Bank', 'code' => '063'),
                     array('id' => '4', 'name' => 'Dynamic Standard Bank', 'code' => ''),
                     array('id' => '5', 'name' => 'Ecobank Nigeria', 'code' => '050'),
                     array('id' => '6', 'name' => 'Fidelity Bank Nigeria', 'code' => '070'),
@@ -1576,7 +1479,11 @@ class Pages extends BaseController
                 ],
             ];
             // var_dump($ords);
-            echo view('user/header', ['title' => 'Profile']);
+            echo view('user/header', [
+                'title' => 'Profile',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('user/profile', $data);
             echo view('user/footer');
         } else {
@@ -1775,27 +1682,98 @@ class Pages extends BaseController
         $session = session();
         if ($session->logged_in == TRUE) {
             $id = $session->id;
-            $users = new \App\Models\Users();
+            $Users = new \App\Models\Users();
             $incoming = $this->request->getPost();
-            $res = $users->update($id, $incoming);
-            if ($res) {
-                $dt = [
-                    'title' => "Successful✨",
-                    'msg' => "Your profile update was successful",
-                    'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
-                ];
-                echo view('user/header');
-                echo view('user/message', $dt);
-                echo view('user/footer');
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $res = $Users->update($id, $incoming);
+                if ($res) {
+                    $dt = [
+                        'title' => "Successful✨",
+                        'msg' => "Your profile update was successful",
+                        'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
+                    ];
+                    echo view('user/header', ['title'=>'Profile Update',
+                    'name' => $session->fname . ' ' . $session->lname,
+                    'email' => $session->email,]);
+                    echo view('user/message', $dt);
+                    echo view('user/footer');
+                } else {
+                    $dt = [
+                        'title' => "😢 Sorry 😒",
+                        'msg' => "Your profile update was unsuccessful",
+                        'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
+                    ];
+                    echo view('user/header',['title'=>'Profile Update',
+                    'name' => $session->fname . ' ' . $session->lname,
+                    'email' => $session->email,]);
+                    echo view('user/message', $dt);
+                    echo view('user/footer');
+                }
             } else {
-                $dt = [
-                    'title' => "😢 Sorry 😒",
-                    'msg' => "Your profile update was unsuccessful",
-                    'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided.',
+                    'url' => base_url()
                 ];
-                echo view('user/header');
-                echo view('user/message', $dt);
-                echo view('user/footer');
+                $this->msg($data);
+            }
+        } else {
+            $this->login();
+        }
+    }
+
+    public function postchgpassword()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE) {
+            $id = $session->id;
+            $Users = new \App\Models\Users();
+            $incoming = $this->request->getPost();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $up = [
+                    'password' => hash('sha1', $incoming['newpass'], false),
+                ];
+                $res = $Users->update($id, $up);
+                if ($res) {
+                    $dt = [
+                        'title' => "Successful✨",
+                        'msg' => "Your profile update was successful",
+                        'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
+                    ];
+                    echo view('user/header', ['title'=>'Profile Update',
+                    'name' => $session->fname . ' ' . $session->lname,
+                    'email' => $session->email,]);
+                    echo view('user/message', $dt);
+                    echo view('user/footer');
+                } else {
+                    $dt = [
+                        'title' => "😢 Sorry 😒",
+                        'msg' => "Your profile update was unsuccessful",
+                        'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
+                    ];
+                    echo view('user/header',['title'=>'Profile Update',
+                    'name' => $session->fname . ' ' . $session->lname,
+                    'email' => $session->email,]);
+                    echo view('user/message', $dt);
+                    echo view('user/footer');
+                }
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided.',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
             }
         } else {
             $this->login();

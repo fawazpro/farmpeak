@@ -51,9 +51,9 @@
         <!-- Full name and email display -->
         <div class="ml-auto mt-2">
           <p class="mb-0" style="font-weight: bold; font-size: 17px">
-            Abdullah Ryan
+            <?=$name?>
           </p>
-          <p class="mb-0" style="font-size: 14px">abdullah@gmail.com</p>
+          <p class="mb-0" style="font-size: 14px"><?=$email?></p>
         </div>
         <!-- Full name and email display -->
       </nav>
