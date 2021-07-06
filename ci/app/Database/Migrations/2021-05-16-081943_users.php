@@ -25,7 +25,7 @@ class AddUsersToDB extends Migration
             ],
             'email'       => [
                     'type'           => 'LONGTEXT',
-                    'constraint'           => '200',
+                    'constraint'           => 200,
                     'null'     => false,
             ],
             'phone' => [
