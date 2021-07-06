@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="mt-3">
         <h4>Farm</h4>
-        <p>List of Farmpeak farm</p>
+        <p>List of OMB farm</p>
     </div>
     <!-- list of farm -->
     <div class="row">

@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-    <link rel="title icon" href="asset/images/p.svg" type="image/svg" />
+    <link rel="title icon" href="asset/images/favicon.svg" type="image/svg" />
     <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="asset/StyleSheet/main.css" />
     <link rel="stylesheet" href="asset/StyleSheet/main.css" />
-    <title><?= $title ?> - Farmpeak</title>
+    <title><?= $title ?> - OMB farm</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                         <img src="asset/images/p.svg" style="width: 100px; height: auto" class="mx-auto" alt="p" />
                     </div>
                     <div>
-                        <p class="ml-2 text-white">Farmpeak</p>
+                        <p class="ml-2 text-white">OMB farm</p>
                     </div>
                 </a>
             </div>

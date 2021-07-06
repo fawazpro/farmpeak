@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="mt-3 mb-1">
         <h4>Help Center Setting</h4>
-        <!-- <p>List of Farmpeak Investors</p> -->
+        <!-- <p>List of OMB farm Investors</p> -->
     </div>
 
     <!-- list of helpline -->
@@ -138,7 +138,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #023c74">
                     <h5 class="modal-title text-white ml-auto">
-                        Edit Helpline-2
+                        Edit Email
                     </h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -150,7 +150,7 @@
                             <div class="col-12 mb-3">
                                 <label for="helpMail">Email</label>
                                 <input type="hidden" name="name" value="email1">
-                                <input type="email" class="form-control" id="helpMail" placeholder="mail@mail.com" value="<?=$email1?>" maxlength="11" name="val" required />
+                                <input type="email" class="form-control" id="helpMail" placeholder="mail@mail.com" value="<?=$email1?>" name="val" required />
                             </div>
                         </div>
                         <hr />

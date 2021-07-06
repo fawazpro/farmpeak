@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="mt-3">
         <h4>Farm</h4>
-        <p>List of Farmpeak farm</p>
+        <p>List of OMB farm</p>
     </div>
     <div class="text-right">
         <a href="#addFarmModal" data-toggle="modal" class="btn" style="background-color: #023c74 !important; color: #ffffff"><i style="font-size: 19px" class="fas fa-plus-circle mr-2"></i>Add Farm</a>
@@ -72,22 +72,22 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="farmAmount">Plot (in numbers)</label>
-                                <input type="text" class="form-control" id="farmPlot" name="unit_stock" placeholder="Plot" required />
+                                <label for="farmAmount">Unit (in numbers)</label>
+                                <input type="number" class="form-control" id="farmPlot" name="unit_stock" placeholder="Plot" required />
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="farmAmount">Amount (per plot)</label>
+                                <label for="farmAmount">Amount (per unit)</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text px-2">&#x20a6;</span>
                                     </div>
-                                    <input type="text" class="form-control" id="farmAmount" name="unit_price" placeholder="Amount" required />
+                                    <input type="number" class="form-control" id="farmAmount" name="unit_price" placeholder="Amount" required />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="farmDuration">Duration (in num)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="farmDuration" name="duration" placeholder="1" required />
+                                    <input type="number" class="form-control" id="farmDuration" name="duration" placeholder="1" required />
                                     <div class="input-group-append">
                                         <span class="input-group-text px-1">Month(s)</span>
                                     </div>
@@ -105,7 +105,7 @@
                             <div class="col-md-3 mb-3">
                                 <label for="farmRoi">ROI</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="farmRoi" name="ROI" placeholder="ROI" maxlength="3" max="100" min="1" required />
+                                    <input type="number" class="form-control" id="farmRoi" name="ROI" placeholder="ROI" maxlength="3" max="100" min="1" required />
                                     <div class="input-group-append">
                                         <span class="input-group-text px-2">%</span>
                                     </div>

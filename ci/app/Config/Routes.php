@@ -47,6 +47,7 @@ $routes->get('/trainee', 'Pages::trainee');
 $routes->get('/admins', 'Pages::admins');
 $routes->get('/helpset', 'Pages::helpset');
 $routes->get('/switch', 'Pages::switch');
+$routes->get('/conv', 'Pages::conv');
 $routes->post('/wallet', 'Pages::postwallet');
 $routes->post('/addadmin', 'Pages::postaddadmin');
 $routes->post('/removeadmin', 'Pages::postremoveadmin');
@@ -54,6 +55,7 @@ $routes->post('/upvariables', 'Pages::postupvariables');
 // Admin
 
 $routes->get('/about', 'Pages::about');
+$routes->post('/trainee', 'Pages::postTrainee');
 $routes->get('/dashboard', 'Pages::index');
 $routes->get('/transactions', 'Pages::transactions');
 $routes->get('/order', 'Pages::order');

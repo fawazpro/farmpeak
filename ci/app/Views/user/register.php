@@ -1,6 +1,6 @@
         <body style="background-color: #f0f0f0">
             <div class="container-fluid">
-                <h4 class="text-center mt-2 mt-md-3">Create your Farmpeak Account</h4>
+                <h4 class="text-center mt-2 mt-md-3">Create your OMB farm Account</h4>
                 <div class="row justify-content-center">
                     <!-- form -->
                     <div class="card">

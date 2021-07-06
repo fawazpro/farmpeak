@@ -1,7 +1,7 @@
 <div class="container-fluid">
           <div class="mt-3">
             <h4>Investor</h4>
-            <p>List of Farmpeak Investors</p>
+            <p>List of OMB farm Investors</p>
           </div>
 
           <!-- investors -->

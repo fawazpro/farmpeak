@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="mt-3">
         <h4>My Investment</h4>
-        <p>List of your Farmpeak investment</p>
+        <p>List of your OMB farm investment</p>
         <i class="text-info hide">swipe table for info</i>
     </div>
     <!-- myInvestment table -->
@@ -196,7 +196,7 @@
                                                         &times;
                                                     </button>
                                                 </div>
-                                                <form  method="post" action="payout">
+                                                <form method="post" action="payout">
                                                     <div class="modal-body p-4">
                                                         <div class="form-row">
                                                             <div hidden class="col-md-0 mb-2">
@@ -234,7 +234,7 @@
                                                             <div class="col-md-12 mb-1">
                                                                 <label for="userPwd">Your password</label>
                                                                 <input type="password" name="pass" class="form-control" id="userPwd" placeholder="Password" required />
-                                                                <input type="hidden" name="payout" class="form-control" id="" value="<?=$in['total_payout']?>" />
+                                                                <input type="hidden" name="payout" class="form-control" id="" value="<?= $in['total_payout'] ?>" />
                                                                 <input type="hidden" name="investID" class="form-control" id="" value="<?= $in['investID'] ?>" />
                                                             </div>
                                                         </div>
@@ -259,7 +259,7 @@
                                         <td><?= $in['duration'] ?> month</td>
                                         <td><span>&#x20a6;</span><?= price($in['total_price']) ?></td>
                                         <td>
-                                        <?= $in['status'] ?>
+                                            <?= $in['status'] ?>
                                         </td>
                                         <td class="text-center">
                                             <a href="#!" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-times fa-1x"></i></a>

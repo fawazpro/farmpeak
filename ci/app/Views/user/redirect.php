@@ -7,7 +7,7 @@
     <link rel="title icon" href="asset/images/p.svg" type="image/svg" />
     <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="asset/StyleSheet/main.css" />
-    <title>Farmpeak</title>
+    <title>OMB farm</title>
   </head>
   <body>
     <!-- message card -->

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="mt-3">
     <h4>Payout</h4>
-    <p>Record of your Farmpeak payout</p>
+    <p>Record of your OMB farm payout</p>
     <i class="text-info hide">swipe table for info</i>
   </div>
   <!-- mypayout table -->

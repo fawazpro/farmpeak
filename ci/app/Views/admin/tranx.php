@@ -1,7 +1,7 @@
 <div class="container-fluid">
           <div class="mt-3 mb-1">
             <h4>Paystack Transactions</h4>
-            <!-- <p>List of Farmpeak Investors</p> -->
+            <!-- <p>List of OMB farm Investors</p> -->
           </div>
 
           <!-- list of paystack transaction -->

@@ -91,7 +91,7 @@
                     <p class="text-info">
                         Note:
                         <span>Make sure you enter a
-                            <b>registered farmpeak account email</b> for the role of
+                            <b>registered OMB farm account email</b> for the role of
                             Admin</span>
                     </p>
                     <div class="form-row">
