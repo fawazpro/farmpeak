@@ -1,5 +1,9 @@
 <?php
 
+// To Do
+// Farm close
+// Investor Payout under investors admin
+
 namespace App\Controllers;
 
 require 'autoload.php';
@@ -1328,7 +1332,9 @@ class Pages extends BaseController
 
         $email->send(false);
         $this->msg($data['response']);
-        // return $email->printDebugger(['headers', 'subject', 'body']);
+        if(getenv('emailDebugger')){
+            return $email->printDebugger(['headers', 'subject', 'body']);
+        }
     }
 
     public function passreset()
