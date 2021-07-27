@@ -6,6 +6,7 @@
     <!-- list of farm -->
     <div class="row">
         <?php foreach ($products as $prod) : ?>
+            <?php if ($prod['io'] == 'open'):?>
             <div class="col-md-4 m-sm-0 m-1">
                 <a href="#addInvestModal<?= $prod['id'] ?>" data-toggle="modal" style="text-decoration: none">
                     <div class="card my-1">
@@ -180,6 +181,7 @@
                 </div>
             </div>
             <!-- end of add farm modal -->
+            <?php endif; ?>
         <?php endforeach; ?>
         <!-- end of farm1 -->
     </div>

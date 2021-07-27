@@ -31,7 +31,7 @@
                         <tr>
                           <td><?=$in['date']?></td>
                           <td><?=$in['trans_id']?></td>
-                          <td><span>&#x20a6;</span><?=price($in['amount'])?></td>
+                          <td><span>&#x20a6;</span><?=price($in['amount']/100)?></td>
                           <td><?=$in['email']?></td>
                           <td><?=$in['user']['fname'].' '.$in['user']['lname']?></td>
                           <?php if($in['status'] == 'initiated'): ?>

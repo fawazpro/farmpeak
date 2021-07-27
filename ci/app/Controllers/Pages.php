@@ -798,6 +798,7 @@ class Pages extends BaseController
         if ($session->logged_in == TRUE) {
             $users = new \App\Models\Users();
             $Investments = new \App\Models\Investments();
+            $Tranx = new \App\Models\Tranx();
             $Packages = new \App\Models\Packages();
             $user = $users->where(['id' => $session->id])->find()[0];
             $investments = $Investments->where('user_id', $session->id)->find();
@@ -816,6 +817,7 @@ class Pages extends BaseController
                     $invs[$key]['unit_price'] = $indiv_package['unit_price'];
                     $invs[$key]['total_price'] = $indiv_package['unit_price'] * $invest['unit_bought'];
                     $invs[$key]['duration'] = $indiv_package['duration'];
+                    $invs[$key]['url'] = $Tranx->where('id', $invest['tranx_id'])->find()[0]['url'];
                     // TO BE EXAMINED
                     $invs[$key]['total_payout'] = (($indiv_package['unit_price'] * $invest['unit_bought']) * $indiv_package['ROI'] / 100) + $indiv_package['unit_price'] * $invest['unit_bought'];
                     $ndate = new DateTime(strtotime($invest['date']));
@@ -1201,6 +1203,104 @@ class Pages extends BaseController
                 'url' => base_url()
             ];
             $this->msg($data);
+        }
+    }
+
+    public function trainee()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Trainee = new \App\Models\Trainee();
+            $data = [
+                'details' => $Trainee->findAll(),
+            ];
+            echo view('admin/header', [
+                'title' => 'Student Lists',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('admin/trainee', $data);
+            echo view('admin/footer');
+            
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
+        }
+    }
+
+    public function delTrainee()
+    {
+        $session = session();
+        if ($session->logged_in == TRUE && $session->admin == TRUE) {
+            $Trainee = new \App\Models\Trainee();
+            $id = $session->id;
+            $Users = new \App\Models\Users();
+            $incoming = $this->request->getPost();
+            $data = [
+                'email' => $session->email,
+                'password' => hash('sha1', $incoming['pass'], false),
+            ];
+            $result = $Users->where($data)->find();
+            if ($result) {
+                $res = $Trainee->delete($incoming['id']);
+                if ($res) {
+                    $dt = [
+                        'title' => "Successful✨",
+                        'msg' => "Trainee data removal successful",
+                        'url' => "Go to <a href='" . base_url('trainee') . "'>Trainee List</a>",
+                    ];
+                    echo view('user/header', ['title'=>'Trainee Update',
+                    'name' => $session->fname . ' ' . $session->lname,
+                    'email' => $session->email,]);
+                    echo view('user/message', $dt);
+                    echo view('user/footer');
+                } else {
+                    $dt = [
+                        'title' => "😢 Sorry 😒",
+                        'msg' => "The removal was unsuccessful",
+                        'url' => "Go to <a href='" . base_url('trainee') . "'>Trainee List</a>",
+                    ];
+                    echo view('user/header',['title'=>'Trainee Update',
+                    'name' => $session->fname . ' ' . $session->lname,
+                    'email' => $session->email,]);
+                    echo view('user/message', $dt);
+                    echo view('user/footer');
+                }
+            } else {
+                $data = [
+                    'title' => 'Verification Failed 💔',
+                    'msg' => 'Confirm the password provided.',
+                    'url' => base_url()
+                ];
+                $this->msg($data);
+            }
+        } else if ($session->logged_in == TRUE) {
+            $dt = [
+                'title' => "😠Out of Bound😡",
+                'msg' => "You are not authorised to visit this page",
+                'url' => "Go to <a href='" . base_url() . "'>dashboard</a>",
+            ];
+            echo view('user/header', [
+                'title' => 'Out of Bound',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
+            echo view('user/message', $dt);
+            echo view('user/footer');
+        } else {
+            $this->login();
         }
     }
 

@@ -155,10 +155,10 @@
                                                             <p class="subInfo2"><?= $in['roi'] ?><span>%</span></p>
                                                         </div>
 
-                                                        <div class="col-md-4 mb-3">
+                                                        <!-- <div class="col-md-4 mb-3">
                                                             <p class="subTitle1 mb-1">Payout Month</p>
                                                             <p class="subInfo2"><?= $in['payout_month'] ?></p>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col-md-4 mb-3">
@@ -250,6 +250,7 @@
                                     </div>
                                     <!-- end of request payout modal -->
                                 <?php else : ?>
+                                    
                                     <tr style="background-color: black; color: white;">
                                         <td hidden><?= $in['farmID'] ?></td>
                                         <td><?= $in['farmName'] ?></td>
@@ -259,12 +260,17 @@
                                         <td><?= $in['duration'] ?> month</td>
                                         <td><span>&#x20a6;</span><?= price($in['total_price']) ?></td>
                                         <td>
-                                            <?= $in['status'] ?>
+                                            <?php if (strtolower($in['status']) == 'initiated'):?>
+                                                <a href="<?=$in['url']?>" title="Go to payment page"><?= strtoupper($in['status']) ?></a>
+                                            <?php else: ?>
+                                                <?= $in['status'] ?>
+                                            <?php endif; ?>
                                         </td>
                                         <td class="text-center">
                                             <a href="#!" rel="tooltip" class="shadow p-1"><i class="text-info fas fa-times fa-1x"></i></a>
                                         </td>
                                     </tr>
+                                    
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>

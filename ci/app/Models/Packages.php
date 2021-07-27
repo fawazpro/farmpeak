@@ -11,7 +11,7 @@ class Packages extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['name','unit_stock', 'unit_price', 'duration', 'description', 'ROI', 'status'];
+    protected $allowedFields = ['name','unit_stock', 'unit_price', 'duration', 'description', 'ROI', 'status', 'io'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

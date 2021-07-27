@@ -207,10 +207,10 @@
                                                                     <p class="subInfo2"><?= $in['roi'] ?><span>%</span></p>
                                                                 </div>
 
-                                                                <div class="col-md-4 mb-3">
+                                                                <!-- <div class="col-md-4 mb-3">
                                                                     <p class="subTitle1 mb-1">Payout Month</p>
                                                                     <p class="subInfo2"><?= $in['payout_month'] ?></p>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col-md-4 mb-3">

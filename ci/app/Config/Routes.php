@@ -44,6 +44,7 @@ $routes->get('/investorinfo', 'Pages::investorinfo');
 $routes->get('/payout', 'Pages::payout');
 $routes->get('/pay_transactions', 'Pages::pay_transactions');
 $routes->get('/trainee', 'Pages::trainee');
+$routes->post('/deltrainee', 'Pages::delTrainee');
 $routes->get('/admins', 'Pages::admins');
 $routes->get('/helpset', 'Pages::helpset');
 $routes->get('/switch', 'Pages::switch');

@@ -24,7 +24,7 @@
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
                         <label for="farmAmount">Plot (in numbers)</label>
-                        <input type="text" class="form-control" id="farmPlot" placeholder="Plot" name="unit_stock" value="<?=$unit_stock?>" required />
+                        <input type="number" class="form-control" id="farmPlot" placeholder="Plot" name="unit_stock" value="<?=$unit_stock?>" required />
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="farmAmount">Amount (per plot)</label>
@@ -32,13 +32,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text px-2">&#x20a6;</span>
                             </div>
-                            <input type="text" class="form-control" id="farmAmount" placeholder="Amount" name="unit_price" value="<?=$unit_price?>" required />
+                            <input type="number" class="form-control" id="farmAmount" placeholder="Amount" name="unit_price" value="<?=$unit_price?>" required />
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="farmDuration">Duration (in numbers)</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="farmDuration" name="duration" placeholder="Duration" value="<?=$duration?>" required />
+                            <input type="number" class="form-control" id="farmDuration" name="duration" placeholder="Duration" value="<?=$duration?>" required />
                             <div class="input-group-append">
                                 <span class="input-group-text px-1">Month(s)</span>
                             </div>
@@ -55,19 +55,30 @@
                     <div class="col-md-3 mb-3">
                         <label for="farmRoi">ROI</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="farmRoi" placeholder="ROI" name="ROI" value="<?=$ROI?>" maxlength="3" max="100" min="1" required />
+                            <input type="number" class="form-control" id="farmRoi" placeholder="ROI" name="ROI" value="<?=$ROI?>" maxlength="3" max="100" min="1" required />
                             <div class="input-group-append">
                                 <span class="input-group-text px-2">%</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
+                    
+                    <div class="col-md-4 offset-2 mb-4">
                         <label for="farmStatus">Status</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="status" id="farmStatus" value="<?=$status?>"  max="100" min="1" required />
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="io" id="" value="open" checked>
+                                Open
+                              </label>
+                                <label class="ml-4 form-check-label">
+                                <input type="radio" class="form-check-input" name="io" id="" value="close">
+                                Close
+                              </label>
+                            </div>
+                            <!-- <input type="text" class="form-control" name="status" id="farmStatus" value="<?=$status?>"  max="100" min="1" required />
                             <div class="input-group-append">
                                 <span class="input-group-text px-2">of <?=$unit_stock?></span>
-                            </div>
+                            </div> -->
                     </div>
                 </div>
                 <!-- submit -->

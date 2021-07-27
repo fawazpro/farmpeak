@@ -26,7 +26,7 @@
                       </thead>
                       <tbody>
                       <?php if(empty($inv)): ?>
-                        <tr> No investment yet!! </tr>
+                        <tr> No investor yet!! </tr>
                         <?php else : ?>
                         <?php foreach ($inv as $key => $in) : ?>
                         <tr>
