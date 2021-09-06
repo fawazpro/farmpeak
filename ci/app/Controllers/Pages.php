@@ -1105,8 +1105,9 @@ class Pages extends BaseController
         // return $tranx->data->authorization_url;
         // return $db_id;
         // redirect to page so User can pay
-        echo "About to redirect....";
-        return $this->response->redirect($tranx->data->authorization_url);
+        // echo "About to redirect....";
+        // return $this->response->redirect($tranx->data->authorization_url);
+        echo view('user/paymentRedirect',['url' => $tranx->data->authorization_url]);
     }
 
     public function initPayment()
