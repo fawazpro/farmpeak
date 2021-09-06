@@ -1061,7 +1061,7 @@ class Pages extends BaseController
         }
     }
 
-    private function payment($email, $user, $amount, $p_id, $plot)
+    public function payment($email, $user, $amount, $p_id, $plot)
     {
         $trans = new \App\Models\Tranx();
         $investments = new \App\Models\Investments();
@@ -1079,9 +1079,6 @@ class Pages extends BaseController
             print_r($e->getResponseObject());
             die($e->getMessage());
         }
-
-        // store transaction reference so we can query in case user never comes back
-        // perhaps due to network issue
         $data = [
             'reference' => $tranx->data->reference,
             'url' => $tranx->data->authorization_url,
@@ -1100,14 +1097,67 @@ class Pages extends BaseController
             'date' => date('c')
         ];
         $inv_id = $investments->insert($inv_data);
-        // echo $tranx->data->authorization_url;
-        // var_dump($tranx->data->reference);
-        // return $tranx->data->authorization_url;
-        // return $db_id;
-        // redirect to page so User can pay
-        // echo "About to redirect....";
-        // return $this->response->redirect($tranx->data->authorization_url);
-        echo view('user/paymentRedirect',['url' => $tranx->data->authorization_url]);
+        // $this->redir($tranx->data->authorization_url,$inv_id);
+    }
+
+    public function payment2($email, $user, $amount, $p_id, $plot)
+    {
+        $trans = new \App\Models\Tranx();
+        $investments = new \App\Models\Investments();
+        $session = session();
+        $amount = $amount * 100;
+        $reference = uniqid("OMBfarm");
+
+        $url = "https://api.paystack.co/transaction/initialize";
+        $fields = [
+          'email' => $email,
+          'amount' => $amount,
+          'reference' => $reference,
+        ];
+        $fields_string = http_build_query($fields);
+        //open connection
+        $ch = curl_init();
+        
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+          "Authorization: bearer ".$this->SK,
+          "Cache-Control: no-cache",
+        ));
+        
+        //So that curl_exec returns the contents of the cURL; rather than echoing it
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+        
+        //execute post
+        $result = curl_exec($ch);
+        $tranx = json_decode($result);
+        $data = [
+                'reference' => $tranx->data->reference,
+                'url' => $tranx->data->authorization_url,
+                'amount' => $amount,
+                'user_id' => $user,
+                'email' => $email,
+                'status' => 'initiated'
+            ];
+            $db_id = $trans->insert($data);
+            $inv_data = [
+                'user_id' => $session->id,
+                'packages_id' => $p_id,
+                'tranx_id' => $db_id,
+                'payment_status' => 'initiated',
+                'unit_bought' => $plot,
+                'date' => date('c')
+            ];
+            $inv_id = $investments->insert($inv_data);
+
+        $this->redir($tranx->data->authorization_url);
+    }
+
+    public function redir($url)
+    {
+        echo view('user/paymentRedirect', ['url'=>$url]);
     }
 
     public function initPayment()
@@ -1122,7 +1172,8 @@ class Pages extends BaseController
         $amount = $p_price * $incoming['plot'];
         $email = $session->email;
         $user = $session->id;
-        $this->payment($email, $user, $amount, $p_db['id'], $incoming['plot']);
+
+        $this->payment2($email, $user, $amount, $p_db['id'], $incoming['plot']);
     }
 
     public function processPayment()
