@@ -153,9 +153,11 @@ class Pages extends BaseController
             $id = $this->request->getGet('id');
             $details = $packages->find($id);
 
-            echo view('admin/header', ['title' => 'Farm Edit',
-            'name' => $session->fname . ' ' . $session->lname,
-            'email' => $session->email,]);
+            echo view('admin/header', [
+                'title' => 'Farm Edit',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('admin/editpackage', $details);
             echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
@@ -260,7 +262,7 @@ class Pages extends BaseController
             $users = new \App\Models\Users();
             $Investments = new \App\Models\Investments();
             // $investments = $Investments->distinct()->findAll();
-            $investments = $users->where('packages>',0)->findAll();
+            $investments = $users->where('packages>', 0)->findAll();
             if (!empty($investments)) {
                 $invs = [];
                 foreach ($investments as $key => $user) {
@@ -277,9 +279,11 @@ class Pages extends BaseController
             } else {
                 $data = [];
             }
-            echo view('admin/header', ['title' => 'Investors',
-            'name' => $session->fname . ' ' . $session->lname,
-            'email' => $session->email,]);
+            echo view('admin/header', [
+                'title' => 'Investors',
+                'name' => $session->fname . ' ' . $session->lname,
+                'email' => $session->email,
+            ]);
             echo view('admin/investor', $data);
             echo view('admin/footer');
         } else if ($session->logged_in == TRUE) {
@@ -375,8 +379,8 @@ class Pages extends BaseController
         if ($session->logged_in == TRUE && $session->admin == TRUE) {
             $users = new \App\Models\Users();
             $data = [
-                'users' => $users->where('clearance',11)->findAll(),
-                ];
+                'users' => $users->where('clearance', 11)->findAll(),
+            ];
             echo view('admin/header', [
                 'title' => 'Administrator',
                 'name' => $session->fname . ' ' . $session->lname,
@@ -414,13 +418,14 @@ class Pages extends BaseController
             ];
             $result = $Users->where($data)->find();
             if ($result) {
-                $db = $Users->where('email',$incoming['email'])->find()[0];
-                if($Users->update($db['id'],['clearance' => 11,])){
-                $data = [
-                    'title' => 'New admin added',
-                    'msg' => 'You can always update this priviledge anytime, anywhere',
-                    'url' => base_url()
-                ];}
+                $db = $Users->where('email', $incoming['email'])->find()[0];
+                if ($Users->update($db['id'], ['clearance' => 11,])) {
+                    $data = [
+                        'title' => 'New admin added',
+                        'msg' => 'You can always update this priviledge anytime, anywhere',
+                        'url' => base_url()
+                    ];
+                }
                 $this->msg($data);
             } else {
                 $data = [
@@ -461,13 +466,14 @@ class Pages extends BaseController
             ];
             $result = $Users->where($data)->find();
             if ($result) {
-                $db = $Variables->where('name',$incoming['name'])->find()[0];
-                if($Variables->update($db['id'],['value' => $incoming['val'],])){
-                $data = [
-                    'title' => 'Your data has been updated',
-                    'msg' => 'You can always change this anytime, anywhere',
-                    'url' => base_url()
-                ];}
+                $db = $Variables->where('name', $incoming['name'])->find()[0];
+                if ($Variables->update($db['id'], ['value' => $incoming['val'],])) {
+                    $data = [
+                        'title' => 'Your data has been updated',
+                        'msg' => 'You can always change this anytime, anywhere',
+                        'url' => base_url()
+                    ];
+                }
                 $this->msg($data);
             } else {
                 $data = [
@@ -507,7 +513,7 @@ class Pages extends BaseController
             ];
             $result = $Users->where($data)->find();
             if ($result) {
-                $Users->update($incoming['id'],['clearance'=> 1]);
+                $Users->update($incoming['id'], ['clearance' => 1]);
                 $data = [
                     'title' => 'Admin priviledge revoked',
                     'msg' => 'You can always update this priviledge anytime, anywhere',
@@ -546,10 +552,10 @@ class Pages extends BaseController
         if ($session->logged_in == TRUE && $session->admin == TRUE) {
             $Variables = new \App\Models\Variables();
             $data = [
-                'phone1' => $Variables->where('name','phone1')->find()[0]['value'],
-                'phone2' => $Variables->where('name','phone2')->find()[0]['value'],
-                'email1' => $Variables->where('name','email1')->find()[0]['value'],
-                ];
+                'phone1' => $Variables->where('name', 'phone1')->find()[0]['value'],
+                'phone2' => $Variables->where('name', 'phone2')->find()[0]['value'],
+                'email1' => $Variables->where('name', 'email1')->find()[0]['value'],
+            ];
             echo view('admin/header', [
                 'title' => 'Help Settings',
                 'name' => $session->fname . ' ' . $session->lname,
@@ -790,7 +796,7 @@ class Pages extends BaseController
         echo view('footer');
     }
 
-  
+
 
     public function investment()
     {
@@ -820,9 +826,9 @@ class Pages extends BaseController
                     $invs[$key]['url'] = $Tranx->where('id', $invest['tranx_id'])->find()[0]['url'];
                     // TO BE EXAMINED
                     $invs[$key]['total_payout'] = (($indiv_package['unit_price'] * $invest['unit_bought']) * $indiv_package['ROI'] / 100) + $indiv_package['unit_price'] * $invest['unit_bought'];
-                    $ndate = new DateTime(strtotime($invest['date']));
-                    $ndate->add(new DateInterval('P6M'));
-                    $invs[$key]['payout_month'] = $ndate->format('F');
+                    // $ndate = new DateTime(strtotime($invest['date']));
+                    // $ndate->add(new DateInterval('P6M'));
+                    $invs[$key]['payout_month'] = '###';
                     $invs[$key]['tpayout'] = $invest['payout'];
                 }
                 $data = [
@@ -941,9 +947,9 @@ class Pages extends BaseController
             $user = $users->where(['id' => $session->id])->find()[0];
 
             $data = [
-                'phone1' => $Variables->where('name','phone1')->find()[0]['value'],
-                'phone2' => $Variables->where('name','phone2')->find()[0]['value'],
-                'email1' => $Variables->where('name','email1')->find()[0]['value'],
+                'phone1' => $Variables->where('name', 'phone1')->find()[0]['value'],
+                'phone2' => $Variables->where('name', 'phone2')->find()[0]['value'],
+                'email1' => $Variables->where('name', 'email1')->find()[0]['value'],
             ];
             echo view('user/header', [
                 'title' => 'Help',
@@ -1019,31 +1025,48 @@ class Pages extends BaseController
         // Update Users package with number of investment
         $Users = new \App\Models\Users();
         $user_db = $Users->where('id', $db['user_id'])->find()[0];
-        $Users->update($db['user_id'], ['packages'=>$user_db['packages'] + 1]);
+        $Users->update($db['user_id'], ['packages' => $user_db['packages'] + 1]);
     }
 
     public function autoVeri()
     {
-        // Retrieve the request's body and parse it as JSON
-        $event = \Yabacon\Paystack\Event::capture();
+
+        // only a post with paystack signature header gets our attention
+        if ((strtoupper($_SERVER['REQUEST_METHOD']) != 'POST') || !array_key_exists('x-paystack-signature', $_SERVER))
+            exit();
+        // Retrieve the request's body
+        $input = @file_get_contents("php://input");
+        define('PAYSTACK_SECRET_KEY', $this->SK);
+        // validate event do all at once to avoid timing attack
+        if ($_SERVER['HTTP_X_PAYSTACK_SIGNATURE'] !== hash_hmac('sha512', $input, PAYSTACK_SECRET_KEY))
+            exit();
         http_response_code(200);
+        // parse event (which is json string) as object
+        // Do something - that will not take long - with $event
+        $event = json_decode($input);
+        // exit();
 
-        /* It is a important to log all events received. Add code *
-     * here to log the signature and body to db or file       */
-        openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
-        syslog(LOG_INFO, $event->raw);
-        closelog();
 
-        /* Verify that the signature matches one of your keys*/
-        $my_keys = [
-            'live' => $this->SK,
-            'test' => $this->SK,
-        ];
-        $owner = $event->discoverOwner($my_keys);
-        if (!$owner) {
-            // None of the keys matched the event's signature
-            die();
-        }
+    //     // Retrieve the request's body and parse it as JSON
+    //     $event = \Yabacon\Paystack\Event::capture();
+    //     http_response_code(200);
+
+    //     /* It is a important to log all events received. Add code *
+    //  * here to log the signature and body to db or file       */
+    //     openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
+    //     syslog(LOG_INFO, $event->raw);
+    //     closelog();
+
+    //     /* Verify that the signature matches one of your keys*/
+    //     $my_keys = [
+    //         'live' => $this->SK,
+    //         'test' => $this->SK,
+    //     ];
+    //     $owner = $event->discoverOwner($my_keys);
+    //     if (!$owner) {
+    //         // None of the keys matched the event's signature
+    //         die();
+    //     }
 
         // Do something with $event->obj
         // Give value to your customer but don't give any output
@@ -1110,54 +1133,54 @@ class Pages extends BaseController
 
         $url = "https://api.paystack.co/transaction/initialize";
         $fields = [
-          'email' => $email,
-          'amount' => $amount,
-          'reference' => $reference,
+            'email' => $email,
+            'amount' => $amount,
+            'reference' => $reference,
         ];
         $fields_string = http_build_query($fields);
         //open connection
         $ch = curl_init();
-        
+
         //set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          "Authorization: bearer ".$this->SK,
-          "Cache-Control: no-cache",
+            "Authorization: bearer " . $this->SK,
+            "Cache-Control: no-cache",
         ));
-        
+
         //So that curl_exec returns the contents of the cURL; rather than echoing it
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
-        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
         //execute post
         $result = curl_exec($ch);
         $tranx = json_decode($result);
         $data = [
-                'reference' => $tranx->data->reference,
-                'url' => $tranx->data->authorization_url,
-                'amount' => $amount,
-                'user_id' => $user,
-                'email' => $email,
-                'status' => 'initiated'
-            ];
-            $db_id = $trans->insert($data);
-            $inv_data = [
-                'user_id' => $session->id,
-                'packages_id' => $p_id,
-                'tranx_id' => $db_id,
-                'payment_status' => 'initiated',
-                'unit_bought' => $plot,
-                'date' => date('c')
-            ];
-            $inv_id = $investments->insert($inv_data);
+            'reference' => $tranx->data->reference,
+            'url' => $tranx->data->authorization_url,
+            'amount' => $amount,
+            'user_id' => $user,
+            'email' => $email,
+            'status' => 'initiated'
+        ];
+        $db_id = $trans->insert($data);
+        $inv_data = [
+            'user_id' => $session->id,
+            'packages_id' => $p_id,
+            'tranx_id' => $db_id,
+            'payment_status' => 'initiated',
+            'unit_bought' => $plot,
+            'date' => date('c')
+        ];
+        $inv_id = $investments->insert($inv_data);
 
         $this->redir($tranx->data->authorization_url);
     }
 
     public function redir($url)
     {
-        echo view('user/paymentRedirect', ['url'=>$url]);
+        echo view('user/paymentRedirect', ['url' => $url]);
     }
 
     public function initPayment()
@@ -1246,9 +1269,9 @@ class Pages extends BaseController
         $Trainee = new \App\Models\Trainee();
         $incoming = $this->request->getPost();
 
-        if($Trainee->insert($incoming)){
+        if ($Trainee->insert($incoming)) {
             return $this->response->redirect('https://ombfarm.com.ng/success.html');
-        }else{
+        } else {
             $data = [
                 'title' => 'Registration Failed 💔',
                 'msg' => 'Your registration did not submit successfully. Please contact the admin for support',
@@ -1273,7 +1296,6 @@ class Pages extends BaseController
             ]);
             echo view('admin/trainee', $data);
             echo view('admin/footer');
-            
         } else if ($session->logged_in == TRUE) {
             $dt = [
                 'title' => "😠Out of Bound😡",
@@ -1313,9 +1335,11 @@ class Pages extends BaseController
                         'msg' => "Trainee data removal successful",
                         'url' => "Go to <a href='" . base_url('trainee') . "'>Trainee List</a>",
                     ];
-                    echo view('user/header', ['title'=>'Trainee Update',
-                    'name' => $session->fname . ' ' . $session->lname,
-                    'email' => $session->email,]);
+                    echo view('user/header', [
+                        'title' => 'Trainee Update',
+                        'name' => $session->fname . ' ' . $session->lname,
+                        'email' => $session->email,
+                    ]);
                     echo view('user/message', $dt);
                     echo view('user/footer');
                 } else {
@@ -1324,9 +1348,11 @@ class Pages extends BaseController
                         'msg' => "The removal was unsuccessful",
                         'url' => "Go to <a href='" . base_url('trainee') . "'>Trainee List</a>",
                     ];
-                    echo view('user/header',['title'=>'Trainee Update',
-                    'name' => $session->fname . ' ' . $session->lname,
-                    'email' => $session->email,]);
+                    echo view('user/header', [
+                        'title' => 'Trainee Update',
+                        'name' => $session->fname . ' ' . $session->lname,
+                        'email' => $session->email,
+                    ]);
                     echo view('user/message', $dt);
                     echo view('user/footer');
                 }
@@ -1484,7 +1510,7 @@ class Pages extends BaseController
 
         $email->send(false);
         $this->msg($data['response']);
-        if(getenv('emailDebugger')){
+        if (getenv('emailDebugger')) {
             return $email->printDebugger(['headers', 'subject', 'body']);
         }
     }
@@ -1615,7 +1641,7 @@ class Pages extends BaseController
         }
     }
 
- 
+
     public function personalinfo()
     {
         $session = session();
@@ -1636,9 +1662,11 @@ class Pages extends BaseController
                         'msg' => "Your profile update was successful",
                         'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
                     ];
-                    echo view('user/header', ['title'=>'Profile Update',
-                    'name' => $session->fname . ' ' . $session->lname,
-                    'email' => $session->email,]);
+                    echo view('user/header', [
+                        'title' => 'Profile Update',
+                        'name' => $session->fname . ' ' . $session->lname,
+                        'email' => $session->email,
+                    ]);
                     echo view('user/message', $dt);
                     echo view('user/footer');
                 } else {
@@ -1647,9 +1675,11 @@ class Pages extends BaseController
                         'msg' => "Your profile update was unsuccessful",
                         'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
                     ];
-                    echo view('user/header',['title'=>'Profile Update',
-                    'name' => $session->fname . ' ' . $session->lname,
-                    'email' => $session->email,]);
+                    echo view('user/header', [
+                        'title' => 'Profile Update',
+                        'name' => $session->fname . ' ' . $session->lname,
+                        'email' => $session->email,
+                    ]);
                     echo view('user/message', $dt);
                     echo view('user/footer');
                 }
@@ -1689,9 +1719,11 @@ class Pages extends BaseController
                         'msg' => "Your profile update was successful",
                         'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
                     ];
-                    echo view('user/header', ['title'=>'Profile Update',
-                    'name' => $session->fname . ' ' . $session->lname,
-                    'email' => $session->email,]);
+                    echo view('user/header', [
+                        'title' => 'Profile Update',
+                        'name' => $session->fname . ' ' . $session->lname,
+                        'email' => $session->email,
+                    ]);
                     echo view('user/message', $dt);
                     echo view('user/footer');
                 } else {
@@ -1700,9 +1732,11 @@ class Pages extends BaseController
                         'msg' => "Your profile update was unsuccessful",
                         'url' => "Go to <a href='" . base_url('profile') . "'>profile</a>",
                     ];
-                    echo view('user/header',['title'=>'Profile Update',
-                    'name' => $session->fname . ' ' . $session->lname,
-                    'email' => $session->email,]);
+                    echo view('user/header', [
+                        'title' => 'Profile Update',
+                        'name' => $session->fname . ' ' . $session->lname,
+                        'email' => $session->email,
+                    ]);
                     echo view('user/message', $dt);
                     echo view('user/footer');
                 }
